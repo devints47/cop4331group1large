@@ -1,0 +1,6 @@
+*.DS_Store
+config.py
+*.db
+/env
+*.pyc
+*.xcf
