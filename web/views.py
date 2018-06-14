@@ -97,6 +97,5 @@ def register():
 	return render_template('registration.html')
 
 @app.route('/')
-@login_required
 def index():
 	return render_template('index.html')
