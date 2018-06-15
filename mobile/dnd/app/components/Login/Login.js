@@ -9,8 +9,16 @@ import {
   Image
 } from 'react-native';
 import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import * as Animate from 'react-native-animatable';
 
+const TabSelector = ({ selected }) => {
+  return (
+    <View style={styles.selectorContainer}>
+      <View style={selected && styles.selected}/>
+    </View>
+  );
+};
 
 export default class Login extends Component {
   render() {
@@ -26,9 +34,9 @@ export default class Login extends Component {
 				</Text>
 
           	</Animate.View>
-			
+
 			<View style={styles.formContainer}>
-				<LoginForm />
+				<LoginForm/>
 			</View>
 
       </KeyboardAvoidingView>

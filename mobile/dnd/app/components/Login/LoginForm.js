@@ -7,7 +7,18 @@ import * as Animate from 'react-native-animatable';
 
 
 export default class LoginForm extends Component {
-  render() {
+  
+   constructor(props){
+       super(props);
+
+       this.state = {
+
+        selectedCategory : 0
+       };
+   }
+  
+
+    render() {
     return (
         <Animate.View 
         animation='slideInUp'
