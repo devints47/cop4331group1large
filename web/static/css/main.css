@@ -1,0 +1,50 @@
+
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+    background-color: #ede4c7;;
+}
+
+
+nav a{
+    color: #fff; 
+    margin-left: 10px;
+}
+
+nav a:hover{
+    color: #fff;
+    border-bottom: 2px solid;
+    padding-bottom: 6px;
+}
+
+form button{
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}
+
+#formContainer form{
+    width: 70%;
+}
+
+#forgotPasswordLink{
+    color: #343a40;
+}
+
+#formContainer{
+    margin-top: 50px;
+    color: black;
+}
+
+#alert, #usernameAlert, #passwordAlert{
+    margin-top: 10px;
+}
+
+.flashes{
+	width: 30%;
+	margin: 0 auto;
+    margin-top: 10px; 
+    list-style-type: none;
+    text-align: center;
+}
