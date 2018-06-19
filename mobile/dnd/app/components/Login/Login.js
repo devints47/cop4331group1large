@@ -48,39 +48,38 @@ class Login extends Component {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.main}>
           	<Animate.View style={styles.container} animation='zoomIn' iterationCount={1}>
-				<Image
-				source={require('../../assets/images/logo.png')}
-				style={styles.logo}
-				/>
-				<Text style={styles.text}>
-					Dungeons and Dragons
-				</Text>
-
+                <Image
+                source={require('../../assets/images/logo.png')}
+                style={styles.logo}
+                />
+                <Text style={styles.text}>
+                  Dungeons and Dragons
+                </Text>
           	</Animate.View>
 
-        <View style={{flexDirection: 'row'}}>
+        <Animate.View style={styles.buttons} animation='slideInUp' iterationCount={1} >
                   <Button 
                     buttonStyle = {styles.loginButton}
-                    backgroundColor = 'transparent'
+                    backgroundColor = 'rgba(255,255,255,0.2)'
+                    borderRadius={10}
                     title={'Login'}
                     onPress = {this.onButtonPress}
                     fontWeight = 'bold'
                     clear
                     activeOpacity = {0.7}
-                    containerStyle={{flex: 1}}
+                    textAlign='center'
                   />
                   <Button
-                   buttonStyle = {styles.signupButton}
-                   backgroundColor = 'transparent'
+                    buttonStyle = {styles.signupButton}
+                    backgroundColor = 'rgba(255,255,255,0.2)'
+                    borderRadius={10}
                     fontWeight = 'bold'
                     onPress = {this.onButtonPressTwo}
                     title={'Sign up'}
-                    alignItems = 'right'
                     clear
                     activeOpacity = {0.7}
-                    containerStyle={{flex: 1}}
                   />
-        </View>
+        </Animate.View>
         
         {this.state.isShowingText == false ? <LoginForm navigation={this.props.navigation}/> : <SignupForm/>}
 
@@ -110,16 +109,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		textAlign: 'center'
   },
-  loginButton: {
-    right : -30,
-    height : 50,
-    width : 90,
-  },
-  signupButton: {
-    right : -80,
-    height : 50,
-    width : 90,
-  },
+  buttons:{
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexGrow:1,
+  }
+
 });
 
 
