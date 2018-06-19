@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import {Text,View,AppRegistry,StyleSheet, TextInput} from 'react-native';
 
-
 import { FormInput, Button } from 'react-native-elements';
 import * as Animate from 'react-native-animatable';
 
@@ -14,7 +13,6 @@ export default class LoginForm extends Component {
        super(props);
 
        this.state = {
-
         selectedCategory : 0
        };
    }
@@ -52,7 +50,7 @@ export default class LoginForm extends Component {
             <Button  
             buttonStyle={styles.button} 
             placeholderTextColor='rgba(124,110,95,0.8)'
-            onPress={() => this.props.navigation.navigate('router')}
+            onPress={() => this.props.navigation.navigate('Router')}
             title='login'/>
 
         </Animate.View>

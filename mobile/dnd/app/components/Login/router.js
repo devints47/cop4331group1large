@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
 import {Modal, Text, TouchableHighlight} from 'react-native';
+
+
 export default class router extends Component {
+  
+  
   _onPressButton() {
     Alert.alert('You tapped the button!')
-    
-    
   }
 
   render() {

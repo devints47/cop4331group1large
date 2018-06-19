@@ -12,10 +12,16 @@ import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import * as Animate from 'react-native-animatable';
-
 import { FormInput, Button } from 'react-native-elements';
 
-export default class Login extends Component {
+import {withNavigation} from 'react-navigation';
+
+class Login extends Component {
+
+  static navigationOptions = {
+    header: null,
+  }
+
 
   constructor(props){
     super(props);
@@ -76,12 +82,14 @@ export default class Login extends Component {
                   />
         </View>
         
-        {this.state.isShowingText == false ? <LoginForm/> : <SignupForm/>}
+        {this.state.isShowingText == false ? <LoginForm navigation={this.props.navigation}/> : <SignupForm/>}
 
       </KeyboardAvoidingView>
     );
   }
 }
+
+export default withNavigation(Login);
 
 const styles = StyleSheet.create({
     main:{
