@@ -5,17 +5,11 @@ For the initial react-native setup use:
   Make sure you are installing the option for 'Building Projects with Native Code' not 'Quick Start"
   
  Once setup is done make sure to be in the dnd folder
-  Install dependencies:
+  Install dependencies (might require sudo):
     
-    yarn add react-native-elements
-       or if you use npm
-    npm i react-native-elements --save
-    
-    yarn add react-native-vector-icons    
-      or if you use npm
-    npm i --save react-native-vector-icons
-    
-    react-native link react-native-vector-icons
+    yarn install
+    npm install
+    react-native link
     
  Now once setup connect your android phone, or start the android emulator
  Make sure your device has debugging mode one, and can be seen in your computer with:
@@ -29,6 +23,12 @@ For the initial react-native setup use:
 Once done you can read the logs with:
     
     react-native log-android
+
+-----
+Note:
+
+While the backend is being setup use the the same setup as the small project but replace the views.py
+Also the URI link that the app uses to connect is within index.js
     
     
     
