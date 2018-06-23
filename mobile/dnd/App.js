@@ -1,28 +1,44 @@
-
 import React, { Component } from 'react';
 import {Text,View,AppRegistry} from 'react-native';
 import Login from './app/components/Login/Login';
-import router from './app/components/Home/router'
+import MainAppPage from './app/components/Home/MainAppPage';
+import router from './app/components/Home/router';
+import { createStackNavigator,DrawerNavigator,StackNavigator} from 'react-navigation'; 
 
-import { createStackNavigator } from 'react-navigation'; 
 
 const AppStackNavigator = createStackNavigator(
   {
   Home: Login,
-  Router: router,
+  Router: MainAppPage,
   }
 );
 
+const MainScreenNavigator = StackNavigator({
+  MainAppPage: { screen: MainAppPage },
+  Home: {screen: Login},
+  Router: {screen : MainAppPage}
 
+});
 
-export default class App extends React.Component{
+const Drawer = DrawerNavigator(
+  {
+    Main: { screen: MainScreenNavigator }
+  },
+  {
+    contentComponent: router,
+    drawerWidth: 200
+  }
+);
+
+class App extends React.Component{
   
   
   render() {
 
   return (
-    <AppStackNavigator />
+    <AppStackNavigator/>
   );
   }
 }
 
+export default App;
