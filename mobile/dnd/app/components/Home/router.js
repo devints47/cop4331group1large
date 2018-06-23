@@ -1,70 +1,75 @@
-import React, { Component } from 'react';
-import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
-import {Modal, Text, TouchableHighlight} from 'react-native';
+import React, { Component } from "react";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Button
+} from "react-native";
 
+import { NavigationActions } from "react-navigation";
 
-export default class router extends Component {
-  
-  
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
+class router extends Component {
+  _navigate(route) {
+    return this.props.navigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: `${route}` })]
+      })
+    );
   }
-
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="Add Character"
-            color="#4CAF50"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="My Characters"
-            color="#841584"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="Delete Character"
-            color="#f44336"
-          />
-        </View>
-        <View style={styles.alternativeLayoutButtonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="This looks great!"
-          />
-          <Button
-            onPress={this._onPressButton}
-            title="OK!"
-            color="#841584"
-          />
-        </View>
+        <TouchableOpacity
+          style={styles.menuItem}
+        >
+          <Text style={styles.menuItemText}>Character List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.menuItem}
+        >
+          <Text style={styles.menuItemText}>Settings</Text>
+        </TouchableOpacity>
+      
+        <TouchableOpacity
+          style={styles.menuItem}
+        >
+          <Text style={styles.menuItemText}>Log Out</Text>
+        </TouchableOpacity>
+
       </View>
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-   justifyContent: 'center',
+    flex: 1,
+    paddingTop: 100
   },
-  buttonContainer: {
-    margin: 20
+  menuItem: {
+    padding: 10,
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    marginBottom: 2
   },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+
+  Logout: {
+    padding: 10,
+    justifyContent: "center",
+    backgroundColor: "red",
+    marginBottom: 2
+  },
+  menuItemText: {
+    fontSize: 20
   }
-})
+});
 
+router.defaultProps = {};
 
+router.propTypes = {};
 
-AppRegistry.registerComponent('router', ()=>router)
+export default router;
