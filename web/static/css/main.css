@@ -48,3 +48,12 @@ form button{
     list-style-type: none;
     text-align: center;
 }
+
+#sideBarNav {
+    background-color: #ede4c7 !important;
+}
+
+.jumbotron{
+    background-color: #fff;
+    color: #343a40 
+}
