@@ -1,75 +1,142 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
-  StatusBar,
+  Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
-  Button
-} from "react-native";
+  View,TouchableOpacity,Animated,Image
+} from 'react-native';
 
-import { NavigationActions } from "react-navigation";
 
-class router extends Component {
-  _navigate(route) {
-    return this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: `${route}` })]
-      })
-    );
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.menuItem}
-        >
-          <Text style={styles.menuItemText}>Character List</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuItem}
-        >
-          <Text style={styles.menuItemText}>Settings</Text>
-        </TouchableOpacity>
-      
-        <TouchableOpacity
-          style={styles.menuItem}
-        >
-          <Text style={styles.menuItemText}>Log Out</Text>
+const Sliding_Drawer_Width = 250;
+
+export default class App extends Component{
+
+  
+  
+  constructor()
+    {
+        super();
+
+        this.Animation = new Animated.Value(0);
+
+        this.Sliding_Drawer_Toggle = true;
+
+    }
+
+
+    ShowSlidingDrawer = () =>
+    {
+        if( this.Sliding_Drawer_Toggle === true )
+        {
+                Animated.timing(
+                    this.Animation,
+                    {
+                        toValue: 1,
+                        duration: 500
+                    }
+                ).start(() =>
+                {
+                    this.Sliding_Drawer_Toggle = false;
+                });
+
+        }
+        else
+        {
+                Animated.timing(
+                    this.Animation,
+                    {
+                        toValue: 0,
+                        duration: 500
+                    }
+                ).start(() =>
+                {
+                    this.Sliding_Drawer_Toggle = true;
+                });
+        }
+    }
+
+  render(){
+    const Animation_Interpolate = this.Animation.interpolate(
+      {
+          inputRange: [ 0, 1 ],
+          outputRange: [ -(Sliding_Drawer_Width - 32), 0 ]
+      });
+
+  return(
+    <View style={styles.container}>
+
+    <Text style = {styles.TextStyle}>Main page</Text>
+
+      <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
+
+
+    <View style = { styles.Main_Sliding_Drawer_Container }>
+
+
+        <TouchableOpacity>
+          <Text style= {{fontSize:30}}>Character List</Text>
         </TouchableOpacity>
 
-      </View>
-      
-    );
-  }
+        <TouchableOpacity>
+          <Text style= {{fontSize:30}}>Settings</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+          <Text style= {{fontSize:30}}>Logout</Text>
+        </TouchableOpacity>
+
+        </View>
+
+
+    <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
+
+        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 30, height: 30,left:5 }} />
+
+      </TouchableOpacity>
+
+
+    </Animated.View>
+
+    </View>
+  );
+}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 100
-  },
-  menuItem: {
-    padding: 10,
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    marginBottom: 2
-  },
+  container:
+    {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems:'center'
 
-  Logout: {
-    padding: 10,
-    justifyContent: "center",
-    backgroundColor: "red",
-    marginBottom: 2
-  },
-  menuItemText: {
-    fontSize: 20
-  }
+    },
+
+    Root_Sliding_Drawer_Container:
+      {
+          position: 'absolute',
+          flexDirection: 'row',
+          left: 0,
+          top: 0,
+          //top: (Platform.OS == 'ios') ? 20 : 0,
+          width: Sliding_Drawer_Width,
+          height:'100%'
+      },
+
+      Main_Sliding_Drawer_Container:
+      {
+          flex: 1,
+          backgroundColor: 'gray',
+          paddingHorizontal: 10,
+          justifyContent: 'center',
+          alignItems: 'center'
+      },
+
+      TextStyle: {
+
+          fontSize: 20,
+          padding: 10,
+          textAlign: 'center',
+          color: 'black'
+      }
+
 });
-
-router.defaultProps = {};
-
-router.propTypes = {};
-
-export default router;
