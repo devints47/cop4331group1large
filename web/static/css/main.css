@@ -55,5 +55,7 @@ form button{
 
 .jumbotron{
     background-color: #fff;
-    color: #343a40 
+    color: #343a40; 
+    margin-top: 10px;
 }
+
