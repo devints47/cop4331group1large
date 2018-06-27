@@ -12,9 +12,9 @@
         <!-- side bar-->
         <nav id="sideBarNav" class="col-md-2  col-lg-2 col-sm-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column" role="navigation">
               <li class="nav-item">
-                <a  class="nav-link active" href="#">
+                <a  id="home-tab" class="nav-link active" href="#home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
                   <span  data-feather="home"></span>
                   Home<span class="sr-only">(current)</span>
                 </a>
@@ -23,15 +23,15 @@
                 <span>Character Manager</span>
               </h6>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a id="myCharacter-tab" class="nav-link" href="#myCharacters" data-toggle="tab" role="tab" aria-controls="myCharacters" aria-selected="false">
                   <span data-feather="users"></span>
                   My Characters
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a id="addCharacter-tab" class="nav-link" href="#addCharacter" data-toggle="tab" role="tab" aria-controls="addCharacter" aria-selected="false">
                   <span data-feather="plus-circle"></span>
-                  Add Characters
+                  Add Character
                 </a>
               </li>
             </ul>
@@ -50,15 +50,33 @@
           </div>
         </nav>
 
-        <!--Jumbo Tron-->
-        <main role="main" class="col-md-10 col-sm-10 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="jumbotron">
-            <h1 class="display-4">Welcome ....</h1>
-            <p class="lead">Important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-            <hr class="my-4">
-            <p>Semi-important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-        </main>
+        <!--tab content-->
+        <div class="tab-content col-md-10 col-sm-10 ml-sm-auto col-lg-10" id="myTabContent">
+
+          <!--home tab-->
+          <div role="tabpanel" aria-labelledby="home-tab" class="col-md-12 col-sm-12 ml-sm-auto col-lg-12 tab-pane fade-in active" id="home">
+               <!--Jumbo Tron-->
+                 <div role="tabpanel" class="jumbotron" >
+                   <h1 class="display-3">Welcome ....</h1>
+                   <p class="lead">Important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
+                   <hr class="my-4">
+                   <p>Semi-important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                 </div> 
+         </div>
+           <!--my characters tab-->
+           <div role="tabpanel" aria-labelledby="myCharacter-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12" id="myCharacters">
+               <div class="jumbotron" style="margin-top: 10px;">
+                   <h1 class="display-3">Hello, world!</h1>
+                   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                   <hr class="my-4">
+                   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                 </div>
+           </div>
+
+
+           <!--add character tab-->
+           <div role="tabpanel" aria-labelledby="addCharacter-tab" class="tab-pane fade" id="addCharacter">add characters</div>
+         </div>
 
       </div>
     </div>
