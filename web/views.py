@@ -19,6 +19,8 @@ class User(db.Model):
 	username = db.Column(db.String(80), unique=True, nullable=False)
 	email = db.Column(db.String(80), unique=True, nullable=False)
 	pw_hash = db.Column(db.String(256), nullable=False)
+	characters = db.relationship('Character', backref='User', lazy=True)
+
 
 	def __init__(self, username, password):
 		self.username = username
@@ -33,6 +35,56 @@ class User(db.Model):
 
 	def __repr__(self):
 		return '<User %r>' % self.username
+
+
+class Character(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	user = db.Column(db.Integer, db.ForeignKey('user.id'),
+			nullable=False)
+
+	def __init__(stats, race, subrace):
+		#set all base stats
+		self.str = base_stats[0]
+		self.dex = base_stats[1]
+		self.con = base_stats[2]
+		self.int = base_stats[3]
+		self.wis = base_stats[4]
+		self.chr = base_stats[5]
+
+
+class Race(object):
+	def __init__(self):
+		self._hello = 'world'
+
+
+class Dwarf(Race):
+	size = 'medium'
+	def __init__(self, character, subrace):
+		Race.__init__(self)
+		subrace = subrace
+		print self._hello
+
+	def ability_score_boost(subrace):
+		character.constitution += 2
+		if subrace == "Hill":
+			character.wis += 1
+		else:
+			character.str += 2
+
+
+
+class userClass(object):
+	asdf = 1
+
+
+
+class Fighter(userClass):
+	asdf = 1
+
+
+class Background(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+
 
 
 # ==================
@@ -98,4 +150,7 @@ def register():
 
 @app.route('/')
 def index():
+	base_stats = [1,2,3,4,5,6]
+	subrace = 'Hill'
+	dwarf = Dwarf(base_stats, subrace)
 	return render_template('index.html')
