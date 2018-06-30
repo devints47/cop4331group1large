@@ -1,38 +1,49 @@
-import React, { Component } from "react";
-import { Text, TouchableOpacity, View, AppRegistry, ListView,StyleSheet} from "react-native";
-import Modal from "react-native-modal";
+import React, { Component } from 'react'
+import { AsyncStorage,AppRegistry, Text, View, TextInput, StyleSheet } from 'react-native'
 
-const users = [
-  { name: 'John Doe' },
-  { name: 'Rick James' },
-  { name: 'Bob Hope' },
-  { name: 'Janet Doe' }
-]
+class addchar extends Component {
+   state = {
+      name: ''
+   }
+   componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
 
-export default class addchar extends Component {
-  constructor(){
-    super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      userDataSource: ds.cloneWithRows(users),
-    };
-  }
+   setName = (value) => {
+      AsyncStorage.setItem('name', value);
+      this.setState({ 'name': value });
+   }
 
-  renderRow(user, sectionId, rowId, highlightRow){
-    return(
-    <View>
-      <Text>{user.name}</Text>
-      </View>
-    )
-  }
-  render() {
-    return (
-      <ListView 
-        dataSource={this.state.userDataSource}
-        renderRow={this.renderRow.bind(this)}
-      />
-    );
-  }
+   _submitForm = () => {
+       const { name } = this.state
+   };
+
+   render() {
+
+      return (
+         <View style = {styles.container}>
+            <TextInput style = {styles.textInput} autoCapitalize = 'none' 
+               onChangeText = {this.setName}
+               onSubmitEditing = {this._submitForm}/>
+            <Text>
+               {this.state.name}
+            </Text>
+         </View>
+      )
+   }
 }
+export default addchar
+
+const styles = StyleSheet.create ({
+   container: {
+      flex: 1,
+      alignItems: 'center',
+      marginTop: 50
+   },
+   textInput: {
+      margin: 15,
+      height: 35,
+      borderWidth: 1,
+      backgroundColor: '#7685ed'
+   }
+})
 
 AppRegistry.registerComponent('addchar', () => addchar)
