@@ -3,9 +3,9 @@ from flask import Flask, url_for, redirect, render_template, request, json, sess
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from races import *
-from classes import *
-from backgrounds import *
+from objects.races import *
+from objects.classes import *
+from objects.backgrounds import *
 
 app = Flask(__name__)
 app.config.from_object('config')

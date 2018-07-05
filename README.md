@@ -1,4 +1,4 @@
-# cop4331group1small
+# cop4331group1large
 Final Project for COP 4331c
 
 # Setup
