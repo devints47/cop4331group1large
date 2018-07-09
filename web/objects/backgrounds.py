@@ -17,7 +17,7 @@ class Background(object):
 
 
 class BackgroundFactory(object):
-    def make_background(back_string):
+    def make_background(self, back_string):
         if (back_string == "Acolyte"):
             return Acolyte(back_string)
         elif (back_string == "Charlatan"):

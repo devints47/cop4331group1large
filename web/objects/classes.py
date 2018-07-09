@@ -22,7 +22,7 @@ class CharacterClass(object):
         self._archetype = ""
         self._start_HP = HP
         self._hit_dice = HP
-        self._HP_per_level = HP_level
+        self._HP_per_level = level_HP
         self._feature_list = []
         self._saving_throws = saving_list
         self._prof_list = []
@@ -60,7 +60,7 @@ class CharacterClass(object):
 
 
 class ClassFactory(object):
-    def make_class(class_string):
+    def make_class(self, class_string):
         if (class_string == "Barbarian"):
             return Barbarian(class_string)
         elif (class_string == "Bard"):

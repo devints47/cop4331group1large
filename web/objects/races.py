@@ -11,6 +11,7 @@ INT = 3
 WIS = 4
 CHR = 5
 
+LANG_LIST = ["Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc","Abyssal","Celestial","Deep Speech","Infernal","Primordial","Sylvan","Undercommon"]
 
 # ==================
 # Races
@@ -40,7 +41,7 @@ class Race(object):
 
 
 class RaceFactory(object):
-    def make_race(race_string):
+    def make_race(self, race_string):
         string_list = race_string.split()
         if (string_list[0] == "Dragonborn"):
             return Dragonborn(string_list[0])
@@ -73,12 +74,20 @@ class Dwarf(Race):
         # set ability boost
         character.increase_ability_score(CON, 2)
         # set all proficiencies
+        character.add_weapon_profs(["Battleaxe","Handaxe","Throwing Hammer","Warhammer"])
+        character.create_option(3, 1, "Dwarven Tool Proficiency", ["Smith's tools", "Brewer's supplies", "Mason's tools"])
+        character.add_lang_profs(["Common","Dwarvish"])
         # set all features
         # set all spells
         if self._subrace == "Hill": # All the hill stuff
             character.increase_ability_score(WIS, 1)
         else: # All the Mountain stuff
             character.increase_ability_score(STR, 2)
+            character.add_armor_profs(["Light", "Medium"])
+
+    def get_options(self):
+        return True # THIS SHOULD BE A SQL QUERY
+
 
 
 class Elf(Race):
@@ -90,14 +99,25 @@ class Elf(Race):
         # set ability boost
         character.increase_ability_score(DEX, 2)
         # set all proficiencies
+        character.add_skill_profs(["Perception"])
+        character.add_lang_profs(["Common","Elvish"])
         # set all features
         # set all spells
         if self._subrace == "High": # All the high stuff
             character.increase_ability_score(INT, 1)
+            character.add_weapon_profs(["Longsword","Shortsword","Longbow","Shortbow"])
+            # Creating language option list
+            temp_list = LANG_LIST
+            temp_list.remove("Common")
+            temp_list.remove("Elvish")
+            character.create_option()
         elif self._subrace == "Wood": # All the wood stuff
             character.increase_ability_score(WIS, 1)
+            self._speed = 35
+            character.add_weapon_profs(["Longsword","Shortsword","Longbow","Shortbow"])
         else: # All the drow stuff
             character.increase_ability_score(CHR, 1)
+            character.add_weapon_profs(["Rapier","Shortsword","Hand Crossbow"])
 
 
 class Halfling(Race):
