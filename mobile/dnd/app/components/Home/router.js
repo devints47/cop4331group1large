@@ -5,6 +5,7 @@ import {
   Text,
   View,TouchableOpacity,Animated,Image,Button
 } from 'react-native';
+import ActionButton from 'react-native-action-button';
 
 
 const Sliding_Drawer_Width = 250;
@@ -63,9 +64,12 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Character')}>
-          <Text style= {{fontSize:30}}>Next Page</Text>
-        </TouchableOpacity>
+       
+        
+        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('Character')}>
+          
+        </ActionButton>
+
 
       <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
 
