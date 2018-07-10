@@ -1,70 +1,142 @@
 import React, { Component } from 'react';
-import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
-import {Modal, Text, TouchableHighlight} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,TouchableOpacity,Animated,Image
+} from 'react-native';
 
 
-export default class router extends Component {
+const Sliding_Drawer_Width = 250;
+
+export default class App extends Component{
+
   
   
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
-  }
+  constructor()
+    {
+        super();
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="Add Character"
-            color="#4CAF50"
-          />
+        this.Animation = new Animated.Value(0);
+
+        this.Sliding_Drawer_Toggle = true;
+
+    }
+
+
+    ShowSlidingDrawer = () =>
+    {
+        if( this.Sliding_Drawer_Toggle === true )
+        {
+                Animated.timing(
+                    this.Animation,
+                    {
+                        toValue: 1,
+                        duration: 500
+                    }
+                ).start(() =>
+                {
+                    this.Sliding_Drawer_Toggle = false;
+                });
+
+        }
+        else
+        {
+                Animated.timing(
+                    this.Animation,
+                    {
+                        toValue: 0,
+                        duration: 500
+                    }
+                ).start(() =>
+                {
+                    this.Sliding_Drawer_Toggle = true;
+                });
+        }
+    }
+
+  render(){
+    const Animation_Interpolate = this.Animation.interpolate(
+      {
+          inputRange: [ 0, 1 ],
+          outputRange: [ -(Sliding_Drawer_Width - 32), 0 ]
+      });
+
+  return(
+    <View style={styles.container}>
+
+    <Text style = {styles.TextStyle}>Main page</Text>
+
+      <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
+
+
+    <View style = { styles.Main_Sliding_Drawer_Container }>
+
+
+        <TouchableOpacity>
+          <Text style= {{fontSize:30}}>Character List</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style= {{fontSize:30}}>Settings</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+          <Text style= {{fontSize:30}}>Logout</Text>
+        </TouchableOpacity>
+
         </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="My Characters"
-            color="#841584"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="Delete Character"
-            color="#f44336"
-          />
-        </View>
-        <View style={styles.alternativeLayoutButtonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="This looks great!"
-          />
-          <Button
-            onPress={this._onPressButton}
-            title="OK!"
-            color="#841584"
-          />
-        </View>
-      </View>
-    );
-  }
+
+
+    <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
+
+        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 30, height: 30,left:5 }} />
+
+      </TouchableOpacity>
+
+
+    </Animated.View>
+
+    </View>
+  );
+}
 }
 
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   justifyContent: 'center',
-  },
-  buttonContainer: {
-    margin: 20
-  },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-})
+  container:
+    {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems:'center'
 
+    },
 
+    Root_Sliding_Drawer_Container:
+      {
+          position: 'absolute',
+          flexDirection: 'row',
+          left: 0,
+          top: 0,
+          //top: (Platform.OS == 'ios') ? 20 : 0,
+          width: Sliding_Drawer_Width,
+          height:'100%'
+      },
 
-AppRegistry.registerComponent('router', ()=>router)
+      Main_Sliding_Drawer_Container:
+      {
+          flex: 1,
+          backgroundColor: 'gray',
+          paddingHorizontal: 10,
+          justifyContent: 'center',
+          alignItems: 'center'
+      },
+
+      TextStyle: {
+
+          fontSize: 20,
+          padding: 10,
+          textAlign: 'center',
+          color: 'black'
+      }
+
+});
