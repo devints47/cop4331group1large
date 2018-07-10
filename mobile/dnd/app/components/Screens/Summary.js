@@ -3,7 +3,7 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,TouchableOpacity,Animated,Image,Button
+  View,TouchableOpacity,Animated,Image
 } from 'react-native';
 
 
@@ -11,6 +11,8 @@ const Sliding_Drawer_Width = 250;
 
 export default class App extends Component{
 
+  
+  
   constructor()
     {
         super();
@@ -63,21 +65,31 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Character')}>
-          <Text style= {{fontSize:30}}>Next Page</Text>
-        </TouchableOpacity>
+    <Text style = {styles.TextStyle}>Summary</Text>
 
       <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
 
 
     <View style = { styles.Main_Sliding_Drawer_Container }>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
-          <Text style= {{fontSize:30}}>Settings</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Router')}>
+          <Text style= {{fontSize:30}}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-          <Text style= {{fontSize:30}}>Logout</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Character Bio')}>
+          <Text style= {{fontSize:30}}>Character Bio</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Stats')}>
+          <Text style= {{fontSize:30}}>Stats</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Equipment')}>
+          <Text style= {{fontSize:30}}>Equipment</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Summary')}>
+          <Text style= {{fontSize:30}}>Summary</Text>
         </TouchableOpacity>
 
         </View>
@@ -85,7 +97,7 @@ export default class App extends Component{
 
     <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
 
-        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 38, height: 36,left:10,bottom: -3 }} />
+        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 30, height: 30,left:5 }} />
 
       </TouchableOpacity>
 

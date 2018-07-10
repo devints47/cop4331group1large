@@ -1,12 +1,9 @@
 
 import React, { Component } from 'react';
 import {Text,View,AppRegistry,StyleSheet, TextInput} from 'react-native';
-import t from 'tcomb-form-native';
 
 import { FormInput, Button } from 'react-native-elements';
 import * as Animate from 'react-native-animatable';
-
-  
 
 
 export default class LoginForm extends Component {
@@ -15,46 +12,9 @@ export default class LoginForm extends Component {
        super(props);
 
        this.state = {
-        user:'',
-        pass: '',
-        selectedCategory : 0,
-        
+        selectedCategory : 0
        };
    }
-
-
-  handleAdd(){
-      console.log(this.state.user);
-      console.log(this.state.pass);
-
-      const button = this;
-      const data = {username: this.state.user, password:this.state.pass};
-      const json = JSON.stringify(data);
-      console.log(json);
-
-      fetch(global.uri + '/login1',{
-          method:'POST',
-          headers:{
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          body: json
-      })
-      .then((response)=>response.json())
-      .then((res)=>{
-          console.log(res)
-          if(res.res == 'logged_in'){
-            console.log('Logged In!')
-            button.props.navigation.navigate('Router')
-          }
-          else alert(res.res)
-      })
-      .catch(()=>{
-          console.log('error')
-      }).done();
-
-
-  }
   
 
     render() {
@@ -63,7 +23,7 @@ export default class LoginForm extends Component {
         animation='slideInUp'
         iterationCount={1}
         style={styles.container}>
-  
+            
             <TextInput 
             placeholder='username'
             placeholderTextColor='rgba(124,110,95,0.8)'
@@ -74,7 +34,6 @@ export default class LoginForm extends Component {
             autoCapitalize='none'
             autoCorrect={false}
             underlineColorAndroid='rgba(0,0,0,0)'
-            onChangeText={(text) => this.setState({user:text}) }
             />
 
             <TextInput 
@@ -85,13 +44,12 @@ export default class LoginForm extends Component {
             returnKeyType='go'
             underlineColorAndroid='rgba(0,0,0,0)'
             ref={(input)=>this.passwordInput=input}
-            onChangeText={(text) => this.setState({pass:text}) }
             />
 
             <Button  
             buttonStyle={styles.button} 
             placeholderTextColor='rgba(124,110,95,0.8)'
-            onPress={()=> this.handleAdd() }
+            onPress={() => this.props.navigation.navigate('Router')}
             title='login'/>
 
         </Animate.View>
