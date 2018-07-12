@@ -21,6 +21,12 @@ export default class App extends Component{
 
         this.Sliding_Drawer_Toggle = true;
 
+        this.state={
+            race: 'Race',
+            subrace: 'Subrace',
+            background: 'Background',
+        }
+
     }
 
 
@@ -61,6 +67,11 @@ export default class App extends Component{
         this.refs.addModal.showAddModal()
     }
 
+    getRaceInfo(data){
+        this.setState({race: data['race'], subrace: data['subrace'], background: data['background']});
+        console.log(this.state.race);
+    }
+
   render(){
     const Animation_Interpolate = this.Animation.interpolate(
       {
@@ -71,7 +82,11 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
-        <AddModal ref={'addModal'}>
+        <Text>
+            {this.state.race} {this.state.subrace} {this.state.background}
+        </Text>
+
+        <AddModal ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
         </AddModal>
 
        
