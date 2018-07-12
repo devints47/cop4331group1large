@@ -9,3 +9,4 @@ AppRegistry.registerComponent('dnd', () => App);
 
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+console.disableYellowBox = true;
