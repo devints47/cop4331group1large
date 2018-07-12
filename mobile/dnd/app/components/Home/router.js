@@ -6,6 +6,7 @@ import {
   View,TouchableOpacity,Animated,Image,Button
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
+import AddModal from './AddModal';
 
 
 const Sliding_Drawer_Width = 250;
@@ -54,6 +55,12 @@ export default class App extends Component{
         }
     }
 
+
+    _addChar(){
+        //this.props.navigation.navigate('Character')
+        this.refs.addModal.showAddModal()
+    }
+
   render(){
     const Animation_Interpolate = this.Animation.interpolate(
       {
@@ -64,9 +71,12 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
+        <AddModal ref={'addModal'}>
+        </AddModal>
+
        
         
-        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('Character')}>
+        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this._addChar() }>
           
         </ActionButton>
 
