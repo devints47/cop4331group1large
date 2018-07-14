@@ -20,7 +20,9 @@ export default class AddModal extends Component {
     showAddModal = () => {
         this.refs.myModal.open();
     }
-    
+    generateKey = (numberOfCharacters) => {
+        //return require('random-string')({length: numberOfCharacters});        
+    }
     render() {
         return (
             <Modal
@@ -38,6 +40,13 @@ export default class AddModal extends Component {
                     // alert("Modal closed");
                 }}
             >
+                <Text style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    marginTop: 40
+                }}>Add Character</Text>
+                
                 <Button
                     style={{ fontSize: 18, color: 'white' }}
                     containerStyle={{
@@ -48,12 +57,14 @@ export default class AddModal extends Component {
                         borderRadius: 6,
                         backgroundColor: 'mediumseagreen'
                     }}
-                    onPress={() => { 
-                        const newKey = '1234567889998';
+                    onPress={() => {
+                         
+                        const newKey = this.generateKey(24);
                         const newFood = {
-                            key: newKey,
-                            name: 'Sample race',
-                            foodDescription: 'Sample subrace'
+                            key: "asddfgghhj",
+                            name: "Race sample",
+                           
+                            foodDescription: "Subrace sample"
                         };    
                         flatListData.push(newFood);    
                         this.props.parentFlatList.refreshFlatList(newKey);                                
