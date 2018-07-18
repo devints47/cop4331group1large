@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight } from 'react-native';
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
-import AddModal from './AddModal';
+import AddModal from '../Home/AddModal';
 import ActionButton from 'react-native-action-button';
 
 class FlatListItem extends Component {
@@ -151,7 +151,7 @@ export default class BasicFlatList extends Component {
 
             </FlatList>
 
-            <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => console.log('Here')}>
+            <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.refs.addModal.showAddModal()}>
                 </ActionButton>
 
             <AddModal ref={'addModal'} parentFlatList={this} >
