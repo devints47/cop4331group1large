@@ -71,29 +71,30 @@ export default class AddModal extends Component{
             }}
             >
 
-            <Text style={styles.header}> Character Creation </Text>
-            <Dropdown
-            style={styles.race} 
-            ref={'racedrop'}
-            label='Race'
-            data={races}
-            itemCount={10}
-            onChangeText = {(input) => this.setState({selectedRace: input}) }
-            />
+            <View styles={styles.dropdown}>
+                <Text style={styles.header}> Character Creation </Text>
+                <Dropdown
+                style={styles.race} 
+                ref={'racedrop'}
+                label='Race'
+                data={races}
+                itemCount={10}
+                onChangeText = {(input) => this.setState({selectedRace: input}) }
+                />
 
-            {this._renderSubRace()}
+                {this._renderSubRace()}
 
-            <Dropdown
-            style={styles.race} 
-            ref={'backdrop'}
-            label='Background'
-            data={background}
-            itemCount={10}
-            onChangeText = {(input)=>this.setState({selectedBackground: input})}
-            />
+                <Dropdown
+                style={styles.race} 
+                ref={'backdrop'}
+                label='Background'
+                data={background}
+                itemCount={10}
+                onChangeText = {(input)=>this.setState({selectedBackground: input})}
+                />
 
-            <Button title='Next' onPress={()=>this.updateState()}/>
-
+                <Button title='Next' onPress={()=>this.updateState()}/>
+            </View>
             </Modal>
         );
 
@@ -116,7 +117,11 @@ const styles=StyleSheet.create({
     },
     race:{
 
-    }
+    },
+    dropdown:{
+     paddingLeft: 10,
+        
+    },
 
 });
 
