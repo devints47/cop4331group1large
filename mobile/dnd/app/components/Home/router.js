@@ -6,6 +6,8 @@ import {
   View,TouchableOpacity,Animated,Image,Button,FlatList
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
+
+import AddModal from './AddModal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
 import Swipeout from 'react-native-swipeout';
@@ -22,6 +24,14 @@ export default class App extends Component{
         });
         this.Animation = new Animated.Value(0);
         this.Sliding_Drawer_Toggle = true;
+
+        this.state={
+            race: 'Race',
+            subrace: 'Subrace',
+            background: 'Background',
+        }
+
+
     }
 
     ShowSlidingDrawer = () =>
@@ -55,6 +65,17 @@ export default class App extends Component{
         }
     }
 
+
+    _addChar(){
+        //this.props.navigation.navigate('Character')
+        this.refs.addModal.showAddModal()
+    }
+
+    getRaceInfo(data){
+        this.setState({race: data['race'], subrace: data['subrace'], background: data['background']});
+        console.log(this.state.race);
+    }
+
   render(){
     const Animation_Interpolate = this.Animation.interpolate(
       {
@@ -65,8 +86,20 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
-        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('BasicFlatList')}>
+
+        <Text>
+            {this.state.race} {this.state.subrace} {this.state.background}
+        </Text>
+
+        <AddModal ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
+        </AddModal>
+
+       
         
+        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this._addChar() }>
+          
+          {/*<ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('BasicFlatList')}>*/}
+
         </ActionButton>
 
     
