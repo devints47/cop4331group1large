@@ -3,6 +3,7 @@ import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, 
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import AddModal from './AddModal';
+import ActionButton from 'react-native-action-button';
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -47,6 +48,8 @@ class FlatListItem extends Component {
             sectionId: 1    
         };               
         return (  
+
+            
             <Swipeout {...swipeSettings}>
                 <View style={{
                 flex: 1,
@@ -74,8 +77,12 @@ class FlatListItem extends Component {
                     }}>
                 
                     </View>
+
                 </View>   
+
             </Swipeout>      
+
+            
             
         );
     }
@@ -143,6 +150,9 @@ export default class BasicFlatList extends Component {
                 >
 
             </FlatList>
+
+            <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => console.log('Here')}>
+                </ActionButton>
 
             <AddModal ref={'addModal'} parentFlatList={this} >
 

@@ -8,6 +8,7 @@ import {
 import ActionButton from 'react-native-action-button';
 
 import AddModal from './AddModal';
+import BasicFlatList from '../Screens/BasicFlatList';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
 import Swipeout from 'react-native-swipeout';
@@ -84,12 +85,9 @@ export default class App extends Component{
       });
 
   return(
-    <View style={styles.container}>
 
+        <BasicFlatList style={styles.list}>
 
-        <Text>
-            {this.state.race} {this.state.subrace} {this.state.background}
-        </Text>
 
         <AddModal ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
         </AddModal>
@@ -102,31 +100,9 @@ export default class App extends Component{
 
         </ActionButton>
 
+
+        </BasicFlatList>
     
-      <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
-
-
-    <View style = { styles.Main_Sliding_Drawer_Container }>
-
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
-          <Text style= {{fontSize:30}}>Settings</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-          <Text style= {{fontSize:30}}>Logout</Text>
-        </TouchableOpacity>
-
-        </View>
-
-
-      <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
-        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 38, height: 36,left:10,bottom: -3 }} />
-      </TouchableOpacity>
-
-
-    </Animated.View>
-
-    </View>
   );
 }
 }
@@ -170,6 +146,9 @@ const styles = StyleSheet.create({
         color: 'white',
         padding: 10,
         fontSize: 16,  
-    }
+      },
+      list:{
+          flex:1
+      },
 
 });
