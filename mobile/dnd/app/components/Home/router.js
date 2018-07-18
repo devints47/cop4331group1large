@@ -3,22 +3,26 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,TouchableOpacity,Animated,Image,Button
+  View,TouchableOpacity,Animated,Image,Button,FlatList
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
-import AddModal from './AddModal';
 
+import AddModal from './AddModal';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from 'react-native-modal';
+import Swipeout from 'react-native-swipeout';
 
 const Sliding_Drawer_Width = 250;
 
 export default class App extends Component{
 
-  constructor()
+  constructor(props)
     {
-        super();
-
+        super(props);
+        this.state = ({
+            deletedRowKey: null,            
+        });
         this.Animation = new Animated.Value(0);
-
         this.Sliding_Drawer_Toggle = true;
 
         this.state={
@@ -27,8 +31,8 @@ export default class App extends Component{
             background: 'Background',
         }
 
-    }
 
+    }
 
     ShowSlidingDrawer = () =>
     {
@@ -82,6 +86,7 @@ export default class App extends Component{
   return(
     <View style={styles.container}>
 
+
         <Text>
             {this.state.race} {this.state.subrace} {this.state.background}
         </Text>
@@ -93,9 +98,11 @@ export default class App extends Component{
         
         <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this._addChar() }>
           
+          {/*<ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('BasicFlatList')}>*/}
+
         </ActionButton>
 
-
+    
       <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
 
 
@@ -112,10 +119,8 @@ export default class App extends Component{
         </View>
 
 
-    <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
-
+      <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
         <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 38, height: 36,left:10,bottom: -3 }} />
-
       </TouchableOpacity>
 
 
@@ -134,7 +139,6 @@ const styles = StyleSheet.create({
       alignItems:'center'
 
     },
-
     Root_Sliding_Drawer_Container:
       {
           position: 'absolute',
@@ -161,6 +165,11 @@ const styles = StyleSheet.create({
           padding: 10,
           textAlign: 'center',
           color: 'black'
-      }
+      },
+      flatListItem: {
+        color: 'white',
+        padding: 10,
+        fontSize: 16,  
+    }
 
 });
