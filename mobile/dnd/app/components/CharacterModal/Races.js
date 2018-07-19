@@ -11,7 +11,7 @@ import uuid from 'react-native-uuid';
 var screen = Dimensions.get('window');
 
 
-export default class AddModal extends Component{
+export default class Races extends Component{
 
     constructor(props){
         super(props);

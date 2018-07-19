@@ -5,7 +5,7 @@ import router from './app/components/Home/router';
 import Stats from './app/components/Screens/Stats';
 import Settings from './app/components/Screens/Settings';
 import Skills from './app/components/Screens/Skills';
-import Equipment from './app/components/Screens/Equipment';
+import Equipment from './app/components/CharacterModal/Equipment';
 import Character from './app/components/Screens/Character';
 import BasicFlatList from './app/components/Screens/BasicFlatList';
 import Summary from './app/components/Screens/Summary'; 

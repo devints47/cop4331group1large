@@ -7,9 +7,8 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import AddModal from './AddModal';
+import Races from '../CharacterModal/Races';
 import BasicFlatList from '../Screens/BasicFlatList';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
 import Swipeout from 'react-native-swipeout';
 
@@ -89,8 +88,8 @@ export default class App extends Component{
         <BasicFlatList style={styles.list}>
 
 
-        <AddModal ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
-        </AddModal>
+        <Races ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
+        </Races>
 
        
         

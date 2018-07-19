@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight } from 'react-native';
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
-import AddModal from '../Home/AddModal';
+import Races from '../CharacterModal/Races';
 import Equipment from '../Home/Equipment';
 import ActionButton from 'react-native-action-button';
 import {chars,races} from '../../assets/data/races';
@@ -182,9 +182,9 @@ export default class BasicFlatList extends Component {
           </ActionButton.Item>
                 </ActionButton>
 
-            <AddModal ref={'addModal'} parentFlatList={this} >
+            <Races ref={'addModal'} parentFlatList={this} >
 
-            </AddModal>
+            </Races>
 
             <Equipment ref={'Eqp'} parentFlatList={this} >
 
