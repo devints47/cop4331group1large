@@ -4,6 +4,7 @@ import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import AddModal from '../Home/AddModal';
 import ActionButton from 'react-native-action-button';
+import {races} from '../../assets/data/races';
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -67,8 +68,8 @@ class FlatListItem extends Component {
                                 flexDirection:'column',   
                                 height: 100                 
                             }}>            
-                                <Text style={styles.flatListItem}>{this.props.item.name}</Text>
-                                <Text style={styles.flatListItem}>{this.props.item.foodDescription}</Text>
+                                <Text style={styles.flatListItem}>{this.props.item.value}</Text>
+                                <Text style={styles.flatListItem}>{this.props.item.value}</Text>
                         </View>              
                     </View>
                     <View style={{
@@ -139,7 +140,7 @@ export default class BasicFlatList extends Component {
 
             <FlatList 
                 ref={"flatList"}
-                data={flatListData}
+                data={races}
                 renderItem={({item, index})=>{
                     //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
                     return (

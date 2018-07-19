@@ -1,13 +1,13 @@
-export const races = [
-    {'value':'Dwarf'},
-    {'value':'Elf'},
-    {'value':'Halfling'},
-    {'value':'Human'},
-    {'value':'Dragonborn'},
-    {'value':'Gnome'},
-    {'value':'Half-Elf'},
-    {'value':'Half-Orc'},
-    {'value':'Tiefling'},
+export var races = [
+    {'key':'1','value':'Dwarf'},
+    {'key':'2','value':'Elf'},
+    {'key':'3','value':'Halfling'},
+    {'key':'4','value':'Human'},
+    {'key':'5','value':'Dragonborn'},
+    {'key':'6','value':'Gnome'},
+    {'key':'7','value':'Half-Elf'},
+    {'key':'8','value':'Half-Orc'},
+    {'key':'9','value':'Tiefling'},
 ];
 
 export const subrace = {
@@ -39,13 +39,13 @@ export const subrace = {
         {'value':'Rock'},
     ],
     'Half-Elf': [
-        {'value':'Half-Elf'},
+        {'value':'none'},
     ],
     'Half-Orc':[
-        {'value':'Half-Orc'},
+        {'value':'none'},
     ],
     'Tiefling':[
-        {'value':'Tiefling'},
+        {'value':'none'},
     ]
 
 }

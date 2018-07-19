@@ -53,7 +53,7 @@ export default class AddModal extends Component{
     }
 
     updateState(){
-        var data = {race: this.state.selectedRace, subrace: this.state.selectedSubRace, background: this.state.selectedBackground}
+        var data = {newItem: {} }
         this.props.updateVal(data);
         console.log('back');
     }
@@ -95,6 +95,7 @@ export default class AddModal extends Component{
 
                 <Button title='Next' onPress={()=>this.updateState()}/>
             </View>
+            
             </Modal>
         );
 
@@ -109,6 +110,8 @@ const styles=StyleSheet.create({
         shadowRadius: 10,
         width: screen.width - 80,
         height: 400,
+        padding:32,
+        
     },
     header:{
         fontSize: 20,
@@ -119,8 +122,7 @@ const styles=StyleSheet.create({
 
     },
     dropdown:{
-     paddingLeft: 10,
-        
+     padding:32,
     },
 
 });
