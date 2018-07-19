@@ -104,8 +104,8 @@ export default class AddModal extends Component{
             <Text style={styles.header}> Character Creation </Text>
             </View>
 
-            <View>
-            <RadioForm
+            <View styles={styles.dropdown}>
+            <RadioForm style={{ alignItems: 'flex-start' }}
             radio_props={subrace['Dwarf']['weapons']['Hill']}
             onPress={(value) => {this.setState({value:value})}}
         />
@@ -138,8 +138,9 @@ const styles=StyleSheet.create({
 
     },
     dropdown:{
-     padding:32,
+     padding:32
     },
+
 
 });
 
