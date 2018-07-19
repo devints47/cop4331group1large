@@ -58,18 +58,33 @@ export default class AddModal extends Component{
 
     updateState(){
 
+        sub = this.state.selectedSubRace;
+
+        if(sub=== ''){
+            sub='None';
+        }
 
         const newKey = uuid.v1();
         const newItem = {
             key: newKey,
             race: this.state.selectedRace,
-            subrace: this.state.selectedSubRace,
+            subrace: sub,
             background: this.state.selectedBackground,
             class: this.state.selectedClass,
         };    
         chars.push(newItem);
         // console.log(chars)    
-        this.props.parentFlatList.refreshFlatList(newKey);                                
+        this.props.parentFlatList.refreshFlatList(newKey);       
+        
+        
+        this.setState({
+            selectedBackground:'',
+            selectedClass:'',
+            selectedRace:'',
+            selectedSubRace:'',
+        });
+
+
         this.refs.myModal.close();          
 
     }
