@@ -4,8 +4,9 @@ import Modal from 'react-native-modalbox';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
         TextInput,Button} from 'react-native';
-import {races, subrace, background} from '../../assets/data/races';
+import {races, subrace, background, chars,charclass} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
+import uuid from 'react-native-uuid';
 
 var screen = Dimensions.get('window');
 
@@ -18,6 +19,7 @@ export default class AddModal extends Component{
             selectedRace: '',
             selectedSubRace: '',
             selectedBackground: '',
+            selectedClass:'',
             subracelabel: 'Subrace',
 
         }
@@ -31,10 +33,12 @@ export default class AddModal extends Component{
     _renderSubRace(){
 
         
-        disabled = subrace[this.state.selectedRace][0]['value'] === 'none'
+        disabled = subrace[this.state.selectedRace]['subrace'][0]['value'] === 'none'
 
         if(!disabled) setlabel = this.state.subracelabel;
-        else setlabel = 'No Subrace'
+        else {
+            setlabel = 'No Subrace'
+        }
 
 
         return(
@@ -42,7 +46,7 @@ export default class AddModal extends Component{
             style={styles.race} 
             ref={'subdrop'}
             label={setlabel}
-            data={subrace[this.state.selectedRace]}
+            data={subrace[this.state.selectedRace]['subrace']}
             disabled={disabled}
             itemCount={10}
             onChangeText = {(input)=>this.setState({selectedSubRace: input})}
@@ -53,9 +57,21 @@ export default class AddModal extends Component{
     }
 
     updateState(){
-        var data = {newItem: {} }
-        this.props.updateVal(data);
-        console.log('back');
+
+
+        const newKey = uuid.v1();
+        const newItem = {
+            key: newKey,
+            race: this.state.selectedRace,
+            subrace: this.state.selectedSubRace,
+            background: this.state.selectedBackground,
+            class: this.state.selectedClass,
+        };    
+        chars.push(newItem);
+        // console.log(chars)    
+        this.props.parentFlatList.refreshFlatList(newKey);                                
+        this.refs.myModal.close();          
+
     }
 
     render(){
@@ -67,7 +83,7 @@ export default class AddModal extends Component{
             position='center'
             backdrop={true}
             onClosed={()=>{
-               alert('Modal Closed!')
+               console.log('Modal Closed')
             }}
             >
 
@@ -83,6 +99,16 @@ export default class AddModal extends Component{
                 />
 
                 {this._renderSubRace()}
+
+
+                <Dropdown
+                style={styles.race} 
+                ref={'backdrop'}
+                label='Class'
+                data={charclass}
+                itemCount={10}
+                onChangeText = {(input)=>this.setState({selectedClass: input})}
+                />
 
                 <Dropdown
                 style={styles.race} 

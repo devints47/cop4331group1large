@@ -4,13 +4,13 @@ import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import AddModal from '../Home/AddModal';
 import ActionButton from 'react-native-action-button';
-import {races} from '../../assets/data/races';
+import {chars,races} from '../../assets/data/races';
 
 class FlatListItem extends Component {
     constructor(props) {
         super(props);   
         this.state = {
-            activeRowKey: null
+            activeRowKey: null,
         };          
     }
     render() {   
@@ -34,7 +34,7 @@ class FlatListItem extends Component {
                             [                              
                               {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                               {text: 'Yes', onPress: () => {        
-                                races.splice(this.props.index, 1); 
+                                chars.splice(this.props.index, 1); 
                                 //Refresh FlatList ! 
                                 this.props.parentFlatList.refreshFlatList(deletingRow);
                               }},
@@ -66,10 +66,12 @@ class FlatListItem extends Component {
                         <View style={{
                                 flex: 1,
                                 flexDirection:'column',   
-                                height: 100                 
-                            }}>            
-                                <Text style={styles.flatListItem}>{this.props.item.value}</Text>
-                                <Text style={styles.flatListItem}>{this.props.item.value}</Text>
+                                flexGrow:1,                 
+                            }}>         
+                                <Text style={styles.flatListItem}>Race: {this.props.item.race}</Text>
+                                <Text style={styles.flatListItem}>Subrace: {this.props.item.subrace}</Text>
+                                <Text style={styles.flatListItem}>Class: {this.props.item.class}</Text>
+                                <Text style={styles.flatListItem}>Background: {this.props.item.background}</Text>
                         </View>              
                     </View>
                     <View style={{
@@ -105,11 +107,14 @@ export default class BasicFlatList extends Component {
         this._onPressAdd = this._onPressAdd.bind(this);        
     }
     refreshFlatList = (activeKey) => {
+        console.log(chars)
         this.setState((prevState) => {
             return {
-                deletedRowKey: activeKey
+                deletedRowKey: activeKey,
             };
         });
+
+
         this.refs.flatList.scrollToEnd();
     }
     _onPressAdd () {
@@ -118,29 +123,27 @@ export default class BasicFlatList extends Component {
     }
     render() {
       return (
-        <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0}}>
+        <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0, backgroundColor: 'rgba(150,97,107,1)'}}>
             
             <View style={{
-                backgroundColor: 'brown', 
-                flexDirection: 'row',
-                justifyContent:'flex-end',                
+                backgroundColor: 'rgba(69,45,49,0.9)', 
+                flexDirection: 'row',           
                 alignItems: 'center',
-                height: 55}}>
-                <TouchableHighlight 
-                    style={{marginRight: 10}}
-                    underlayColor='brown'
-                    onPress={this._onPressAdd}
-                    >
-                <Image
-                    style={{width: 35, height: 35}}
-                    source={require('../../assets/images/icons-add.png')}
-                />
-            </TouchableHighlight>
+                height: 55,
+                justifyContent:'center'}}>
+                <Text style={{
+                    fontSize:25,
+                    color:'white',
+                }}>
+                    Character Manager
+                </Text>
+    
             </View>
 
             <FlatList 
                 ref={"flatList"}
-                data={races}
+                data={chars}
+                extraData={this.state}
                 renderItem={({item, index})=>{
                     //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
                     return (
@@ -148,6 +151,7 @@ export default class BasicFlatList extends Component {
 
                     </FlatListItem>);
                 }}
+                keyExtractor={(item)=> item.toString()}
                 >
 
             </FlatList>

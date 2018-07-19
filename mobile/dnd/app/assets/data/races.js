@@ -10,43 +10,190 @@ export var races = [
     {'key':'9','value':'Tiefling'},
 ];
 
+
+export var chars = [
+    {'key':'1','race':'Camilo', 'subrace':'Lozano', 'class':'USA', 'background':'Criminal'},
+    {'key':'2','race':'Camilo1', 'subrace':'Lozano','class':'USA', 'background':'Criminal'},
+];
+
 export const subrace = {
-    '' : [
-        {'value':'Select Race First'}
-    ],
-    'Dwarf' : [
-        {'value':'Hill'},
-        {'value':'Mountain'},
-    ],
-    'Elf' : [
-        {'value':'High'},
-        {'value':'Wood'},
-        {'value':'Drow'},
-    ],
-    'Halfling': [
-        {'value':'Lightfoot'},
-        {'value':'Stout'},
-    ],
-    'Human': [
-        {'value':'Standard'},
-        {'value':'Variant'},
-    ],
-    'Dragonborn':[
-        {'value':'none'},
-    ],
-    'Gnome': [
-        {'value':'Forest'},
-        {'value':'Rock'},
-    ],
-    'Half-Elf': [
-        {'value':'none'},
-    ],
-    'Half-Orc':[
-        {'value':'none'},
-    ],
-    'Tiefling':[
-        {'value':'none'},
-    ]
+    '' : {
+        subrace:[
+            {'value':'Select Race First'}
+        ],
+    },
+    'Dwarf' : 
+    {
+        'subrace': 
+        [
+            {'value':'Hill'},
+            {'value':'Mountain'},
+        ],
+        'weapons':
+        {
+            'Hill':[
+                {'label':'Battleaxe'},
+                {'label':'Handaxe'},
+                {'label':'Throwing Hammer'},
+                {'label':'Warhammer'},
+            ],
+            'Mountain':[
+                {'label':'Battleaxe'},
+                {'label':'Handaxe'},
+                {'label':'Throwing Hammer'},
+                {'label':'Warhammer'},
+            ],
+        }
+
+    },
+    
+    'Elf' : 
+    {
+        'subrace':
+        [
+            {'value':'High'},
+            {'value':'Wood'},
+            {'value':'Drow'},
+        ],
+        'weapons':
+        {
+            'High':
+            [
+                {'label':'Longsword'},
+                {'label':'Shortsword'},
+                {'label':'Shortbow'},
+                {'label':'Longbow'},
+            ],
+            'Wood':
+            [
+                {'label':'Longsword'},
+                {'label':'Shortsword'},
+                {'label':'Shortbow'},
+                {'label':'Longbow'},
+            ],
+            'Dark':
+            [
+                {'label':'Rapiers'},
+                {'label':'Shortswords'},
+                {'label':'Hand Crossbows'},
+                {'label':'Longbow'},
+            ],
+        }
+
+    },
+    'Halfling': 
+    {
+        'subrace':
+            [
+                {'value':'Lightfoot'},
+                {'value':'Stout'},
+            ],
+        'weapons':
+        {
+            'Lightfoot':
+            [
+                {'label':'none'},    
+            ],
+            'Stout':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Human': 
+    {
+        'subrace':
+        [
+            {'value':'Standard'},
+            {'value':'Variant'},
+        ],
+        'weapons':
+        {
+            'Standard':
+            [
+                {'label':'none'},    
+            ],
+            'Variant':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Dragonborn':
+    {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Gnome': 
+    {
+        'subrace':
+        [
+            {'value':'Forest'},
+            {'value':'Rock'},
+        ],
+        'weapons':
+        {
+            'Forest':
+            [
+                {'label':'none'},    
+            ],
+            'Rock':
+            [
+                {'label':'none'},    
+            ],
+            
+        }
+
+    },
+
+    'Half-Elf':  {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Half-Orc': {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Tiefling': {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
 
 }
 
@@ -64,7 +211,6 @@ export const charclass = [
     {'value':'Warlock'},
     {'value':'Wizard'},
 
-    
 ]
 
 export const background = [
