@@ -12,8 +12,8 @@ export var races = [
 
 
 export var chars = [
-    {'key':'1','race':'Camilo', 'subrace':'Lozano', 'class':'USA', 'background':'Criminal'},
-    {'key':'2','race':'Camilo1', 'subrace':'Lozano','class':'USA', 'background':'Criminal'},
+    {'key':'1','race':'Human', 'subrace':'Variant', 'class':'Cleric', 'background':'Criminal'},
+    {'key':'2','race':'Halfling', 'subrace':'Stout','class':'Bard', 'background':'Sage'},
 ];
 
 export const subrace = {

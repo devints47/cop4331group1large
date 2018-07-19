@@ -55,23 +55,39 @@ class FlatListItem extends Component {
                 <View style={{
                 flex: 1,
                 flexDirection:'column',                                
-                }}>            
+                }}
+            >            
                     <View style={{
                             flex: 1,
                             flexDirection:'row',
                             // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'                
-                            backgroundColor: 'antiquewhite'
+                            backgroundColor: 'antiquewhite',
+                            padding:10,
                     }}>            
                        
                         <View style={{
                                 flex: 1,
                                 flexDirection:'column',   
                                 flexGrow:1,                 
-                            }}>         
-                                <Text style={styles.flatListItem}>Race: {this.props.item.race}</Text>
-                                <Text style={styles.flatListItem}>Subrace: {this.props.item.subrace}</Text>
-                                <Text style={styles.flatListItem}>Class: {this.props.item.class}</Text>
-                                <Text style={styles.flatListItem}>Background: {this.props.item.background}</Text>
+                            }}
+                            onClick>         
+                                <Text style={{
+                                    color:'black',
+                                    paddingLeft:50,
+                                    paddingBottom:10,
+                                    fontSize:16
+                                }}
+                                >
+                                    {this.props.item.race} {this.props.item.subrace}
+                                </Text>
+                                <Text style={{
+                                    fontSize:15, 
+                                    color:'red', 
+                                    paddingLeft:50
+                                }}
+                                >
+                                    {this.props.item.class} {this.props.item.background}
+                                </Text>
                         </View>              
                     </View>
                     <View style={{
@@ -93,7 +109,7 @@ class FlatListItem extends Component {
 const styles = StyleSheet.create({
     flatListItem: {
         color: 'black',
-        padding: 10,
+        paddingLeft: 20,
         fontSize: 16,  
     }
 });
