@@ -3,8 +3,10 @@ import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, 
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import AddModal from '../Home/AddModal';
+import Equipment from '../Home/Equipment';
 import ActionButton from 'react-native-action-button';
 import {chars,races} from '../../assets/data/races';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -170,12 +172,25 @@ export default class BasicFlatList extends Component {
 
             </FlatList>
 
-            <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.refs.addModal.showAddModal()}>
+            <ActionButton buttonColor="rgba(231,76,60,1)">
+            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.addModal.showAddModal()}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+
+          <ActionButton.Item buttonColor='#1abc9c' title="Add Equipment" onPress={() => this.refs.Eqp.showAddModal()}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
                 </ActionButton>
 
             <AddModal ref={'addModal'} parentFlatList={this} >
 
             </AddModal>
+
+            <Equipment ref={'Eqp'} parentFlatList={this} >
+
+            </Equipment>
+
+            
         </View>
       );
     }
