@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Image,
   Alert,
+  ImageBackground,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
@@ -47,20 +48,28 @@ class Login extends Component {
 
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.main}>
+
+      <ImageBackground
+      source={require('../../assets/images/background.png')}
+      style={{height:'100%',width:'100%'}}
+      >
+
           	<Animate.View style={styles.container} animation='zoomIn' iterationCount={1}>
                 <Image
-                source={require('../../assets/images/logo.png')}
+                source={require('../../assets/images/dragon.png')}
                 style={styles.logo}
                 />
                 <Text style={styles.text}>
-                  Dungeons and Dragons
+                  4d20
                 </Text>
-          	</Animate.View>
+            </Animate.View> 
+            
+        <View >
 
         <Animate.View style={styles.buttons} animation='slideInUp' iterationCount={1} >
                   <Button 
                     buttonStyle = {styles.loginButton}
-                    backgroundColor = 'rgba(255,255,255,0.2)'
+                    backgroundColor = 'rgba(54,47,39,0.5)'
                     borderRadius={10}
                     title={'Login'}
                     onPress = {this.onButtonPress}
@@ -71,7 +80,7 @@ class Login extends Component {
                   />
                   <Button
                     buttonStyle = {styles.signupButton}
-                    backgroundColor = 'rgba(255,255,255,0.2)'
+                    backgroundColor = 'rgba(54,47,39,0.5)'
                     borderRadius={10}
                     fontWeight = 'bold'
                     onPress = {this.onButtonPressTwo}
@@ -82,8 +91,11 @@ class Login extends Component {
         </Animate.View>
         
         {this.state.isShowingText == false ? <LoginForm navigation={this.props.navigation}/> : <SignupForm/>}
+        </View>
 
+      </ImageBackground>
       </KeyboardAvoidingView>
+
     );
   }
 }
@@ -101,17 +113,21 @@ const styles = StyleSheet.create({
       justifyContent:'center',
 	},
 	logo:{
-		height:200,
-		width:200
+		height:'70%',
+    width:'70%',
+    flex:1,
   },
 	text:{
 		color:'rgba(34,24,13,0.4)',
 		justifyContent: 'center',
-		textAlign: 'center'
+    textAlign: 'center',
+    padding:1,
+    fontSize:25,
+    fontWeight:'bold',
   },
   buttons:{
     alignSelf: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     flexDirection: 'row',
     flexGrow:1,
   }
