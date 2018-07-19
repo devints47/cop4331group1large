@@ -34,7 +34,7 @@ class FlatListItem extends Component {
                             [                              
                               {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                               {text: 'Yes', onPress: () => {        
-                                flatListData.splice(this.props.index, 1); 
+                                races.splice(this.props.index, 1); 
                                 //Refresh FlatList ! 
                                 this.props.parentFlatList.refreshFlatList(deletingRow);
                               }},

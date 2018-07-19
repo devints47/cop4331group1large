@@ -48,7 +48,7 @@ export default class AddModal extends Component {
                 }}>Add Character</Text>
                 
                 <Button
-                    style={{ fontSize: 18, color: 'white' }}
+                    style={{ fontSize: 18, color: 'white', paddingTop:10}}
                     containerStyle={{
                         padding: 8,
                         marginLeft: 70,
