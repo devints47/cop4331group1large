@@ -49,8 +49,6 @@ class FlatListItem extends Component {
             sectionId: 1    
         };               
         return (  
-
-            
             <Swipeout {...swipeSettings}>
                 <View style={{
                 flex: 1,
@@ -70,7 +68,7 @@ class FlatListItem extends Component {
                                 flexDirection:'column',   
                                 flexGrow:1,                 
                             }}
-                            onClick>         
+                            >         
                                 <Text style={{
                                     color:'black',
                                     paddingLeft:50,
