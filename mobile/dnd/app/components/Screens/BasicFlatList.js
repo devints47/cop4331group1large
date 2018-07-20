@@ -5,7 +5,7 @@ import Swipeout from 'react-native-swipeout';
 import Races from '../CharacterModal/Races';
 import Equipment from '../CharacterModal/Equipment';
 import ActionButton from 'react-native-action-button';
-import {chars,races} from '../../assets/data/races';
+import {chars,races,classWeapons} from '../../assets/data/races';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalRouter from '../CharacterModal/ModalRouter';
 
@@ -174,11 +174,11 @@ export default class BasicFlatList extends Component {
             </FlatList>
 
             <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.modal._displayRace()}>
+            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.modal.showAddModal()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 
-          <ActionButton.Item buttonColor='#1abc9c' title="Add Equipment" onPress={() => this.refs.modal._displayRace()}>
+          <ActionButton.Item buttonColor='#1abc9c' title="Add Equipment" onPress={() => this.refs.Eqp.showAddModal()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
                 </ActionButton>

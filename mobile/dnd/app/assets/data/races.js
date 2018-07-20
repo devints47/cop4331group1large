@@ -197,46 +197,321 @@ export const subrace = {
 
 }
 
-export const charclass = [
+export var classWeapons = 
     {
-        'value':'Barbarian',
-        'equipment':[
-            [
-                'Greataxe', 
-                'Any Martial Weapon',
+     'Barbarian' : 
+     {
+         'Equipment':
+         {
+             'One':[
+                 {'label':'Great Axe'},
+                 {'label':'Martial Weapons'},
+             ],
+             'Two':[
+                 {'label':'2 Handaxes'},
+                 {'label':'Simple weapon'},
+             ],
+             'Three':[
+                {'label':'Explorer\'s pack'},
             ],
-            [
-                '2 Handaxes',
-                'Any Simple Weapon',
+
+            'Four':[
+                {'label':'2 javelins'},
             ],
+         }
+ 
+     },
+     
+     'Bard' : 
+     {
+         'Equipment':
+         {
+             'One':
+             [
+                 {'label':'Rapier'},
+                 {'label':'Longsword'},
+                 {'label':'Simple Weapon'},
+             ],
+             'Two':
+             [
+                 {'label':'Diplomat\'s pack'},
+                 {'label':'Entertainer\'s pack'},
+             ],
+             'Three':
+             [
+                 {'label':'Lute'},
+                 {'label':'Musical instrument'},
+             ],
+             'Four':
+             [
+                 {'label':'Leather armor & a dagger'},
+             ],
+         }
+ 
+     },
+    
+     'Cleric': 
+     {
+         'Equipment':
+         {
+            'One':
             [
-                "An expoler's Pack",
+                {'label':'Mace'},
+                {'label':'Warhammar'},
             ],
+            'Two':
             [
-                '2 Javelins',
-            ]
-        ]
+                {'label':'Scale mail'},
+                {'label':'Leather armor'},
+                {'label':'Chain mail'}
+            ],
+            'Three':
+            [
+                {'label':'Light crossbow & 20 bolts'},
+                {'label':'Sin'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Druid': 
+     {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Fighter':
+     {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Monk': 
+     {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+             
+         }
+ 
+     },
+ 
+     'Paladin':  {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Ranger': {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Rogue': {
+         'Equipment':
+         {
+            'One':
+            [
+                {'label':'Rapier'},
+                {'label':'Longsword'},
+                {'label':'Simple Weapon'},
+            ],
+            'Two':
+            [
+                {'label':'Diplomat\'s pack'},
+                {'label':'Entertainer\'s pack'},
+            ],
+            'Three':
+            [
+                {'label':'Lute'},
+                {'label':'Musical instrument'},
+            ],
+            'Four':
+            [
+                {'label':'Leather armor & a dagger'},
+            ],
+         }
+     },
+     'Sorcerer': {
+        'Equipment':
+        {
+           'One':
+           [
+               {'label':'Rapier'},
+               {'label':'Longsword'},
+               {'label':'Simple Weapon'},
+           ],
+           'Two':
+           [
+               {'label':'Diplomat\'s pack'},
+               {'label':'Entertainer\'s pack'},
+           ],
+           'Three':
+           [
+               {'label':'Lute'},
+               {'label':'Musical instrument'},
+           ],
+           'Four':
+           [
+               {'label':'Leather armor & a dagger'},
+           ],
+        }
     },
-    {'value':'Bard',
-        'equipment':[
-            [
-                'Rapier',
-                'Longsword',
-                'Simpleweapon',
-            ],
-            [
-                "A diplomat's pack",
-                "An Entertainer's pack"
-            ],
-            [
-                'Lute',
-                'Any Musical Instrument',
-            ],
-            [
-                'Leather armor & dagger',
-            ]
-        ]        
+    'Warlock': {
+        'Equipment':
+        {
+           'One':
+           [
+               {'label':'Rapier'},
+               {'label':'Longsword'},
+               {'label':'Simple Weapon'},
+           ],
+           'Two':
+           [
+               {'label':'Diplomat\'s pack'},
+               {'label':'Entertainer\'s pack'},
+           ],
+           'Three':
+           [
+               {'label':'Lute'},
+               {'label':'Musical instrument'},
+           ],
+           'Four':
+           [
+               {'label':'Leather armor & a dagger'},
+           ],
+        }
     },
+    'Wizard': {
+        'Equipment':
+        {
+           'One':
+           [
+               {'label':'Rapier'},
+               {'label':'Longsword'},
+               {'label':'Simple Weapon'},
+           ],
+           'Two':
+           [
+               {'label':'Diplomat\'s pack'},
+               {'label':'Entertainer\'s pack'},
+           ],
+           'Three':
+           [
+               {'label':'Lute'},
+               {'label':'Musical instrument'},
+           ],
+           'Four':
+           [
+               {'label':'Leather armor & a dagger'},
+           ],
+        }
+    },
+ }
+
+export const charclass = [
+    {'value':'Barbarian'},
+    {'value':'Bard'},
     {'value':'Cleric'},
     {'value':'Druid'},
     {'value':'Fighter'},
@@ -249,7 +524,6 @@ export const charclass = [
     {'value':'Wizard'},
 
 ]
-
 export const background = [
     {'value':'Acolyte'},
     {'value':'Charlatan'},
