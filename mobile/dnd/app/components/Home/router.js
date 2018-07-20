@@ -22,8 +22,7 @@ export default class App extends Component{
         this.state = ({
             deletedRowKey: null,            
         });
-        this.Animation = new Animated.Value(0);
-        this.Sliding_Drawer_Toggle = true;
+
 
         this.state={
             race: 'Race',
@@ -34,36 +33,6 @@ export default class App extends Component{
 
     }
 
-    ShowSlidingDrawer = () =>
-    {
-        if( this.Sliding_Drawer_Toggle === true )
-        {
-                Animated.timing(
-                    this.Animation,
-                    {
-                        toValue: 1,
-                        duration: 500
-                    }
-                ).start(() =>
-                {
-                    this.Sliding_Drawer_Toggle = false;
-                });
-
-        }
-        else
-        {
-                Animated.timing(
-                    this.Animation,
-                    {
-                        toValue: 0,
-                        duration: 500
-                    }
-                ).start(() =>
-                {
-                    this.Sliding_Drawer_Toggle = true;
-                });
-        }
-    }
 
 
     _addChar(){
@@ -77,11 +46,6 @@ export default class App extends Component{
     }
 
   render(){
-    const Animation_Interpolate = this.Animation.interpolate(
-      {
-          inputRange: [ 0, 1 ],
-          outputRange: [ -(Sliding_Drawer_Width - 32), 0 ]
-      });
 
   return(
 
@@ -114,26 +78,6 @@ const styles = StyleSheet.create({
       alignItems:'center'
 
     },
-    Root_Sliding_Drawer_Container:
-      {
-          position: 'absolute',
-          flexDirection: 'row',
-          left: 0,
-          top: 0,
-          //top: (Platform.OS == 'ios') ? 20 : 0,
-          width: Sliding_Drawer_Width,
-          height:'100%'
-      },
-
-      Main_Sliding_Drawer_Container:
-      {
-          flex: 1,
-          backgroundColor: 'gray',
-          paddingHorizontal: 10,
-          justifyContent: 'center',
-          alignItems: 'center'
-      },
-
       TextStyle: {
 
           fontSize: 20,

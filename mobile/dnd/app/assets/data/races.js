@@ -198,8 +198,45 @@ export const subrace = {
 }
 
 export const charclass = [
-    {'value':'Barbarian'},
-    {'value':'Bard'},
+    {
+        'value':'Barbarian',
+        'equipment':[
+            [
+                'Greataxe', 
+                'Any Martial Weapon',
+            ],
+            [
+                '2 Handaxes',
+                'Any Simple Weapon',
+            ],
+            [
+                "An expoler's Pack",
+            ],
+            [
+                '2 Javelins',
+            ]
+        ]
+    },
+    {'value':'Bard',
+        'equipment':[
+            [
+                'Rapier',
+                'Longsword',
+                'Simpleweapon',
+            ],
+            [
+                "A diplomat's pack",
+                "An Entertainer's pack"
+            ],
+            [
+                'Lute',
+                'Any Musical Instrument',
+            ],
+            [
+                'Leather armor & dagger',
+            ]
+        ]        
+    },
     {'value':'Cleric'},
     {'value':'Druid'},
     {'value':'Fighter'},

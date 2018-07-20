@@ -9,6 +9,7 @@ import Equipment from './app/components/CharacterModal/Equipment';
 import Character from './app/components/Screens/Character';
 import BasicFlatList from './app/components/Screens/BasicFlatList';
 import Summary from './app/components/Screens/Summary'; 
+import Races from './app/components/CharacterModal/Races'
 import { createStackNavigator,createDrawerNavigator,StackNavigator} from 'react-navigation'; 
 
 const AppStackNavigator = createDrawerNavigator(
@@ -21,7 +22,8 @@ const AppStackNavigator = createDrawerNavigator(
   Character: Character,
   Summary: Summary,
   Settings: Settings,
-  BasicFlatList: BasicFlatList
+  BasicFlatList: BasicFlatList,
+  RaceModal : Races,
   },
   {
     headerMode:'none'
