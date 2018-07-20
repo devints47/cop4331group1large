@@ -5,7 +5,7 @@ import Swipeout from 'react-native-swipeout';
 import Races from '../CharacterModal/Races';
 import Equipment from '../Home/Equipment';
 import ActionButton from 'react-native-action-button';
-import {chars,races} from '../../assets/data/races';
+import {chars,races,classWeapons} from '../../assets/data/races';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class FlatListItem extends Component {

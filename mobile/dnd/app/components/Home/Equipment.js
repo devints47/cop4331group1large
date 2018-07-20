@@ -3,8 +3,8 @@ import Modal from 'react-native-modalbox';
 //import Button from 'react-native-button';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
-        TextInput,Button} from 'react-native';
-import {races, subrace, background, chars,charclass} from '../../assets/data/races';
+        TextInput,Button,ScrollView} from 'react-native';
+import {races, subrace, background, chars,charclass,classWeapons} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
@@ -12,7 +12,7 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 var screen = Dimensions.get('window');
 
 
-export default class AddModal extends Component{
+export default class Equipment extends Component{
 
     constructor(props){
         super(props);
@@ -31,28 +31,25 @@ export default class AddModal extends Component{
         //console.log(races);
     }
 
-    _renderSubRace(){
+    _renderEquipment(){
 
-        
-        disabled = subrace[this.state.selectedRace]['subrace'][0]['value'] === 'none'
+        var empt = [];
+        var milf = "Bard";
 
-        if(!disabled) setlabel = this.state.subracelabel;
-        else {
-            setlabel = 'No Subrace'
+        for(var i in classWeapons[milf]['Equipment'])
+        {
+            empt.push(<View>
+                <Text>Choose one</Text>
+                <RadioForm style={{ alignItems: 'flex-start' }}
+                radio_props={classWeapons[milf]['Equipment'][i]}
+                onPress={(value) => {this.setState({value:value})}}
+                />
+                </View>
+                )
         }
 
-
-        return(
-            <Dropdown
-            style={styles.race} 
-            ref={'subdrop'}
-            label={setlabel}
-            data={subrace[this.state.selectedRace]['subrace']}
-            disabled={disabled}
-            itemCount={10}
-            onChangeText = {(input)=>this.setState({selectedSubRace: input})}
-            />
-
+        return( 
+            empt
         );
 
     }
@@ -104,14 +101,10 @@ export default class AddModal extends Component{
             <Text style={styles.header}> Character Creation </Text>
             </View>
 
-            <View styles={styles.dropdown}>
-            <RadioForm style={{ alignItems: 'flex-start' }}
-            radio_props={subrace['Dwarf']['weapons']['Hill']}
-            onPress={(value) => {this.setState({value:value})}}
-        />
-      </View>
-           
-              
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+            {this._renderEquipment()}
+            </ScrollView>  
+            
             </Modal>
         );
 
@@ -141,6 +134,9 @@ const styles=StyleSheet.create({
      padding:32
     },
 
+    contentContainer: {
+        paddingVertical: 20
+      }
 
 });
 
