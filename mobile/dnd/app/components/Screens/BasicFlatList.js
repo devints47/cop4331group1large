@@ -7,6 +7,7 @@ import Equipment from '../Home/Equipment';
 import ActionButton from 'react-native-action-button';
 import {chars,races} from '../../assets/data/races';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ModalRouter from '../CharacterModal/ModalRouter';
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -173,22 +174,22 @@ export default class BasicFlatList extends Component {
             </FlatList>
 
             <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.addModal.showAddModal()}>
+            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.modal._displayRace()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 
-          <ActionButton.Item buttonColor='#1abc9c' title="Add Equipment" onPress={() => this.refs.Eqp.showAddModal()}>
+          <ActionButton.Item buttonColor='#1abc9c' title="Add Equipment" onPress={() => this.refs.modal._displayRace()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
                 </ActionButton>
 
-            <Races ref={'addModal'} parentFlatList={this} >
-
-            </Races>
 
             <Equipment ref={'Eqp'} parentFlatList={this} >
 
             </Equipment>
+
+            <ModalRouter ref={'modal'} parentFlatList={this}>
+            </ModalRouter>
 
             
         </View>
