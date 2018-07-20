@@ -264,6 +264,56 @@ class SpellLookup(db.Model):
     wizard_list = db.Column(db.Boolean, unique=False, default=False)
 
 
+class Character(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	user = db.Column(db.Integer, db.ForeignKey('user.id'),
+			nullable=False)
+
+	def __init__(stats, race, subrace):
+		#set all base stats
+		self.str = base_stats[0]
+		self.dex = base_stats[1]
+		self.con = base_stats[2]
+		self.int = base_stats[3]
+		self.wis = base_stats[4]
+		self.chr = base_stats[5]
+
+
+class Race(object):
+	def __init__(self):
+		self._hello = 'world'
+
+
+class Dwarf(Race):
+	size = 'medium'
+	def __init__(self, character, subrace):
+		Race.__init__(self)
+		subrace = subrace
+		print self._hello
+
+	def ability_score_boost(subrace):
+		character.constitution += 2
+		if subrace == "Hill":
+			character.wis += 1
+		else:
+			character.str += 2
+
+
+
+class userClass(object):
+	asdf = 1
+
+
+
+class Fighter(userClass):
+	asdf = 1
+
+
+class Background(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+
+
+
 # ==================
 # Helper Functions
 # ==================
@@ -329,3 +379,4 @@ def register():
 def index():
     c = Character()
     return render_template('index.html')
+  
