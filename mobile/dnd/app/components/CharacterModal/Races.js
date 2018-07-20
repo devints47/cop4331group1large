@@ -30,6 +30,7 @@ export default class Races extends Component{
         //console.log(races);
     }
 
+
     _renderSubRace(){
 
         
@@ -85,7 +86,8 @@ export default class Races extends Component{
         });
 
 
-        this.refs.myModal.close();          
+        this.refs.myModal.close();
+        this.props.openEquipment(); 
 
     }
 

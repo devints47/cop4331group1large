@@ -19,6 +19,7 @@ export default class ModalRouter extends Component{
             race: '',
             subrace: '',
             background:'',
+            
         };
     }
 
@@ -37,7 +38,8 @@ export default class ModalRouter extends Component{
 
         return(
         <View>
-            <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}>
+            <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}
+            openEquipment={()=>this.refs.equip.showAddModal()}>
             </Races>
             <Equipment ref={'equip'} parentFlatList={this.props.parentFlatList}>
             </Equipment>
