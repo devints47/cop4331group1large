@@ -32,11 +32,12 @@ export default class ModalRouter extends Component{
     }
 
 
-    return(){
+    render(){
 
-
-        <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)}>
+        return(
+        <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}>
         </Races>
+        );
 
     }
 
