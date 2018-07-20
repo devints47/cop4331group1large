@@ -8,6 +8,7 @@ import {races, subrace, background, chars,charclass} from '../../assets/data/rac
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import Races from './Races';
+import Equipment from './Equipment';
 
 export default class ModalRouter extends Component{
 
@@ -35,8 +36,12 @@ export default class ModalRouter extends Component{
     render(){
 
         return(
-        <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}>
-        </Races>
+        <View>
+            <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}>
+            </Races>
+            <Equipment ref={'equip'} parentFlatList={this.props.parentFlatList}>
+            </Equipment>
+        </View>
         );
 
     }

@@ -1,150 +1,147 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,TouchableOpacity,Animated,Image
-} from 'react-native';
+import React, {Component} from 'react';
+import Modal from 'react-native-modalbox';
+//import Button from 'react-native-button';
+import {AppRegistry, FlatList, StyleSheet, Text, View, 
+        Image, Alert, Platform, TouchableHighlight, Dimensions,
+        TextInput,Button} from 'react-native';
+import {races, subrace, background, chars,charclass} from '../../assets/data/races';
+import {Dropdown} from 'react-native-material-dropdown';
+import uuid from 'react-native-uuid';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+var screen = Dimensions.get('window');
 
 
-const Sliding_Drawer_Width = 250;
+export default class AddModal extends Component{
 
-export default class App extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            selectedRace: '',
+            selectedSubRace: '',
+            selectedBackground: '',
+            selectedClass:'',
+            subracelabel: 'Subrace',
 
-  
-  
-  constructor()
-    {
-        super();
-
-        this.Animation = new Animated.Value(0);
-
-        this.Sliding_Drawer_Toggle = true;
-
-    }
-
-
-    ShowSlidingDrawer = () =>
-    {
-        if( this.Sliding_Drawer_Toggle === true )
-        {
-                Animated.timing(
-                    this.Animation,
-                    {
-                        toValue: 1,
-                        duration: 500
-                    }
-                ).start(() =>
-                {
-                    this.Sliding_Drawer_Toggle = false;
-                });
-
-        }
-        else
-        {
-                Animated.timing(
-                    this.Animation,
-                    {
-                        toValue: 0,
-                        duration: 500
-                    }
-                ).start(() =>
-                {
-                    this.Sliding_Drawer_Toggle = true;
-                });
         }
     }
 
-  render(){
-    const Animation_Interpolate = this.Animation.interpolate(
-      {
-          inputRange: [ 0, 1 ],
-          outputRange: [ -(Sliding_Drawer_Width - 32), 0 ]
-      });
+    showAddModal = () => {
+        this.refs.myModal.open();
+        //console.log(races);
+    }
 
-  return(
-    <View style={styles.container}>
+    _renderSubRace(){
 
-    <Text style = {styles.TextStyle}>Equipment</Text>
+        
+        disabled = subrace[this.state.selectedRace]['subrace'][0]['value'] === 'none'
 
-      <Animated.View style = {[ styles.Root_Sliding_Drawer_Container, { transform: [{ translateX: Animation_Interpolate }]}]}>
-
-
-    <View style = { styles.Main_Sliding_Drawer_Container }>
+        if(!disabled) setlabel = this.state.subracelabel;
+        else {
+            setlabel = 'No Subrace'
+        }
 
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Router')}>
-          <Text style= {{fontSize:30}}>Home</Text>
-        </TouchableOpacity>
+        return(
+            <Dropdown
+            style={styles.race} 
+            ref={'subdrop'}
+            label={setlabel}
+            data={subrace[this.state.selectedRace]['subrace']}
+            disabled={disabled}
+            itemCount={10}
+            onChangeText = {(input)=>this.setState({selectedSubRace: input})}
+            />
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Character Bio')}>
-          <Text style= {{fontSize:30}}>Character Bio</Text>
-        </TouchableOpacity>
+        );
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Stats')}>
-          <Text style= {{fontSize:30}}>Stats</Text>
-        </TouchableOpacity>
+    }
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Equipment')}>
-          <Text style= {{fontSize:30}}>Equipment</Text>
-        </TouchableOpacity>
+    updateState(){
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Summary')}>
-          <Text style= {{fontSize:30}}>Summary</Text>
-        </TouchableOpacity>
+        sub = this.state.selectedSubRace;
 
-        </View>
+        if(sub=== ''){
+            sub='None';
+        }
+
+        const newKey = uuid.v1();
+        const newItem = {
+            key: newKey,
+            race: this.state.selectedRace,
+            subrace: sub,
+            background: this.state.selectedBackground,
+            class: this.state.selectedClass,
+        };    
+        chars.push(newItem);
+        // console.log(chars)    
+        this.props.parentFlatList.refreshFlatList(newKey);       
+        
+        
+        this.setState({
+            selectedBackground:'',
+            selectedClass:'',
+            selectedRace:'',
+            selectedSubRace:'',
+        });
 
 
-    <TouchableOpacity onPress = { this.ShowSlidingDrawer}>
+        this.refs.myModal.close();          
 
-        <Image source={require('../../assets/images/icon.png')}  style = {{resizeMode: 'contain', width: 38, height: 36,left:10,bottom: -3 }} />
+    }
 
-      </TouchableOpacity>
+    render(){
 
+        return(
+            <Modal
+            ref={'myModal'}
+            style={styles.modal}
+            position='center'
+            backdrop={true}
+            coverScreen={true}
+            >
 
-    </Animated.View>
+            <View>
+            <Text style={styles.header}> Character Creation </Text>
+            </View>
 
-    </View>
-  );
+            <View styles={styles.dropdown}>
+            <RadioForm style={{ alignItems: 'flex-start' }}
+            radio_props={subrace['Dwarf']['weapons']['Hill']}
+            onPress={(value) => {this.setState({value:value})}}
+        />
+      </View>
+           
+              
+            </Modal>
+        );
+
+    }    
 }
-}
 
-const styles = StyleSheet.create({
-  container:
-    {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems:'center'
+const styles=StyleSheet.create({
+
+    modal:{
+        justifyContent : 'center',
+        borderRadius: Platform.OS == 'ios' ? 30 : 10,
+        shadowRadius: 10,
+        width: screen.width - 80,
+        height: 400,
+        padding:32,
+        
+    },
+    header:{
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    race:{
 
     },
+    dropdown:{
+     padding:32
+    },
 
-    Root_Sliding_Drawer_Container:
-      {
-          position: 'absolute',
-          flexDirection: 'row',
-          left: 0,
-          top: 0,
-          //top: (Platform.OS == 'ios') ? 20 : 0,
-          width: Sliding_Drawer_Width,
-          height:'100%'
-      },
-
-      Main_Sliding_Drawer_Container:
-      {
-          flex: 1,
-          backgroundColor: 'gray',
-          paddingHorizontal: 10,
-          justifyContent: 'center',
-          alignItems: 'center'
-      },
-
-      TextStyle: {
-
-          fontSize: 20,
-          padding: 10,
-          textAlign: 'center',
-          color: 'black'
-      }
 
 });
+

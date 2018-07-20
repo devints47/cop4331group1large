@@ -100,6 +100,7 @@ export default class Races extends Component{
             onClosed={()=>{
                console.log('Modal Closed')
             }}
+            coverScreen={true}
             >
 
             <View styles={styles.dropdown}>
