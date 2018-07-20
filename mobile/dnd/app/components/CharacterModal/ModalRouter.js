@@ -19,6 +19,7 @@ export default class ModalRouter extends Component{
             race: '',
             subrace: '',
             background:'',
+            class:'Bard',
             
         };
     }
@@ -29,8 +30,11 @@ export default class ModalRouter extends Component{
 
 
     getRaceInfo(data){
-        this.setState({race: data['race'], subrace: data['subrace'], background: data['background']});
-        console.log(this.state.race);
+    
+        this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
+        console.log(data);
+        this.refs.equip.showAddModal(data['class']);
+        
     }
 
 
@@ -38,10 +42,13 @@ export default class ModalRouter extends Component{
 
         return(
         <View>
-            <Races ref={'races'} updateVal={(val)=>this.getRaceInfo(val)} parentFlatList={this.props.parentFlatList}
-            openEquipment={()=>this.refs.equip.showAddModal()}>
+            <Races 
+            ref={'races'} 
+            updateVal={(val)=>this.getRaceInfo(val)} 
+            parentFlatList={this.props.parentFlatList}
+            updateVal={(data)=>this.getRaceInfo(data)}>
             </Races>
-            <Equipment ref={'equip'} parentFlatList={this.props.parentFlatList}>
+            <Equipment ref={'equip'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
             </Equipment>
         </View>
         );

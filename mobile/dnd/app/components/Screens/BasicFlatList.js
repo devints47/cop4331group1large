@@ -174,7 +174,7 @@ export default class BasicFlatList extends Component {
             </FlatList>
 
             <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.modal.showAddModal()}>
+            <ActionButton.Item buttonColor='#1abc9c' title="Add Character" onPress={() => this.refs.modal._displayRace()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 
@@ -183,10 +183,6 @@ export default class BasicFlatList extends Component {
           </ActionButton.Item>
                 </ActionButton>
 
-
-            <Equipment ref={'Eqp'} parentFlatList={this} >
-
-            </Equipment>
 
             <ModalRouter ref={'modal'} parentFlatList={this}>
             </ModalRouter>

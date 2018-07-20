@@ -199,12 +199,21 @@ export const subrace = {
 
 export var classWeapons = 
     {
+        '':
+        {
+            'Equipment':
+            {
+                'One':[
+                    {'label':'Not Loaded'}
+                ],
+            },
+        },
      'Barbarian' : 
      {
          'Equipment':
          {
              'One':[
-                 {'label':'Great Axe'},
+                 {'label':'Great Axe', 'value':'Anus Balls Penis Shit'},
                  {'label':'Martial Weapons'},
              ],
              'Two':[

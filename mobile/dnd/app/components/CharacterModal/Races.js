@@ -86,8 +86,11 @@ export default class Races extends Component{
         });
 
 
+        console.log('Here');
+        this.props.updateVal(newItem);
+
+
         this.refs.myModal.close();
-        this.props.openEquipment(); 
 
     }
 
