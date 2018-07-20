@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from objects.races import *
 from objects.classes import *
 from objects.backgrounds import *
+# from objects.tables import *
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -171,6 +172,10 @@ class ProficiencyLookup(db.Model):
     proficiency_name = db.Column(db.String(80), unique=False, nullable=False)
     proficiency_type = db.Column(db.String(80), unique=False, nullable=False)
 
+    def __init__(self, p_name, p_type):
+    	proficiency_name = p_name
+    	proficiency_type = p_type
+
 
 # ==================
 # Equipment
@@ -185,8 +190,8 @@ class EquipmentLookup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_name = db.Column(db.String(80), unique=False, nullable=False)
     item_type = db.Column(db.String(80), unique=False, nullable=False) # Armor, weapon, gear, tool, mount, vehicle, or tradable
-    item_weight = db.Column(db.Integer, unique=False, nullable=False)
-    item_value = db.Column(db.String(20), unique=False, nullable=False) # Kept this String because currency
+    item_weight = db.Column(db.Float, unique=False, nullable=False)
+    item_value = db.Column(db.Float, unique=False, nullable=False) # Kept this String because currency
     item_description = db.Column(db.String(300), unique=False, nullable=False)
     # Weapon stuff
     weapon_category = db.Column(db.String(80), unique=False, nullable=False) # Can be a simple or martial weapon
@@ -198,9 +203,30 @@ class EquipmentLookup(db.Model):
     damage_type = db.Column(db.String(80), unique=False, nullable=False) # Piercing, bludgeoning, or slashing?
     # Armor stuff
     armor_category = db.Column(db.String(80), unique=False, nullable=False) # Light, medium, or heavy?
-    armor_bonus = db.Column(db.String(80), unique=False, nullable=False) # String because some add dex, some don't
-    armor_disadvantage = db.Column(db.String(80), unique=False, nullable=False) # Boolean, sometimes you suck at stealthing with armor
-    armor_strength = db.Column(db.String(80), unique=False, nullable=False) # Sometimes you need to be strong to wear armor
+    armor_bonus = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
+    armor_disadvantage = db.Column(db.Boolean, unique=False, nullable=False) # Boolean, sometimes you suck at stealthing with armor
+    armor_dex = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
+    armor_strength = db.Column(db.Boolean, unique=False, nullable=False) # Sometimes you need to be strong to wear armor
+
+    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, \
+    	w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
+    	self.item_name = e_name
+		self.item_type = e_type
+		self.item_weight = e_weight
+		self.item_value = e_value
+		self.item_description = e_desc
+		self.weapon_category = w_cat
+		self.weapon_is_ranged = w_range_bool
+		self.weapon_is_thrown = w_thrown
+		self.weapon_range = w_range
+		self.weapon_properties = w_props
+		self.weapon_damage = w_damage
+		self.damage_type = w_type
+		self.armor_category = a_cat
+		self.armor_bonus = a_bonus
+		self.armor_disadvantage = a_dis
+		self.armor_dex_cap = a_dex
+		self.armor_strength = a_str
 
 
 # ==================
