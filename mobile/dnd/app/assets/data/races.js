@@ -210,106 +210,92 @@ export var classWeapons =
         },
      'Barbarian' : 
      {
-         'Equipment':
-         {
-             'One':[
-                 {'label':'Great Axe', 'value':'Anus Balls Penis Shit'},
+         'Equipment':[
+             [
+                 {'label':'Great Axe'},
                  {'label':'Martial Weapons'},
              ],
-             'Two':[
+             [
                  {'label':'2 Handaxes'},
                  {'label':'Simple weapon'},
              ],
-             'Three':[
+             [
                 {'label':'Explorer\'s pack'},
             ],
-
-            'Four':[
+            [
                 {'label':'2 javelins'},
             ],
-         }
+        ]
  
      },
      
      'Bard' : 
      {
          'Equipment':
-         {
-             'One':
+         [
              [
                  {'label':'Rapier'},
                  {'label':'Longsword'},
                  {'label':'Simple Weapon'},
              ],
-             'Two':
              [
                  {'label':'Diplomat\'s pack'},
                  {'label':'Entertainer\'s pack'},
              ],
-             'Three':
              [
                  {'label':'Lute'},
                  {'label':'Musical instrument'},
              ],
-             'Four':
              [
                  {'label':'Leather armor & a dagger'},
              ],
-         }
+        ]
  
      },
     
      'Cleric': 
      {
          'Equipment':
-         {
-            'One':
+         [
             [
                 {'label':'Mace'},
                 {'label':'Warhammar'},
             ],
-            'Two':
             [
                 {'label':'Scale mail'},
                 {'label':'Leather armor'},
                 {'label':'Chain mail'}
             ],
-            'Three':
             [
                 {'label':'Light crossbow & 20 bolts'},
                 {'label':'Sin'},
             ],
-            'Four':
             [
                 {'label':'Leather armor & a dagger'},
             ],
-         }
+        ]
      },
      'Druid': 
      {
          'Equipment':
-         {
-            'One':
+         [
             [
                 {'label':'Rapier'},
                 {'label':'Longsword'},
                 {'label':'Simple Weapon'},
             ],
-            'Two':
             [
                 {'label':'Diplomat\'s pack'},
                 {'label':'Entertainer\'s pack'},
             ],
-            'Three':
             [
                 {'label':'Lute'},
                 {'label':'Musical instrument'},
             ],
-            'Four':
             [
                 {'label':'Leather armor & a dagger'},
             ],
-         }
+        ]
      },
      'Fighter':
      {

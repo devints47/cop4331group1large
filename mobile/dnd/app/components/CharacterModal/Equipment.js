@@ -57,10 +57,13 @@ export default class Equipment extends Component{
             console.log(newData);
 
 
-            empt.push(<View>
+            empt.push(<View key={uuid.v1()} style={{padding:10}}>
                 <Text>Choose one</Text>
                 <RadioForm style={{ alignItems: 'flex-start' }}
+                buttonColor='rgba(150,97,107,1)'
+                selectedButtonColor='rgba(69,45,49,0.9)'
                 radio_props={newData}
+                initial={-1}
                 onPress={(value) => console.log(value)}
                 />
                 </View>
