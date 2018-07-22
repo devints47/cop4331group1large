@@ -1,174 +1,907 @@
 {% extends 'base.html' %}
 {% block content %}
-<nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">Dungeons and Dragons</span>
-    <a class="nav-item nav-link active float-right" id="newUserLink" href="{{ url_for('logout') }}" >Logout</a>	
-</nav>
 
-    <!--contains everything but top nav-->
-    <div class="container-fluid">
-      <div class="row">
-        
-        <!-- side bar-->
-        <nav id="sideBarNav" class="col-md-2  col-lg-2 col-sm-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column" role="navigation">
-              <li class="nav-item">
-                <a  id="home-tab" class="nav-link active" href="#home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
-                  <span  data-feather="home"></span>
-                  Home<span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <h6 style="margin-top: 4px !important;" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Character Manager</span>
-              </h6>
-              <li class="nav-item">
-                <a id="myCharacter-tab" class="nav-link" href="#myCharacters" data-toggle="tab" role="tab" aria-controls="myCharacters" aria-selected="false">
-                  <span data-feather="users"></span>
-                  My Characters
-                </a>
-              </li>
-              <li class="nav-item">
-                <a id="addCharacter-tab" class="nav-link" href="#addCharacter" data-toggle="tab" role="tab" aria-controls="addCharacter" aria-selected="false">
-                  <span data-feather="plus-circle"></span>
-                  Add Character
-                </a>
-              </li>
-            </ul>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <span class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dungeons and Dragons</span>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Log out</a>
+      </li>
+    </ul>
+  </nav>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Campaign Manager</span>
+  <!--contains everything but top nav-->
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- side bar-->
+      <nav id="sideBarNav" class="col-md-2  col-lg-2 col-sm-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column" role="navigation">
+            <li class="nav-item">
+              <a id="home-tab" class="nav-link active" href="#home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
+                <span class="icon" data-feather="home"></span>
+                Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <h6 style="margin-top: 4px !important;" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Character Manager</span>
             </h6>
-            <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a id="myCharacter-tab" class="nav-link" href="#myCharacters" data-toggle="tab" role="tab" aria-controls="myCharacters" aria-selected="false">
+                <span class="icon" data-feather="users"></span>
+                My Characters
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="addCharacter-tab" class="nav-link" href="#addCharacterModalContainer" data-toggle="modal" data-target="#addCharacterModalContainer"
+                role="tab" aria-selected="false">
+                <span class="icon" data-feather="plus-circle"></span>
+                Create Character
+              </a>
+            </li>
+          </ul>
+
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Campaign Manager</span>
+          </h6>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="icon" data-feather="map"></span>
+                Example
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!--tab content-->
+      <div class="tab-content col-md-10 col-sm-10 ml-sm-auto col-lg-10" id="myTabContent">
+
+        <!--home tab-->
+        <div role="tabpanel" aria-labelledby="home-tab" class="col-md-12 col-sm-12 ml-sm-auto col-lg-12 tab-pane fade-in active"
+          id="home">
+          <!--Jumbo Tron-->
+          <div role="tabpanel" class="jumbotron">
+            <h1 class="display-3">Welcome ....</h1>
+            <p class="lead">Important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum..</p>
+            <hr class="my-4">
+            <p>Semi-important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.</p>
+          </div>
+        </div>
+
+        <!--my characters tab-->
+        <div role="tabpanel" aria-labelledby="myCharacter-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12" id="myCharacters">
+          <!-- cards-->
+
+          <div id="cardContainer" class="container-fluid rounded">
+            <div class="card-deck">
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">1 Card title</h4>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                    is a little bit longer.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">2 Card title</h4>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                    is a little bit longer.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-sm-block d-md-none">
+                <!-- wrap every 2 on sm-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">3 Card title</h4>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                    is a little bit longer.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-md-block d-lg-none">
+                <!-- wrap every 3 on md-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">4 Card title</h4>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                    is a little bit longer.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-sm-block d-md-none">
+                <!-- wrap every 2 on sm-->
+              </div>
+              <div class="w-100 d-none d-lg-block d-xl-none">
+                <!-- wrap every 4 on lg-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">5 Card title</h4>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                    is a little bit longer.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-xl-block">
+                <!-- wrap every 5 on xl-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">6 Card title</h4>
+                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-sm-block d-md-none">
+                <!-- wrap every 2 on sm-->
+              </div>
+              <div class="w-100 d-none d-md-block d-lg-none">
+                <!-- wrap every 3 on md-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">7 Card title</h4>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has
+                    even longer content than the first to show that equal height action.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">8 Card title</h4>
+                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-sm-block d-md-none">
+                <!-- wrap every 2 on sm-->
+              </div>
+              <div class="w-100 d-none d-lg-block d-xl-none">
+                <!-- wrap every 4 on lg-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Card title</h4>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has
+                    even longer content than the first to show that equal height action.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+              <div class="w-100 d-none d-md-block d-lg-none">
+                <!-- wrap every 3 on md-->
+              </div>
+              <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="http://via.placeholder.com/500x300" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">10 Card title</h4>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has
+                    even longer content than the first to show that equal height action.</p>
+                  <a href="#" class="btn btn-primary">delete</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!--add character tab-->
+          <div role="tabpanel" aria-labelledby="addCharacter-tab" class="tab-pane fade" id="addCharacter"></div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!--ADD CHARACTER MODAL-->
+    <div class="modal fade" id="addCharacterModalContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+      data-keyboard="false" data-backdrop="static">
+      <div id="innerModal" class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Character</h5>
+
+
+            <button id="closeModalBtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <!--modal nav pills-->
+            <ul class="nav nav-pills nav-fill justify-content-center" id="pills-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="map"></span>
-                  Example
-                </a>
+                <a class="nav-link active pill" id="pills-basics-tab" data-toggle="pill" href="#pills-basics" role="tab" aria-controls="pills-basics"
+                  aria-selected="true">Basic</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled pill" id="pills-ability-tab" data-toggle="pill" href="#pills-ability" role="tab" aria-controls="pills-ability"
+                  aria-selected="false">Ability</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled pill" id="pills-skill-tab" data-toggle="pill" href="#pills-skill" role="tab" aria-controls="pills-skill"
+                  aria-selected="false">Skill</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled pill" id="pills-equipment-tab" data-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment"
+                  aria-selected="false">Equipment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled pill" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+                  aria-selected="false">Summary</a>
               </li>
             </ul>
-          </div>
-        </nav>
 
-        <!--tab content-->
-        <div class="tab-content col-md-10 col-sm-10 ml-sm-auto col-lg-10" id="myTabContent">
+            <!--pills -->
+            <div class="tab-content" id="pills-tabContent">
 
-          <!--home tab-->
-          <div role="tabpanel" aria-labelledby="home-tab" class="col-md-12 col-sm-12 ml-sm-auto col-lg-12 tab-pane fade-in active" id="home">
-               <!--Jumbo Tron-->
-                 <div role="tabpanel" class="jumbotron" >
-                   <h1 class="display-3">Welcome ....</h1>
-                   <p class="lead">Important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-                   <hr class="my-4">
-                   <p>Semi-important info here: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                 </div> 
-         </div>
-           <!--my characters tab-->
-           <div role="tabpanel" aria-labelledby="myCharacter-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12" id="myCharacters">
-            <!-- cards-->  
 
-            <div id="cardContainer" class="container-fluid rounded">
-                <div class="card-deck">
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x280" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">1 Card title</h4>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x280" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">2 Card title</h4>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x280" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">3 Card title</h4>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x280" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">4 Card title</h4>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
-                     <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x280" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">5 Card title</h4>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-xl-block"><!-- wrap every 5 on xl--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">6 Card title</h4>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
-                    <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x270" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">7 Card title</h4>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x300" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">8 Card title</h4>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
-                    <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x270" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
-                    <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-                    <div class="card mb-4">
-                        <img class="card-img-top img-fluid" src="//placehold.it/500x270" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">10 Card title</h4>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <a href="#" class="btn btn-primary">delete</a>
-                        </div>
-                    </div>
+              <!--basics pill-->
+              <div class="tab-pane show active" id="pills-basics" role="tabpanel" aria-labelledby="pills-basics-tab">
+
+                <div style="margin-top: 15px;" class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Race</label>
+                  </div>
+                  <select class="custom-select race_Selected" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">Dwarf</option>
+                    <option value="2">Elf</option>
+                    <option value="3">Halfling</option>
+                    <option value="4">Human</option>
+                    <option value="5">Dragonborn</option>
+                    <option value="6">Gnome</option>
+                    <option value="7">Half-Elf</option>
+                    <option value="8">Half-Orc</option>
+                    <option value="9">Tiefling</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Subrace</label>
+                  </div>
+                  <select class="custom-select subrace_Selected" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Class</label>
+                  </div>
+                  <select class="custom-select class_Selected" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">Barbarian</option>
+                    <option value="2">Bard</option>
+                    <option value="3">Cleric</option>
+                    <option value="4">Druid</option>
+                    <option value="5">Fighter</option>
+                    <option value="6">Monk</option>
+                    <option value="7">Paladin</option>
+                    <option value="8">Ranger</option>
+                    <option value="9">Rogue</option>
+                    <option value="10">Sorcerer</option>
+                    <option value="11">Warlock</option>
+                    <option value="12">Wizard</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Background</label>
+                  </div>
+                  <select class="custom-select background_Selected" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">Acolyte</option>
+                    <option value="2">Charlatan</option>
+                    <option value="3">Criminal</option>
+                    <option value="4">Entertainer</option>
+                    <option value="5">Folk Hero</option>
+                    <option value="6">Guild Artisan</option>
+                    <option value="7">Hermit</option>
+                    <option value="8">Noble</option>
+                    <option value="9">Outlander</option>
+                    <option value="10">Sage</option>
+                    <option value="11">Sailor</option>
+                    <option value="12">Soldier</option>
+                    <option value="13">Urchin</option>
+                  </select>
+
+
 
                 </div>
+                <!--warning for incomplete selectiong-->
+                <div id="basicsAlert" class="alert alert-warning basicsAlert" role="alert">
+                  <strong>Alert!</strong> All Fields must have a selection.
+                </div>
+
+                <!--footer contains the buttons for previous and next-->
+                <div class="modal-footer">
+                  <button id="basicsBtnNext" type="button" class="btn btn-primary btnNext">Next</button>
+                </div>
+
+
+
+              </div>
+
+              <!--ability pill-->
+              <div class="tab-pane" id="pills-ability" role="tabpanel" aria-labelledby="pills-ability-tab">
+                <div class="container">
+                  <div class="row">
+                    <div id="abilityButtons" class="mx-auto">
+                      <button id="customAbilityBtn" type="button" class="btn abilityBtn btn-outline-dark">Custom</button>
+                      <button id="presetAbilityBtn" type="button" class="btn abilityBtn btn-outline-dark">Preset</button>
+                      <button id="rollAbilityBtn" type="button" class="btn abilityBtn btn-outline-dark">Roll</button>
+                      <button id="pointbuyAbilityBtn" type="button" class="btn abilityBtn btn-outline-dark">Point-Buy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 15px" class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">STR&nbsp;&nbsp;</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="strengthInput" type="text" class="form-control abilityInput" placeholder="Strength" aria-label="Username" aria-describedby="strength">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">DEX&nbsp;</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="dexterityInput" type="text" class="form-control abilityInput" placeholder="Dexterity" aria-label="Username" aria-describedby="basic-addon1">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">CON</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="constitutionInput" type="text" class="form-control abilityInput" placeholder="Constitution" aria-label="Username"
+                    aria-describedby="basic-addon1">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">INT&nbsp;&nbsp;</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="intelligenceInput" type="text" class="form-control abilityInput" placeholder="Intelligence" aria-label="Username"
+                    aria-describedby="basic-addon1">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">WIS&nbsp;</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="wisdomInput" type="text" class="form-control abilityInput" placeholder="Wisdom" aria-label="Username" aria-describedby="basic-addon1">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">CHR&nbsp;</span>
+                    <button class="btn arrowBtn pointbuyArrows upArrow" type="button">
+                      <i data-feather="arrow-up"></i>
+                    </button>
+                  </div>
+                  <input id="charismaInput" type="text" class="form-control abilityInput" placeholder="Charisma" aria-label="Username" aria-describedby="basic-addon1">
+                  <div class="input-group-append pointbuyArrows">
+                    <button class="btn arrowBtn downArrow" type="button">
+                      <i data-feather="arrow-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!--for out ability boost badges-->
+                <div id="pointbuyBadge">
+                  <span class="badge badge-dark">
+                    Points Used:
+                    <span id="pointsUsed">0</span>
+                    / 27
+                  </span>
+                </div>
+
+                <!--warning for incomplete selectiong-->
+                <div id="pointsbuyOutofBoundsAlert" class="alert alert-warning basicsAlert" role="alert">
+                  <strong>Alert!</strong> Abilities Must Be Between 8 - 15.
+                </div>
+
+                <!--warning for incomplete selectiong-->
+                <div id="pointsbuyAllPointsUsed" class="alert alert-warning basicsAlert" role="alert">
+                  <strong>Alert!</strong> Can Use 0 - 27 Points.
+                </div>
+
+                <!--ability alert for for not selecting abilities btn-->
+                <div id="abilitiesBtnAlert" class="alert alert-warning" role="alert">
+                  <strong>Alert!</strong> Choose A Ability Button Above.
+                </div>
+
+                <!--abilities alert input out of bounds must be between 1-20 when custom btn is active-->
+                <div id="customInputAlert" class="alert alert-warning" role="alert">
+                  <strong>Alert!</strong> Ability Values Must Be Between 1 - 20.
+                </div>
+
+
+
+                <!-- choose two for ability swap-->
+                <div id="swapAbility" class="panel panel-default swapAbility">
+                  <div class="panel-heading">Choose Two Abilities To Swap:</div>
+                  <div class="panel-body">
+                    <form>
+                      <fieldset class="form-group">
+                        <div class="row">
+                          <div class="col-sm-8">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="strCheckbox" value="STR" data-inputid="strengthInput">
+                              <label class="form-check-label" for="inlineCheckbox1">STR</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="dexCheckbox" value="DEX" data-inputid="dexterityInput">
+                              <label class="form-check-label" for="inlineCheckbox2">DEX</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="conCheckbox" value="CON" data-inputid="constitutionInput">
+                              <label class="form-check-label" for="inlineCheckbox3">CON</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="intCheckbox" value="INT" data-inputid="intelligenceInput">
+                              <label class="form-check-label" for="inlineCheckbox2">INT</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="wisCheckbox" value="WIS" data-inputid="wisdomInput">
+                              <label class="form-check-label" for="inlineCheckbox2">WIS</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="chrCheckbox" value="CHR" data-inputid="charismaInput">
+                              <label class="form-check-label" for="inlineCheckbox2">CHR</label>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                    </form>
+                    <!--abilities alert for over selection-->
+                    <div id="swapAlert" class="alert alert-warning" role="alert">
+                      <strong>Alert!</strong> Choose Two Abilities.
+                    </div>
+                  </div>
+                </div>
+
+                <!--for out ability boost badges-->
+                <div id="abilityBoostBadges">
+                </div>
+
+                <!-- choose two for ability boost-->
+                <div class="panel panel-default abilityChooseTwo">
+                  <div class="panel-heading">Choose Two Boost Abilities:</div>
+                  <div class="panel-body">
+                    <form>
+                      <fieldset class="form-group">
+                        <div class="row">
+                          <div class="col-sm-8">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="strCheckbox" value="STR" checked data-inputid="strengthInput">
+                              <label class="form-check-label" for="inlineCheckbox1">STR</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="dexCheckbox" value="DEX" checked data-inputid="dexterityInput">
+                              <label class="form-check-label" for="inlineCheckbox2">DEX</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="conCheckbox" value="CON" data-inputid="constitutionInput">
+                              <label class="form-check-label" for="inlineCheckbox3">CON</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="intCheckbox" value="INT" data-inputid="intelligenceInput">
+                              <label class="form-check-label" for="inlineCheckbox2">INT</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="wisCheckbox" value="WIS" data-inputid="wisdomInput">
+                              <label class="form-check-label" for="inlineCheckbox2">WIS</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="chrCheckbox" value="CHR" data-inputid="charismaInput">
+                              <label class="form-check-label" for="inlineCheckbox2">CHR</label>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                    </form>
+                    <!--abilities alert for over selection-->
+                    <div id="abilitiesChooseTwoAlert" class="alert alert-warning" role="alert">
+                      <strong>Alert!</strong> Choose Two Only. De-select one.
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--footer contains the buttons for previous and next-->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                  <button id="abilityNextBtn" type="button" class="btn btn-primary btnNext">Next</button>
+                </div>
+              </div>
+
+
+              <!--skill pill-->
+              <div class="tab-pane" id="pills-skill" role="tabpanel" aria-labelledby="pills-skill-tab">
+                <!-- skills from background no selection will be made here-->
+                <div id="backgroundSkillPanel" class="panel panel-default">
+                  <div id="backgroundSkillPanelHeading" class="panel-heading">Skills From Background:</div>
+                  <div class="panel-body">
+                    <form>
+                      <fieldset class="form-group">
+                        <div class="row">
+                          <div id="backgroundSkillCheckBoxes" class="col-sm-12">
+                          </div>
+                        </div>
+                      </fieldset>
+
+                    </form>
+                  </div>
+                </div>
+
+
+                <!-- both panels in one row each panels gets 6 columns in grid system-->
+                <div class="row class_raceSkills">
+                  <!-- Choose skills from class-->
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default ">
+                      <div id="classSkillsPanelHeading" class="panel-heading">Skills From Class: Choose 2</div>
+                      <div class="panel-body">
+                        <form>
+                          <fieldset id="classSkillCheckBoxes" class="form-group">
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <label class="form-check-label" for="inlineCheckbox1">Athletics</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <label class="form-check-label" for="inlineCheckbox2">Acrobatics</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox3">Sleight of Hand</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Stealth</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Arcana</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">History</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Investigation</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Nature</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Religion</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Animal Handling</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Insight</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Medicine</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Perception</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Survival</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Deception</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Intimidation</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Performance</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Persuasion</label>
+                            </div>
+                          </fieldset>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- Choose skills from race-->
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default">
+                      <div id="raceSkillPanelHeading" class="panel-heading">Skills From Race: Choose 2</div>
+                      <div class="panel-body">
+                        <form>
+                          <fieldset id="raceSkillCheckBoxes" class="form-group">
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <label class="form-check-label" for="inlineCheckbox1">Athletics</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <label class="form-check-label" for="inlineCheckbox2">Acrobatics</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="" disabled>
+                              <label class="form-check-label" for="inlineCheckbox3">Sleight of Hand</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Stealth</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Arcana</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">History</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Investigation</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Nature</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Religion</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Animal Handling</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Insight</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Medicine</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Perception</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Survival</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Deception</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Intimidation</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Performance</label>
+                            </div>
+                            <div class="form-check form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label" for="inlineCheckbox2">Persuasion</label>
+                            </div>
+                          </fieldset>
+
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+                <!--skills alert for over selection-->
+                <div id="skillsAlertOverSelection" class="alert alert-warning" role="alert">
+                  <strong>Alert!</strong> Over-Selection. De-select one.
+                </div>
+
+                <!--skills alert for under selection-->
+                <div id="skillsAlertUnderSelection" class="alert alert-warning" role="alert">
+                  <strong>Alert!</strong> Under-Selection. Please Select Skills.
+                </div>
+
+                <!--footer contains the buttons for previous and next-->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                  <button id="skillsNextBtn" type="button" class="btn btn-primary btnNext">Next</button>
+                </div>
+              </div>
+
+
+              <!--equipment pill-->
+              <div class="tab-pane" id="pills-equipment" role="tabpanel" aria-labelledby="pills-equipment-tab">
+                <div id="equipmentRadioBoxes" class="row">
+
+                  <form class="form-group col-sm-6 col-md-6 col-l-6 ">
+                    <fieldset>
+
+                      <legend class="col-form-label pt-0">Choose 1:</legend>
+
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 2</label>
+                      </div>
+                      <div class="radio disabled">
+                        <label>
+                          <input type="radio" name="optradio" disabled>Option 3</label>
+                      </div>
+
+
+                    </fieldset>
+                  </form>
+                  <form class="form-group col-sm-6 col-md-6 col-l-6 ">
+                    <fieldset>
+                      <legend class="col-form-label pt-0">Choose 1:</legend>
+
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 2</label>
+                      </div>
+                      <div class="radio disabled">
+                        <label>
+                          <input type="radio" name="optradio" disabled>Option 3</label>
+                      </div>
+
+
+                    </fieldset>
+                  </form>
+                  <form class="form-group col-sm-6 col-md-6 col-l-6 ">
+                    <fieldset>
+
+                      <legend class="col-form-label pt-0">Choose 1:</legend>
+
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 2</label>
+                      </div>
+                      <div class="radio disabled">
+                        <label>
+                          <input type="radio" name="optradio" disabled>Option 3</label>
+                      </div>
+
+
+                    </fieldset>
+                  </form>
+                  <form class="form-group col-sm-6 col-md-6 col-l-6 ">
+                    <fieldset>
+
+                      <legend class="col-form-label pt-0">Choose 1:</legend>
+
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optradio">Option 2</label>
+                      </div>
+                      <div class="radio disabled">
+                        <label>
+                          <input type="radio" name="optradio" disabled>Option 3</label>
+                      </div>
+                    </fieldset>
+
+                  </form>
+                </div>
+                <!--footer contains the buttons for previous and next-->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btnPrevious">Previous</button>
+                  <button id="equipmentNextBtn" type="button" class="btn btn-primary btnNext">Next</button>
+                </div>
+              </div>
             </div>
-      
 
 
-        
-         </div>
-            <!--add character tab-->
-            <div role="tabpanel" aria-labelledby="addCharacter-tab" class="tab-pane fade" id="addCharacter">add characters</div>
+          </div>
+        </div>
       </div>
     </div>
 
