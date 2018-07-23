@@ -12,7 +12,7 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 var screen = Dimensions.get('window');
 
 
-export default class Equipment extends Component{
+export default class Skills extends Component{
 
     constructor(props){
         super(props);
@@ -22,27 +22,48 @@ export default class Equipment extends Component{
             selectedBackground: '',
             selectedClass:'',
             subracelabel: 'Subrace',
-
         }
     }
 
-    showAddModal = () => {
+    showAddModal = (value) => {
         this.refs.myModal.open();
         //console.log(races);
+        this.setState({selectedClass:value});
     }
 
     _renderEquipment(){
 
         var empt = [];
-        var milf = "Bard";
+        var milf = this.state.selectedClass;
+        console.log('Here')
+
+        // var oldData = classWeapons[milf]['Equipment'];
+        // console.log(oldData);
+
+
 
         for(var i in classWeapons[milf]['Equipment'])
         {
-            empt.push(<View>
+
+            var oldData = classWeapons[milf]['Equipment'][i];
+
+            var newData = oldData.map(function(item){
+                return{
+                    label: item.label,
+                    value: item.label,
+                };
+            });
+            console.log(newData);
+
+
+            empt.push(<View key={uuid.v1()} style={{padding:10}}>
                 <Text>Choose one</Text>
                 <RadioForm style={{ alignItems: 'flex-start' }}
-                radio_props={classWeapons[milf]['Equipment'][i]}
-                onPress={(value) => {this.setState({value:value})}}
+                buttonColor='rgba(150,97,107,1)'
+                selectedButtonColor='rgba(69,45,49,0.9)'
+                radio_props={newData}
+                initial={-1}
+                onPress={(value) => console.log(value)}
                 />
                 </View>
                 )
@@ -95,15 +116,17 @@ export default class Equipment extends Component{
             style={styles.modal}
             position='center'
             backdrop={true}
+            coverScreen={true}
             >
 
             <View>
-            <Text style={styles.header}> Character Creation </Text>
+            <Text style={styles.header}>Skills</Text>
             </View>
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
-            {this._renderEquipment()}
-            </ScrollView>  
+            
+            <Text>Hey</Text>
+            </ScrollView> 
             
             </Modal>
         );

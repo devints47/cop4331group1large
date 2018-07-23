@@ -21,7 +21,6 @@ export default class Races extends Component{
             selectedBackground: '',
             selectedClass:'',
             subracelabel: 'Subrace',
-
         }
     }
 
@@ -30,9 +29,9 @@ export default class Races extends Component{
         //console.log(races);
     }
 
+
     _renderSubRace(){
 
-        
         disabled = subrace[this.state.selectedRace]['subrace'][0]['value'] === 'none'
 
         if(!disabled) setlabel = this.state.subracelabel;
@@ -85,7 +84,9 @@ export default class Races extends Component{
         });
 
 
-        this.refs.myModal.close();          
+        console.log('Here');
+        this.props.updateVal(newItem);
+        this.refs.myModal.close();
 
     }
 
@@ -100,6 +101,7 @@ export default class Races extends Component{
             onClosed={()=>{
                console.log('Modal Closed')
             }}
+            coverScreen={true}
             >
 
             <View styles={styles.dropdown}>
@@ -167,4 +169,3 @@ const styles=StyleSheet.create({
     },
 
 });
-
