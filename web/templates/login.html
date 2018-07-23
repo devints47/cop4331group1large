@@ -2,7 +2,8 @@
 {% block content %}
     <!--Nav bar with project name-->
     <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">Rolodex Login</span>
+        <span class="navbar-brand mb-0 h1">Dungeons and Dragons</span>
+        <a class="nav-item nav-link active float-right" id="newUserLink" href="{{ url_for('register') }}" >Create New User</a>	
     </nav>
 	<!-- flashed messages-->
 	{% with messages = get_flashed_messages() %}
@@ -20,16 +21,17 @@
     <div id="formContainer" class="container content">
         <div class="row justify-content-center">
             <form id="loginForm" action="{{ url_for('login') }}" method="post">
-                <div class="form-group">
-	                <label for="inputUserName">Username</label>
-	                <input name="username" type="username" class="form-control" id="inputUserName" aria-describedby="userNAmeHelp" placeholder="Enter Username" required="" >
+                <div class="form-group row ">
+	                <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputUserName">Username</label>
+	                <input name="username" type="username" class="form-control col-lg-10 col-sm-9 col-md-8" id="inputUserName" aria-describedby="userNAmeHelp" placeholder="Enter Username" required="" >
                 </div>
-                <div class="form-group">
-	                <label for="inputPassword">Password</label>
-	                <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password" required="">
+                <div class="form-group row">
+	                <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputPassword">Password</label>
+                    <input name="password" type="password" class="form-control col-lg-10 col-sm-9 col-md-8" id="inputPassword" placeholder="Password" required="">
                 </div>
-                <button id="loginButton" type="submit" class="btn btn-primary btn-sm login-submit">Login</button>
-                <a id="newUserLink" href="{{ url_for('register') }}" >Create New User</a>		    
+                
+                <button id="loginButton" type="submit" class="btn btn-primary btn-sm login-submit float-left">Login</button>	 
+                <a class="float-right" id="forgotPasswordLink" href="{{ url_for('password') }}" >Forgot Password</a>
             </form>
         </div>
     </div>

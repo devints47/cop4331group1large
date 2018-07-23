@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!--Nav bar with new user heading-->
+    <nav class="navbar  navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">Create an Account</span>
+        <a class="nav-item nav-link active float-right" href="{{ url_for('login') }}">Log In</a>
+    </nav>
+     <!--Flashed messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+         <ul class="flashes alert alert-danger" role="alert">
+         {% for message in messages %}
+             <li>{{ message }}</li>
+         {% endfor %}
+         </ul>
+      {% endif %}
+     {% endwith %}
+    
+    
+    <!--if username is true than show an alert-->
+    <div id="alertDiv" style="margin-top: 10px"></div>
+
+    <!--Username and password form-->
+    <div id="formContainer" class="container">
+        <div class="row justify-content-center">
+            <form style="width: 100%" id="registrationForm" action="{{ url_for('register') }}" method="post">
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputUsername">Username</label>
+                    <input name="username" type="text" class="form-control col-lg-10 col-sm-9 col-md-8" id="inputUsername" aria-describedby="userNAmeHelp" placeholder="Enter Username" required="">
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputPassword">Password</label>
+                    <input name="password" type="password" class="form-control col-lg-10 col-sm-9 col-md-8" id="inputPassword" placeholder="Enter Password" required="">
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputPassword">Confirm Password</label>
+                    <input name="confirm_password" type="password" class="form-control col-lg-10 col-sm-9 col-md-8"id="confirmInputPassword" placeholder="Confirm Password" required="">
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-2 col-sm-3 col-md-4" for="inputEmail">Email</label>
+                    <input name="email" type="email" class="form-control col-lg-10 col-sm-9 col-md-8" id="inputEmail" placeholder="Enter Email" required="">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-left">Create New User</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

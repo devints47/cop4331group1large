@@ -96,6 +96,12 @@ def register():
 			return redirect('register')
 	return render_template('registration.html')
 
+
+@app.route('/password', methods=['GET', 'POST'])
+def password():
+	return render_template('index.html')
+
+	
 @app.route('/')
 def index():
 	return render_template('index.html')
