@@ -3,15 +3,16 @@ import Modal from 'react-native-modalbox';
 //import Button from 'react-native-button';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
-        TextInput,Button} from 'react-native';
-import {races, subrace, background, chars,charclass} from '../../assets/data/races';
+        TextInput,Button,ScrollView} from 'react-native';
+import {races, subrace, background, chars,charclass,classWeapons} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 var screen = Dimensions.get('window');
 
 
-export default class Races extends Component{
+export default class Skills extends Component{
 
     constructor(props){
         super(props);
@@ -24,33 +25,52 @@ export default class Races extends Component{
         }
     }
 
-    showAddModal = () => {
+    showAddModal = (value) => {
         this.refs.myModal.open();
         //console.log(races);
+        this.setState({selectedClass:value});
     }
 
+    _renderEquipment(){
 
-    _renderSubRace(){
+        var empt = [];
+        var milf = this.state.selectedClass;
+        console.log('Here')
 
-        disabled = subrace[this.state.selectedRace]['subrace'][0]['value'] === 'none'
+        // var oldData = classWeapons[milf]['Equipment'];
+        // console.log(oldData);
 
-        if(!disabled) setlabel = this.state.subracelabel;
-        else {
-            setlabel = 'No Subrace'
+
+
+        for(var i in classWeapons[milf]['Equipment'])
+        {
+
+            var oldData = classWeapons[milf]['Equipment'][i];
+
+            var newData = oldData.map(function(item){
+                return{
+                    label: item.label,
+                    value: item.label,
+                };
+            });
+            console.log(newData);
+
+
+            empt.push(<View key={uuid.v1()} style={{padding:10}}>
+                <Text>Choose one</Text>
+                <RadioForm style={{ alignItems: 'flex-start' }}
+                buttonColor='rgba(150,97,107,1)'
+                selectedButtonColor='rgba(69,45,49,0.9)'
+                radio_props={newData}
+                initial={-1}
+                onPress={(value) => console.log(value)}
+                />
+                </View>
+                )
         }
 
-
-        return(
-            <Dropdown
-            style={styles.race} 
-            ref={'subdrop'}
-            label={setlabel}
-            data={subrace[this.state.selectedRace]['subrace']}
-            disabled={disabled}
-            itemCount={10}
-            onChangeText = {(input)=>this.setState({selectedSubRace: input})}
-            />
-
+        return( 
+            empt
         );
 
     }
@@ -84,9 +104,7 @@ export default class Races extends Component{
         });
 
 
-        console.log('Here');
-        this.props.updateVal(newItem);
-        this.refs.myModal.close();
+        this.refs.myModal.close();          
 
     }
 
@@ -98,46 +116,17 @@ export default class Races extends Component{
             style={styles.modal}
             position='center'
             backdrop={true}
-            onClosed={()=>{
-               console.log('Modal Closed')
-            }}
             coverScreen={true}
             >
 
-            <View styles={styles.dropdown}>
-                <Text style={styles.header}> Character Creation </Text>
-                <Dropdown
-                style={styles.race} 
-                ref={'racedrop'}
-                label='Race'
-                data={races}
-                itemCount={10}
-                onChangeText = {(input) => this.setState({selectedRace: input}) }
-                />
-
-                {this._renderSubRace()}
-
-
-                <Dropdown
-                style={styles.race} 
-                ref={'backdrop'}
-                label='Class'
-                data={charclass}
-                itemCount={10}
-                onChangeText = {(input)=>this.setState({selectedClass: input})}
-                />
-
-                <Dropdown
-                style={styles.race} 
-                ref={'backdrop'}
-                label='Background'
-                data={background}
-                itemCount={10}
-                onChangeText = {(input)=>this.setState({selectedBackground: input})}
-                />
-
-                <Button title='Next' onPress={()=>this.updateState()}/>
+            <View>
+            <Text style={styles.header}>Skills</Text>
             </View>
+
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+            
+            <Text>Hey</Text>
+            </ScrollView> 
             
             </Modal>
         );
@@ -165,7 +154,12 @@ const styles=StyleSheet.create({
 
     },
     dropdown:{
-     padding:32,
+     padding:32
     },
 
+    contentContainer: {
+        paddingVertical: 20
+      }
+
 });
+

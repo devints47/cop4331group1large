@@ -9,6 +9,7 @@ import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import Races from './Races';
 import Equipment from './Equipment';
+import Skills from './Skills';
 
 export default class ModalRouter extends Component{
 
@@ -37,6 +38,10 @@ export default class ModalRouter extends Component{
         
     }
 
+    openSkillsModal(){
+        this.refs.skills.showAddModal();
+    }
+
 
     render(){
 
@@ -48,8 +53,18 @@ export default class ModalRouter extends Component{
             parentFlatList={this.props.parentFlatList}
             updateVal={(data)=>this.getRaceInfo(data)}>
             </Races>
-            <Equipment ref={'equip'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            <Equipment 
+            ref={'equip'} 
+            parentFlatList={this.props.parentFlatList} 
+            selectClass={this.state.class}
+            
+            
+            >
+                
             </Equipment>
+
+            <Skills ref={'skills'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            </Skills>
         </View>
         );
 

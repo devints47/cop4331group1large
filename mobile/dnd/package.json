@@ -16,6 +16,8 @@
     "react-native-action-button": "^2.8.4",
     "react-native-animatable": "^1.3.0",
     "react-native-button": "^2.3.0",
+    "react-native-checkbox-group": "^1.0.3",
+    "react-native-checkboxlist": "0.0.8",
     "react-native-elements": "^0.19.1",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-modal": "^6.4.0",

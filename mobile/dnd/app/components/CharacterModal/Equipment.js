@@ -8,6 +8,7 @@ import {races, subrace, background, chars,charclass,classWeapons} from '../../as
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import Skills from './Skills';
 
 var screen = Dimensions.get('window');
 
@@ -22,7 +23,6 @@ export default class Equipment extends Component{
             selectedBackground: '',
             selectedClass:'',
             subracelabel: 'Subrace',
-
         }
     }
 
@@ -126,7 +126,9 @@ export default class Equipment extends Component{
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
             {this._renderEquipment()}
-            </ScrollView>  
+
+            <Button title='Next' onPress={()=>this.updateState()}/>
+            </ScrollView> 
             
             </Modal>
         );
