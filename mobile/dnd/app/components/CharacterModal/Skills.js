@@ -30,18 +30,19 @@ export default class Skills extends Component{
     constructor(props){
         super(props);
         this.state={
-            selectedRace: '',
-            selectedSubRace: '',
-            selectedBackground: '',
-            selectedClass:'',
-            subracelabel: 'Subrace',
+            inputData: {race:'',subrace:'',background:'',class:''},
         }
     }
 
     showAddModal = (value) => {
         this.refs.myModal.open();
-        //console.log(races);
-        this.setState({selectedClass:value});
+        console.log('Skills Modal:');
+        this.setState({inputData: value}, function(){
+            back = this.state.inputData['background']
+            console.log(back)
+            console.log(backgroundSkills[this.state.inputData['background']]['Skills'][0])
+        });
+        
     }
 
     _renderSkills(){
@@ -112,10 +113,11 @@ export default class Skills extends Component{
             textAlign: 'left',}}>Skills from background</Text>
             </View>
 
-            <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'flex-end'}}>
+            <View>
               
               <CheckboxFormX
-                  dataSource={backgroundSkills['Acolyte']['Skills'][0]}
+                  dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
+                  contentContainerStyle={{alignItems: 'flex-start'}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
@@ -129,10 +131,11 @@ export default class Skills extends Component{
              textAlign: 'left',}}>Skills from subclass</Text>
             </View>
 
-            <View style={{flex:1,flexDirection:'column',margin:2,justifyContent:'flex-end',alignItems:'flex-end'}}>
+            <View>
               
               <CheckboxFormX
-                  dataSource={mockData}
+                  dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
+                  contentContainerStyle={{alignItems: 'flex-start'}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
@@ -146,10 +149,11 @@ export default class Skills extends Component{
             textAlign: 'left',}}>Skills from class</Text>
             </View>
 
-            <View style={{flex:1,flexDirection:'column',margin:2,justifyContent:'flex-end',alignItems:'flex-end'}}>
+            <View>
               
               <CheckboxFormX
-                  dataSource={mockData}
+                  dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
+                  contentContainerStyle={{alignItems: 'flex-start'}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
@@ -187,7 +191,7 @@ const styles=StyleSheet.create({
     },
 
     contentContainer: {
-        paddingVertical: 20
+        paddingVertical: 20,
       }
 
 });

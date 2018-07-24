@@ -45,11 +45,15 @@ export default class ModalRouter extends Component{
         console.log('ModalRouter:');
         console.log(data);
 
-        this.setState({equipment: data});
+        this.setState({equipment: data}, function(){
+            console.log(this.state.equipment);
+            this.refs.skills.showAddModal(this.state);
+        });
 
-        console.log(this.state.equipment);
+       
 
         this.finishCharacter();
+
     }
 
     openSkillsModal(){
