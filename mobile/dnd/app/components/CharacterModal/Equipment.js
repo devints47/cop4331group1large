@@ -24,6 +24,7 @@ export default class Equipment extends Component{
             selectedClass:'',
             subracelabel: 'Subrace',
         }
+        this.equipment = {};
     }
 
     showAddModal = (value) => {
@@ -49,13 +50,17 @@ export default class Equipment extends Component{
             var oldData = classWeapons[milf]['Equipment'][i];
 
             var newData = oldData.map(function(item){
+                
+                data = i + ',' + item.label;
+                
                 return{
                     label: item.label,
-                    value: item.label,
+                    value: data,
                 };
             });
             console.log(newData);
 
+            var label = i.toString();
 
             empt.push(<View key={uuid.v1()} style={{padding:10}}>
                 <Text>Choose one</Text>
@@ -64,7 +69,8 @@ export default class Equipment extends Component{
                 selectedButtonColor='rgba(69,45,49,0.9)'
                 radio_props={newData}
                 initial={-1}
-                onPress={(value) => console.log(value)}
+                accessibilityLabel= {label}
+                onPress={(value) => this._onEquipmentSelect(value)}
                 />
                 </View>
                 )
@@ -76,36 +82,31 @@ export default class Equipment extends Component{
 
     }
 
+    _onEquipmentSelect(value){
+
+        data = value.split(',')
+        group = data[0];
+        label = data[1];
+
+        this.equipment[group]=label;
+
+
+        console.log(this.equipment);
+
+        
+        
+
+
+
+       
+    }
+
     updateState(){
 
-        sub = this.state.selectedSubRace;
-
-        if(sub=== ''){
-            sub='None';
-        }
-
-        const newKey = uuid.v1();
-        const newItem = {
-            key: newKey,
-            race: this.state.selectedRace,
-            subrace: sub,
-            background: this.state.selectedBackground,
-            class: this.state.selectedClass,
-        };    
-        chars.push(newItem);
-        // console.log(chars)    
-        this.props.parentFlatList.refreshFlatList(newKey);       
         
+
+        this.refs.myModal.close();       
         
-        this.setState({
-            selectedBackground:'',
-            selectedClass:'',
-            selectedRace:'',
-            selectedSubRace:'',
-        });
-
-
-        this.refs.myModal.close();          
 
     }
 
@@ -118,6 +119,7 @@ export default class Equipment extends Component{
             position='center'
             backdrop={true}
             coverScreen={true}
+            swipeToClose={false}
             >
 
             <View>

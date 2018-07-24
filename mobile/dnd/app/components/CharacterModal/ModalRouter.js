@@ -35,7 +35,13 @@ export default class ModalRouter extends Component{
         this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
         console.log(data);
         this.refs.equip.showAddModal(data['class']);
+
+    }
+
+    getEquipment(data){
+
         
+
     }
 
     openSkillsModal(){
@@ -51,19 +57,24 @@ export default class ModalRouter extends Component{
             ref={'races'} 
             updateVal={(val)=>this.getRaceInfo(val)} 
             parentFlatList={this.props.parentFlatList}
-            updateVal={(data)=>this.getRaceInfo(data)}>
+            updateVal={(data)=>this.getRaceInfo(data)}
+            
+            >
             </Races>
             <Equipment 
             ref={'equip'} 
             parentFlatList={this.props.parentFlatList} 
             selectClass={this.state.class}
-            
-            
+
             >
-                
             </Equipment>
 
-            <Skills ref={'skills'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            <Skills 
+            ref={'skills'} 
+            parentFlatList={this.props.parentFlatList} 
+            selectClass={this.state.class}
+
+            >
             </Skills>
         </View>
         );

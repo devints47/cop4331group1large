@@ -549,7 +549,7 @@ export var classWeapons =
          [
             [
                 {'label':'Mace'},
-                {'label':'Warhammar'},
+                {'label':'Warhammer'},
             ],
             [
                 {'label':'Scale mail'},

@@ -117,6 +117,7 @@ export default class Skills extends Component{
             position='center'
             backdrop={true}
             coverScreen={true}
+            swipeToClose={false}
             >
 
             <View>
