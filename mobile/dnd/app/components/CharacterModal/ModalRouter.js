@@ -34,7 +34,7 @@ export default class ModalRouter extends Component{
     
         this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
         console.log(data);
-        this.refs.equip.showAddModal(data['class']);
+        this.refs.skills.showAddModal(data['class']);
         
     }
 

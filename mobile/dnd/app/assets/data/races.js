@@ -149,19 +149,17 @@ export const backgroundSkills = {
     '':
         {
             'Skills':
-            {
-                'One':[
+                [
                     {'label':'Not Loaded'}
                 ],
-            },
         },
     
     'Acolyte' : 
      {
          'Skills':[
              [
-                 {'label':'Insight'},
-                 {'label':'Religion'},
+                 {label:'Insight',value:'one'},
+                 {label:'Religion',value:'two'},
              ],
         ]
  
