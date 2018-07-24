@@ -25,6 +25,7 @@ export default class Equipment extends Component{
             subracelabel: 'Subrace',
         }
         this.equipment = {};
+        this.length = 0;
     }
 
     showAddModal = (value) => {
@@ -60,6 +61,8 @@ export default class Equipment extends Component{
             });
             console.log(newData);
 
+            this.length = parseInt(i) + 1;
+
             var label = i.toString();
 
             empt.push(<View key={uuid.v1()} style={{padding:10}}>
@@ -93,16 +96,31 @@ export default class Equipment extends Component{
 
         console.log(this.equipment);
 
-        
-        
-
-
-
+        equip=this.equipment;        
        
     }
 
     updateState(){
 
+
+        equip = this.equipment;
+        len = this.length;
+
+       
+        
+        var newItem = []
+
+        for (i in equip){
+            newItem.push(equip[i]);
+        }
+
+
+        if(newItem.length != len){
+            Alert.alert('Select All Items!');
+            return;
+        }
+
+        this.props.updateVal(newItem);
         
 
         this.refs.myModal.close();       

@@ -21,7 +21,9 @@ export default class ModalRouter extends Component{
             subrace: '',
             background:'',
             class:'Bard',
-            
+            equipment: [],
+            key: uuid.v1(),
+
         };
     }
 
@@ -40,12 +42,26 @@ export default class ModalRouter extends Component{
 
     getEquipment(data){
 
-        
+        console.log('ModalRouter:');
+        console.log(data);
 
+        this.setState({equipment: data});
+
+        console.log(this.state.equipment);
+
+        this.finishCharacter();
     }
 
     openSkillsModal(){
         this.refs.skills.showAddModal();
+    }
+
+    finishCharacter(){
+
+        character = this.state;
+        chars.push(character);
+        this.props.parentFlatList.refreshFlatList(character);       
+
     }
 
 
@@ -65,6 +81,7 @@ export default class ModalRouter extends Component{
             ref={'equip'} 
             parentFlatList={this.props.parentFlatList} 
             selectClass={this.state.class}
+            updateVal={(data)=>this.getEquipment(data)}
 
             >
             </Equipment>

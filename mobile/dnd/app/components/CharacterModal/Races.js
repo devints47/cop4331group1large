@@ -71,9 +71,9 @@ export default class Races extends Component{
             background: this.state.selectedBackground,
             class: this.state.selectedClass,
         };    
-        chars.push(newItem);
+        //chars.push(newItem);
         // console.log(chars)    
-        this.props.parentFlatList.refreshFlatList(newKey);       
+        //this.props.parentFlatList.refreshFlatList(newKey);       
         
         
         this.setState({
