@@ -4,10 +4,23 @@ import Modal from 'react-native-modalbox';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
         TextInput,Button,ScrollView} from 'react-native';
-import {races, subrace, background, chars,charclass,classWeapons} from '../../assets/data/races';
+import {races, subrace, background, chars,charclass,classWeapons,backgroundSkills} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import CheckboxFormX from 'react-native-checkbox-form';
+
+const mockData = [
+    {
+        label: 'label1',
+    },
+    {
+        label: 'label2',
+    },
+    {
+        label: 'label3',
+    },
+];
 
 var screen = Dimensions.get('window');
 
@@ -31,47 +44,9 @@ export default class Skills extends Component{
         this.setState({selectedClass:value});
     }
 
-    _renderEquipment(){
+    _renderSkills(){
 
-        var empt = [];
-        var milf = this.state.selectedClass;
-        console.log('Here')
-
-        // var oldData = classWeapons[milf]['Equipment'];
-        // console.log(oldData);
-
-
-
-        for(var i in classWeapons[milf]['Equipment'])
-        {
-
-            var oldData = classWeapons[milf]['Equipment'][i];
-
-            var newData = oldData.map(function(item){
-                return{
-                    label: item.label,
-                    value: item.label,
-                };
-            });
-            console.log(newData);
-
-
-            empt.push(<View key={uuid.v1()} style={{padding:10}}>
-                <Text>Choose one</Text>
-                <RadioForm style={{ alignItems: 'flex-start' }}
-                buttonColor='rgba(150,97,107,1)'
-                selectedButtonColor='rgba(69,45,49,0.9)'
-                radio_props={newData}
-                initial={-1}
-                onPress={(value) => console.log(value)}
-                />
-                </View>
-                )
-        }
-
-        return( 
-            empt
-        );
+        
 
     }
 
@@ -108,7 +83,14 @@ export default class Skills extends Component{
 
     }
 
+    _onSelect = ( item ) => {
+        console.log(item);
+      };
+
     render(){
+
+        const { tag } = this.props;
+        checked= this.state;
 
         return(
             <Modal
@@ -120,15 +102,61 @@ export default class Skills extends Component{
             swipeToClose={false}
             >
 
-            <View>
-            <Text style={styles.header}>Skills</Text>
-            </View>
+            <View><Text style={styles.header}>Skills</Text></View>
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
-            
-            <Text>Hey</Text>
-            </ScrollView> 
-            
+
+           <View>
+            <Text style={{fontSize: 15,
+            fontWeight: 'bold',
+            textAlign: 'left',}}>Skills from background</Text>
+            </View>
+
+            <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'flex-end'}}>
+              
+              <CheckboxFormX
+                  dataSource={backgroundSkills['Acolyte']['Skills'][0]}
+                  itemShowKey="label"
+                  itemCheckedKey="RNchecked"
+                  iconSize={28}
+                  onChecked={(item) => this._onSelect(item)}
+              />
+             </View>
+
+           <View>
+             <Text style={{fontSize: 15,
+             fontWeight: 'bold',
+             textAlign: 'left',}}>Skills from subclass</Text>
+            </View>
+
+            <View style={{flex:1,flexDirection:'column',margin:2,justifyContent:'flex-end',alignItems:'flex-end'}}>
+              
+              <CheckboxFormX
+                  dataSource={mockData}
+                  itemShowKey="label"
+                  itemCheckedKey="RNchecked"
+                  iconSize={28}
+                  onChecked={(item) => this._onSelect(item)}
+              />
+          </View>
+
+           <View>
+            <Text style={{fontSize: 15,
+            fontWeight: 'bold',
+            textAlign: 'left',}}>Skills from class</Text>
+            </View>
+
+            <View style={{flex:1,flexDirection:'column',margin:2,justifyContent:'flex-end',alignItems:'flex-end'}}>
+              
+              <CheckboxFormX
+                  dataSource={mockData}
+                  itemShowKey="label"
+                  itemCheckedKey="RNchecked"
+                  iconSize={28}
+                  onChecked={(item) => this._onSelect(item)}
+              />
+          </View>
+            </ScrollView>            
             </Modal>
         );
 

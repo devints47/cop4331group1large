@@ -36,6 +36,7 @@ export default class ModalRouter extends Component{
     
         this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
         console.log(data);
+<<<<<<< HEAD
         this.refs.equip.showAddModal(data['class']);
 
     }
@@ -50,6 +51,10 @@ export default class ModalRouter extends Component{
         console.log(this.state.equipment);
 
         this.finishCharacter();
+=======
+        this.refs.skills.showAddModal(data['class']);
+        
+>>>>>>> mobile-restructuremodal
     }
 
     openSkillsModal(){
