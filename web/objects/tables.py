@@ -715,6 +715,71 @@ class TableFactory(object):
         True, True, True, s_material, s_mat_desc, s_ritual, \
         s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
         s_spell_desc))
+        s_list.append(SpellLookup("Arcane Lock", 2, "Abjuration", "1 action", "Touch", "Until dispelled", \
+        s_conc, True, True, True, "gold dust worth at least 25 gp, which the spell consumes", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Armor of Agathys", 1, "Abjuration", "1 action", "Self", "1 hour", \
+        s_conc, True, True, True, "a cup of water", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Arms of Hadar", 1, "Conjuration", "1 action", "Self (10 ft radius)", "Instant", \
+        s_conc, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Astral Projection", 9, "Necromancy", "1 hour", "10 ft", "Special", \
+        s_conc, True, True, True, "one jacinth worth at least 1000 gp and one ornately carved bar of silver worth at least 100gp for each affected creature, ", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Augury", 2, "Divination", "1 minute", "Self", "Instant", \
+        s_conc, True, True, True, "specially marked sticks, bones, or similar tokens worth at least 25 gp", True, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Aura of Life", 4, "Abjuration", "1 action", "Self (30 ft radius)", "10 minutes", \
+        True, True, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Aura of Purity", 4, "Abjuration", "1 action", "Self (30 ft radius)", "10 minutes", \
+        True, True, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Aura of Vitality", 3, "Evocation", "1 action", "Self (30 ft radius)", "1 minute", \
+        True, True, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Awaken", 5, "Transmutation", "8 hours", "Touch", "Instant", \
+        s_conc, True, True, True, "an agate worth at least 1000 gp, which the spell consumes", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        # B
+        s_list.append(SpellLookup("Bane", 1, "Enchantment", "1 action", "30 ft", "1 minute", \
+        True, True, True, True, "a drop of blood", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Banishing Smite", 5, "Abjuration", "1 bonus action", "Self", "1 minute", \
+        True, True, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Banishment", 4, "Abjuration", "1 action", "60 ft", "1 minute", \
+        True, True, True, True, "an item distasteful to the target", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Barkskin", 2, "Transmutation", "1 action", "Touch", "1 hour", \
+        True, True, True, True, "a handful of oak bark", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Beacon of Hope", "1 action", "Abjuration", "1 action", "30 ft", "1 minute", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
+        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
+        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
         s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
         s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
         s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \

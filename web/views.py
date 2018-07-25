@@ -34,6 +34,8 @@ SAVING = 3
 LANG = 4
 TOOL = 5
 
+current_character = None
+
 # ==================
 # Models: User & Character
 # ==================
@@ -66,14 +68,23 @@ class Character(db.Model):
     # Fields
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # Strings
     name = db.Column(db.String(80), unique=False, nullable=False)
     race = db.Column(db.String(80), unique=False, nullable=False)
-    character_class_1 = db.Column(db.String(80), unique=False, nullable=False) # Stored as "[Class] [Level]"
-    character_class_2 = db.Column(db.String(80), unique=False, nullable=False) # Stored as "[Class] [Level]"
+    character_class = db.Column(db.String(80), unique=False, nullable=False) # Stored as "[Class] [Level]"
     background = db.Column(db.String(80), unique=False, nullable=False)
+    # Ability Scores
+    char_str = db.Column(db.Integer, unique=False, nullable=False)
+    char_dex = db.Column(db.Integer, unique=False, nullable=False)
+    char_con = db.Column(db.Integer, unique=False, nullable=False)
+    char_int = db.Column(db.Integer, unique=False, nullable=False)
+    char_wis = db.Column(db.Integer, unique=False, nullable=False)
+    char_cha = db.Column(db.Integer, unique=False, nullable=False)
+    # Stats
     max_HP = db.Column(db.Integer, unique=False, nullable=False)
     current_HP = db.Column(db.Integer, unique=False, nullable=False)
     temp_HP = db.Column(db.Integer, unique=False, nullable=False)
+    armor_class = db.Column(db.Integer, unique=False, nullable=False)
     # Relational Tables
     features = db.relationship('CharacterFeatures', backref='Character', lazy=True)
     proficiencies = db.relationship('CharacterProficiencies', backref='Character', lazy=True)
@@ -81,28 +92,22 @@ class Character(db.Model):
     spells = db.relationship('CharacterSpells', backref='Character', lazy=True)
 
 
-    def __init__(self, stats=[10,10,10,10,10,10], race_string="Dwarf Hill", \
-        class_string="Fighter", background_string="Soldier", \
-        skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
-        #set all base stats
-        self._ability_scores = stats
-        self._race_object = Races.RaceFactory().make_race(race_string)
-        self._character_class_object = Classes.ClassFactory().make_class(class_string)
-        self._background_object = Backgrounds.BackgroundFactory().make_background(background_string)
-        self._create_profs()
-        self.add_skill_profs(skill_list)
-        self.new_character()
+    def __init__(self, new=True, char_id=1, stats=[10,10,10,10,10,10], \
+        race_string="Dwarf Hill", class_string="Fighter", background_string="Soldier", \
+        equipment_list = [], skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
+        self._new = new
+        if (new):
+            self.set_ability_scores(stats)
+            self.new_race(Races.RaceFactory().make_race(race_string))
+            self.new_class(Classes.ClassFactory().make_class(class_string))
+            self.new_background(Backgrounds.BackgroundFactory().make_background(background_string))
+            self.new_skills(skill_list)
+            self.new_equipment(equipment_list)
+        else:
+            self.get_character(char_id)
 
 
-    def _create_profs(self):
-        self._skill_profs = set()
-        self._weapon_profs = set()
-        self._armor_profs = set()
-        self._saving_profs = set()
-        self._language_profs = set()
-        self._profs = [self._skill_profs, self._weapon_profs, self._armor_profs, self._saving_profs, self._language_profs]
-
-
+    
     def new_character(self):
         self._option_list = []
         self._race_object.new_race(self)
@@ -399,10 +404,11 @@ def get_options():
         # When this method is called send back a json object of the characters
         # request.args key value pair
         # a request should look like http://localhost:5000/get_characters?user_id=1234
-        character = Character(stats=request.args('stat array'), race_string="Dwarf Hill", \
-        class_string="Fighter", background_string="Soldier", \
-        skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"])
+        current_character = Character(stats=request.args('abilityArray'), \
+        race_string=request.args('race_subrace'), class_string=request.args('class') , background_string=request.args('background'), \
+        equipment_list=request.args('equipmentArray'), skill_list=request.args('skillsArray'))
         options = character.get_options()
+
 
         return jsonify(options=options)
 
