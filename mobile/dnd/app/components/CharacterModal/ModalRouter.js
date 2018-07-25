@@ -11,6 +11,7 @@ import Races from './Races';
 import Equipment from './Equipment';
 import Skills from './Skills';
 import CharacterInfo from './CharacterInfo';
+import Ability from './Ability';
 
 export default class ModalRouter extends Component{
 
@@ -59,6 +60,7 @@ export default class ModalRouter extends Component{
             }
         );
         console.log('Updated State')
+        this.refs.ability.showAddModal();
 
     }
 
@@ -127,6 +129,9 @@ export default class ModalRouter extends Component{
 
         
 
+
+            <Ability ref={'ability'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            </Ability>
         </View>
         );
 
