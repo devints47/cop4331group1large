@@ -55,31 +55,9 @@ export default class Skills extends Component{
 
     updateState(){
 
-        sub = this.state.selectedSubRace;
+        console.log(this.skills)
 
-        if(sub=== ''){
-            sub='None';
-        }
-
-        const newKey = uuid.v1();
-        const newItem = {
-            key: newKey,
-            race: this.state.selectedRace,
-            subrace: sub,
-            background: this.state.selectedBackground,
-            class: this.state.selectedClass,
-        };    
-        chars.push(newItem);
-        // console.log(chars)    
-        this.props.parentFlatList.refreshFlatList(newKey);       
-        
-        
-        this.setState({
-            selectedBackground:'',
-            selectedClass:'',
-            selectedRace:'',
-            selectedSubRace:'',
-        });
+        this.props.updateVal(this.skills);
 
 
         this.refs.myModal.close();          
@@ -87,8 +65,11 @@ export default class Skills extends Component{
     }
 
     _onSelect = ( item ) => {
-        
-        console.log(item)
+    
+
+
+        back = backgroundSkills[this.state.inputData['background']]['Skills'][0];
+
 
         for (i in item){
             if(item[i]['RNchecked'] || !item[i]['RNchecked']){
@@ -96,7 +77,13 @@ export default class Skills extends Component{
             }
         }
 
-        console.log(this.skills)
+
+        for(i in back){
+            this.skills[back[i].label] = true
+        }
+
+
+        // console.log(this.skills)
 
 
       };

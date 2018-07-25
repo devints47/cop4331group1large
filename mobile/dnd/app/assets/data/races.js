@@ -203,8 +203,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Deception','checked' : true},
-                 {'label':'Sleight of Hand','checked' : true},
+                 {'label':'Deception','RNchecked' : true},
+                 {'label':'Sleight of Hand','RNchecked' : true},
              ],
         ]
  
@@ -214,8 +214,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Deception'},
-                 {'label':'Stealth'},
+                 {'label':'Deception','RNchecked' : true},
+                 {'label':'Stealth', 'RNchecked' : true},
              ],
         ]
  
@@ -225,8 +225,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Acrobatics'},
-                 {'label':'Performance'},
+                 {'label':'Acrobatics', 'RNchecked' : true},
+                 {'label':'Performance', 'RNchecked' : true},
              ],
         ]
  
@@ -236,8 +236,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Animal Handling'},
-                 {'label':'Survival'},
+                 {'label':'Animal Handling', 'RNchecked' : true},
+                 {'label':'Survival', 'RNchecked' : true},
              ],
         ]
  
@@ -247,8 +247,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Insight'},
-                 {'label':'Persuasion'},
+                 {'label':'Insight', 'RNchecked' : true},
+                 {'label':'Persuasion', 'RNchecked' : true},
              ],
         ]
  
@@ -258,8 +258,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Medicine'},
-                 {'label':'Religion'},
+                 {'label':'Medicine', 'RNchecked' : true},
+                 {'label':'Religion', 'RNchecked' : true},
              ],
         ]
  
@@ -269,8 +269,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'History'},
-                 {'label':'Persuasion'},
+                 {'label':'History', 'RNchecked' : true},
+                 {'label':'Persuasion', 'RNchecked' : true},
              ],
         ]
  
@@ -280,8 +280,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Athletics'},
-                 {'label':'Survival'},
+                 {'label':'Athletics', 'RNchecked' : true},
+                 {'label':'Survival', 'RNchecked' : true},
              ],
         ]
  
@@ -291,8 +291,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Arcana'},
-                 {'label':'History'},
+                 {'label':'Arcana', 'RNchecked' : true},
+                 {'label':'History', 'RNchecked' : true},
              ],
         ]
  
@@ -302,8 +302,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Athletics'},
-                 {'label':'Perception'},
+                 {'label':'Athletics', 'RNchecked' : true},
+                 {'label':'Perception', 'RNchecked' : true},
              ],
         ]
  
@@ -313,8 +313,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Athletics'},
-                 {'label':'Intimidation'},
+                 {'label':'Athletics', 'RNchecked' : true},
+                 {'label':'Intimidation', 'RNchecked' : true},
              ],
         ]
  
@@ -324,8 +324,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Sleight of Hand'},
-                 {'label':'Disguice kit theives\'s tools'},
+                 {'label':'Sleight of Hand', 'RNchecked' : true},
+                 {'label':'Disguice kit theives\'s tools', 'RNchecked' : true},
              ],
         ]
  
