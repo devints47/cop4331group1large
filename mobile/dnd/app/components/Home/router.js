@@ -50,18 +50,12 @@ export default class App extends Component{
   return(
 
         <BasicFlatList style={styles.list}>
-
-
-        <Races ref={'addModal'} updateVal={(val)=>this.getRaceInfo(val)}>
-        </Races>
-
        
         
-        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this._addChar() }>
-          
-          {/*<ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.props.navigation.navigate('BasicFlatList')}>*/}
+        <ActionButton buttonColor="rgba(152,0,0,1)" onPress={() => this._addChar() }>
 
         </ActionButton>
+        
 
 
         </BasicFlatList>

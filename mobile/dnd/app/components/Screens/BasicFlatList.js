@@ -83,7 +83,7 @@ class FlatListItem extends Component {
                             flex: 1,
                             flexDirection:'row',
                             // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'                
-                            backgroundColor: 'antiquewhite',
+                            backgroundColor: 'rgb(212,213,176)',
                     }}>
                     <Image
                     source = {icons[this.props.item.race]}
@@ -164,10 +164,10 @@ export default class BasicFlatList extends Component {
     }
     render() {
       return (
-        <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0, backgroundColor: 'rgba(150,97,107,1)'}}>
+        <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0, backgroundColor: 'rgb(135,119,143)'}}>
             
             <View style={{
-                backgroundColor: 'rgba(69,45,49,0.9)', 
+                backgroundColor: 'rgb(75,39,93)', 
                 flexDirection: 'row',           
                 alignItems: 'center',
                 height: 55,
