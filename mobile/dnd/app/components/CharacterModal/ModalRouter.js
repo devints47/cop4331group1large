@@ -12,6 +12,7 @@ import Equipment from './Equipment';
 import Skills from './Skills';
 import CharacterInfo from './CharacterInfo';
 import Ability from './Ability';
+import ModalPage from './ModalPage';
 
 export default class ModalRouter extends Component{
 
@@ -27,6 +28,7 @@ export default class ModalRouter extends Component{
             skills:{},
             ability:{},
             key: uuid.v1(),
+            name:'',
 
         };
     }
@@ -43,9 +45,15 @@ export default class ModalRouter extends Component{
 
     getRaceInfo(data){
     
-        this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
-        console.log(data);
-        this.refs.equip.showAddModal(data['class']);
+        this.setState({
+        race: data['race'], 
+        subrace: data['subrace'], 
+        background: data['background'],
+        class:data['class'],
+        name: data['name']}, function(){
+            console.log(this.state)
+            this.refs.equip.showAddModal(data['class']);
+        });
 
     }
     getSkills(data){
@@ -151,6 +159,9 @@ export default class ModalRouter extends Component{
             updateVal={(data)=>this.getAbility(data)}
             >
             </Ability>
+
+            <ModalPage ref={'modpage'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            </ModalPage>
         </View>
         );
 
