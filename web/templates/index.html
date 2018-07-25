@@ -259,6 +259,7 @@
 
             <!--pills -->
             <div class="tab-content" id="pills-tabContent">
+              <form action="{{ url_for('create_character') }}" method="post">
 
 
               <!--basics pill-->
@@ -270,15 +271,9 @@
                   </div>
                   <select class="custom-select race_Selected" id="inputGroupSelect01">
                     <option selected>Choose...</option>
-                    <option value="1">Dwarf</option>
-                    <option value="2">Elf</option>
-                    <option value="3">Halfling</option>
-                    <option value="4">Human</option>
-                    <option value="5">Dragonborn</option>
-                    <option value="6">Gnome</option>
-                    <option value="7">Half-Elf</option>
-                    <option value="8">Half-Orc</option>
-                    <option value="9">Tiefling</option>
+                    {% for race in races %}
+                      <option value="{{race}}">{{race}}</option>
+                    {% endfor %}
                   </select>
                 </div>
 
@@ -897,6 +892,7 @@
                   <button id="equipmentNextBtn" type="button" class="btn btn-primary btnNext">Next</button>
                 </div>
               </div>
+            </form>
             </div>
 
 
