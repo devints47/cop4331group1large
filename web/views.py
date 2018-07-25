@@ -1,15 +1,18 @@
 import os
+import config
+import objects.races as Races
 from flask import Flask, url_for, redirect, render_template, request, json, session, flash, jsonify
+from flask.ext.api import status
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from objects.races import *
+# from objects.races import * as Races
 from objects.classes import *
 from objects.backgrounds import *
 # from objects.tables import *
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object(config)
 db = SQLAlchemy(app)
 
 
@@ -42,8 +45,9 @@ class User(db.Model):
     characters = db.relationship('Character', backref='User', lazy=True)
 
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, email):
         self.username = username
+        self.email = email
         self.set_password(password)
 
     def set_password(self, password):
@@ -173,8 +177,8 @@ class ProficiencyLookup(db.Model):
     proficiency_type = db.Column(db.String(80), unique=False, nullable=False)
 
     def __init__(self, p_name, p_type):
-    	proficiency_name = p_name
-    	proficiency_type = p_type
+        self.proficiency_name = p_name
+        self.proficiency_type = p_type
 
 
 # ==================
@@ -208,25 +212,24 @@ class EquipmentLookup(db.Model):
     armor_dex = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
     armor_strength = db.Column(db.Boolean, unique=False, nullable=False) # Sometimes you need to be strong to wear armor
 
-    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, \
-    	w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
-    	self.item_name = e_name
-		self.item_type = e_type
-		self.item_weight = e_weight
-		self.item_value = e_value
-		self.item_description = e_desc
-		self.weapon_category = w_cat
-		self.weapon_is_ranged = w_range_bool
-		self.weapon_is_thrown = w_thrown
-		self.weapon_range = w_range
-		self.weapon_properties = w_props
-		self.weapon_damage = w_damage
-		self.damage_type = w_type
-		self.armor_category = a_cat
-		self.armor_bonus = a_bonus
-		self.armor_disadvantage = a_dis
-		self.armor_dex_cap = a_dex
-		self.armor_strength = a_str
+    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
+        self.item_name = e_name
+        self.item_type = e_type
+        self.item_weight = e_weight
+        self.item_value = e_value
+        self.item_description = e_desc
+        self.weapon_category = w_cat
+        self.weapon_is_ranged = w_range_bool
+        self.weapon_is_thrown = w_thrown
+        self.weapon_range = w_range
+        self.weapon_properties = w_props
+        self.weapon_damage = w_damage
+        self.damage_type = w_type
+        self.armor_category = a_cat
+        self.armor_bonus = a_bonus
+        self.armor_disadvantage = a_dis
+        self.armor_dex_cap = a_dex
+        self.armor_strength = a_str
 
 
 # ==================
@@ -264,53 +267,39 @@ class SpellLookup(db.Model):
     wizard_list = db.Column(db.Boolean, unique=False, default=False)
 
 
-class Character(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	user = db.Column(db.Integer, db.ForeignKey('user.id'),
-			nullable=False)
-
-	def __init__(stats, race, subrace):
-		#set all base stats
-		self.str = base_stats[0]
-		self.dex = base_stats[1]
-		self.con = base_stats[2]
-		self.int = base_stats[3]
-		self.wis = base_stats[4]
-		self.chr = base_stats[5]
-
 
 class Race(object):
-	def __init__(self):
-		self._hello = 'world'
+    def __init__(self):
+        self._hello = 'world'
 
 
 class Dwarf(Race):
-	size = 'medium'
-	def __init__(self, character, subrace):
-		Race.__init__(self)
-		subrace = subrace
-		print self._hello
+    size = 'medium'
+    def __init__(self, character, subrace):
+        Race.__init__(self)
+        subrace = subrace
+        print self._hello
 
-	def ability_score_boost(subrace):
-		character.constitution += 2
-		if subrace == "Hill":
-			character.wis += 1
-		else:
-			character.str += 2
+    def ability_score_boost(subrace):
+        character.constitution += 2
+        if subrace == "Hill":
+            character.wis += 1
+        else:
+            character.str += 2
 
 
 
 class userClass(object):
-	asdf = 1
+    asdf = 1
 
 
 
 class Fighter(userClass):
-	asdf = 1
+    asdf = 1
 
 
 class Background(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
 
 
@@ -359,7 +348,7 @@ def register():
         if check_username is None:
             if request.form['password'] == request.form['confirm_password']:
                 # Create the new user
-                new_user = User(request.form['username'], request.form['password'])
+                new_user = User(request.form['username'], request.form['password'], request.form['email'])
 
                 db.session.add(new_user)
                 db.session.commit()
@@ -378,11 +367,61 @@ def register():
 
 @app.route('/password', methods=['GET', 'POST'])
 def password():
-	return render_template('index.html')
-
-	
-@app.route('/')
-def index():
-    c = Character()
     return render_template('index.html')
-  
+
+
+@app.route('/')
+@login_required
+def index():
+    # Get user's characters
+    characters = Character.query.filter_by(user=session['logged_in_user']).all()
+
+    # Since most stuff is hardcoded to the SPA frontend there's not much else to send.
+    return render_template('index.html',
+                            characters=characters,
+                            races=Races.RACE_LIST)
+
+
+# Web
+@app.route('/create_character', methods=['POST'])
+def create_character():
+    if request.method == 'POST':
+        print 'post request'
+        # Form data for creating a character goes here
+        # This is where the character gets instantiated and saved to the db
+        # not json encoded just request.form['name attribute of html element']
+
+        # Either return a 200 and ajax refresh on form submission or use flash messages to
+        # tell the user the character was created
+
+    
+    return redirect('index')
+
+
+# API calls
+@app.route('/get_characters', methods=['GET'])
+def get_characters():
+    if request.method == 'GET':
+        # When this method is called send back a json object of the characters
+        # request.args key value pair
+        # a request should look like http://localhost:5000/get_characters?user_id=1234
+        characters = Character.query.filter_by(user=request.args('user_id').all())
+
+        return jsonify(characters=characters)
+
+    else:
+        return status.HTTP_400_BAD_REQUEST
+
+@app.route('/login_mobile', methods=['GET', 'POST'])
+def login_mobile():
+    if request.method == 'POST':
+        user = User.query.filter_by(username=request.args['username']).first()
+        if user is None or not user.check_password(request.args['password']):
+
+            return status.HTTP_400_BAD_REQUEST
+
+        else:
+            # Need to return user id/object and associated data
+            return jsonify('data:data')
+
+    return render_template('login.html')
