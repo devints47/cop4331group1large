@@ -16,7 +16,27 @@ class FlatListItem extends Component {
             activeRowKey: null,
         };          
     }
+
+
     render() {   
+
+
+        const icons = 
+        {
+            'Dwarf': require('../../assets/images/icons/Dwarf.png'),
+            'Elf': require('../../assets/images/icons/Elf.png'),
+            'Halfling': require('../../assets/images/icons/Halfling.png'),
+            'Human': require('../../assets/images/icons/Human.png'),
+            'Dragonborn': require('../../assets/images/icons/Dragonborn.png'),
+            'Gnome': require('../../assets/images/icons/Gnome.png'),
+            'Half-Elf': require('../../assets/images/icons/Half-Elf.png'),
+            'Half-Orc': require('../../assets/images/icons/Halfling.png'),
+            'Tiefling': require('../../assets/images/icons/Tiefling.png'),
+            
+        }
+
+
+
         const swipeSettings = {
             autoClose: true,
             onClose: (secId, rowId, direction) => {
@@ -50,7 +70,8 @@ class FlatListItem extends Component {
             ],  
             rowId: this.props.index, 
             sectionId: 1    
-        };               
+        };
+
         return (  
             <Swipeout {...swipeSettings}>
                 <View style={{
@@ -63,8 +84,11 @@ class FlatListItem extends Component {
                             flexDirection:'row',
                             // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'                
                             backgroundColor: 'antiquewhite',
-                            padding:10,
-                    }}>            
+                    }}>
+                    <Image
+                    source = {icons[this.props.item.race]}
+                    style={{width:100, height:100, margin:5}}>
+                    </Image>     
                        
                         <View style={{
                                 flex: 1,
