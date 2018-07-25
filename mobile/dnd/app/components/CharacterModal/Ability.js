@@ -54,7 +54,7 @@ export default class Ability extends Component{
             intString: 'INT',
             wisString: 'WIS',
             chrString: 'CHR',
-            maxPoints: '27',
+            totalPoints: '0',
         }
 
         // this.state = {dis: false};
@@ -62,6 +62,186 @@ export default class Ability extends Component{
         this.onButtonPressTwo = this.onButtonPressTwo.bind(this)
         this.onButtonPressThree = this.onButtonPressThree.bind(this)
         this.onButtonPressFour = this.onButtonPressFour.bind(this)
+        
+        this.inc1 = this.inc1.bind(this)
+        this.dec1 = this.dec1.bind(this)
+
+        this.inc2 = this.inc2.bind(this)
+        this.dec2 = this.dec2.bind(this)
+
+        this.inc3 = this.inc3.bind(this)
+        this.dec3 = this.dec3.bind(this)
+
+        this.inc4 = this.inc4.bind(this)
+        this.dec4 = this.dec4.bind(this)
+
+        this.inc5 = this.inc5.bind(this)
+        this.dec5 = this.dec5.bind(this)
+
+        this.inc6 = this.inc6.bind(this)
+        this.dec6 = this.dec6.bind(this)
+    }
+
+    inc1(){
+
+        var temp = parseInt(this.state.strString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({strString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec1(){
+        var temp = parseInt(this.state.strString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({strString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
+    }
+
+    inc2(){
+
+        var temp = parseInt(this.state.dexString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({dexString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec2(){
+        var temp = parseInt(this.state.dexString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({dexString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
+    }
+
+    inc3(){
+
+        var temp = parseInt(this.state.conString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({conString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec3(){
+        var temp = parseInt(this.state.conString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({conString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
+    }
+
+    inc4(){
+
+        var temp = parseInt(this.state.intString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({intString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec4(){
+        var temp = parseInt(this.state.intString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({intString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
+    }
+
+    inc5(){
+
+        var temp = parseInt(this.state.wisString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({wisString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec5(){
+        var temp = parseInt(this.state.wisString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({wisString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
+    }
+
+    inc6(){
+
+        var temp = parseInt(this.state.chrString);
+        
+        if(temp + 1 > 15){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp += 1;
+        this.setState({chrString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)+1).toString()});
+    }
+
+    dec6(){
+        var temp = parseInt(this.state.chrString);
+        
+        if(temp-1 < 8){
+            Alert.alert('The ability should be between 8 and 15');
+            return;
+        }
+
+        temp -= 1;
+        this.setState({chrString:temp.toString()})
+        this.setState({totalPoints:(parseInt(this.state.totalPoints)-1).toString()});
     }
 
     onButtonPress(){
@@ -129,8 +309,6 @@ export default class Ability extends Component{
         //console.log(races);
         this.setState({selectedClass:value});
     }
-
-    
 
     _renderEquipment(){
 
@@ -223,10 +401,11 @@ export default class Ability extends Component{
             coverScreen={true}
             >
 
-            <View style={{bottom:6}}>
+            <View style={{bottom:10}}>
             <Text style={styles.header}>Ability</Text>
             </View>
 
+            <ScrollView>
             <View style={{flexDirection: "row", left: 6,bottom: -5}}>
             
                 <TouchableOpacity onPress={this.onButtonPressTwo}
@@ -260,9 +439,15 @@ export default class Ability extends Component{
                 >
              <Text style={{fontSize: 11}}>Point-Buy</Text>
                 </TouchableOpacity>
-            
+
+
             </View>
-            
+
+            <View style={{bottom: -10}}>
+            <Text style={{fontSize:11}}>DEX +1     INT +2</Text> 
+            </View>
+
+            <View styles={{bottom:-200}}>
             <TextField
             label='STR'
             value={str}
@@ -272,7 +457,7 @@ export default class Ability extends Component{
             disabled = {this.state.booler}
             label = {this.state.strString}
             />
-
+            </View>
             
              
             <TextField
@@ -328,14 +513,12 @@ export default class Ability extends Component{
             label = {this.state.chrString}
             />
 
-            <View style={{bottom: -10}}>
-            <Text style={{fontSize:11}}>DEX +1     INT +2</Text> 
-            {this.state.booler2 == true ? <Text style={{fontSize:11}}>Points used: 0/{this.state.maxPoints}</Text> : <Text> </Text>}
-            </View>
+            <View style={{bottom: 1, flexDirection: "row"}}>
             
+            {this.state.booler2 == true ? <Text style={{fontSize:11}}>                                Points used: {this.state.totalPoints}/27</Text> : <Text> </Text>}
 
             {this.state.booler3 == true ?
-            <View style={{ marginVertical: 10, bottom: 10}} >
+            <View style={{ marginVertical: 10, bottom: 15}} >
               <Text style={{fontSize:10}}>Choose Two Abilities To Swap:</Text>
 
               <CheckboxFormX
@@ -344,7 +527,7 @@ export default class Ability extends Component{
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={12}
-                  fontSize={12}
+                  fontSize={10}
                   formHorizontal={true}
                   labelHorizontal={false}
               />
@@ -352,6 +535,48 @@ export default class Ability extends Component{
           </View>
 
             : <View><Text>  </Text></View>}
+        
+        </View>
+
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ? <View style={{flexDirection: "row", left: 195,bottom: 340, height: 40}}>
+                <TouchableOpacity onPress={this.dec1}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc1}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View> : <Text></Text>}
+
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ?<View style={{flexDirection: "row", left: 195,bottom: 325, height: 40}}>
+                <TouchableOpacity onPress={this.dec2}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc2}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View>: <Text></Text>}
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ?<View style={{flexDirection: "row", left: 195,bottom: 311, height: 40}}>
+                <TouchableOpacity onPress={this.dec3}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc3}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View>: <Text></Text>}
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ?<View style={{flexDirection: "row", left: 195,bottom: 297, height: 40}}>
+                <TouchableOpacity onPress={this.dec4}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc4}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View>: <Text></Text>}
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ?<View style={{flexDirection: "row", left: 195,bottom: 284, height: 40}}>
+                <TouchableOpacity onPress={this.dec5}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc5}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View>: <Text></Text>}
+
+            {(this.state.booler2 == true && this.state.booler3 == false) ?<View style={{flexDirection: "row", left: 195,bottom: 270, height: 40}}>
+                <TouchableOpacity onPress={this.dec6}><Text style={styles.button}>-</Text></TouchableOpacity>
+                <Text>   </Text>
+                <TouchableOpacity onPress={this.inc6}><Text style={styles.button}>+</Text></TouchableOpacity>
+            </View>: <Text></Text>}
+
+            </ScrollView>
                         
             </Modal>
             </KeyboardAvoidingView>
