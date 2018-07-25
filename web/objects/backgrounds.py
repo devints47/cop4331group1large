@@ -8,12 +8,12 @@ import os
 
 class Background(object):
     def __init__(self, back_name, two_skills):
-        self._background_name = back_name
-        self._skill_profs = two_skills
-        self._tool_profs = []
-        self._language_profs = []
-        self._equipment = []
-        print ("Created a " + self._background_name)
+        self.background_name = back_name
+        self.skill_profs = two_skills
+        self.tool_profs = []
+        self.language_profs = []
+        self.equipment = []
+        print ("Created a " + self.background_name)
 
 
 class BackgroundFactory(object):

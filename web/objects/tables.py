@@ -802,3 +802,7 @@ class TableFactory(object):
         for s in s_list:
             db.session.add(s)
             db.session.commit()
+
+
+    def add_features(self, db):
+        

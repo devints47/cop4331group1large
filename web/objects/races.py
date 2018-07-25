@@ -20,24 +20,24 @@ RACE_LIST = ['Human', 'Elf', 'Dwarf', 'Gnome', 'Halfling', 'Tiefling', 'Dragonbo
 
 class Race(object):
     def __init__(self, name, sub, size, speed):
-        self._race_name = name
-        self._subrace = sub
-        self._size = size
-        self._speed = speed
-        self._feature_list = []
-        self._prof_list = []
-        self._spell_list = []
-        print ("Created a " + self._race_name)
+        self.race_name = name
+        self.subrace = sub
+        self.size = size
+        self.speed = speed
+        self.feature_list = []
+        self.prof_list = []
+        self.spell_list = []
+        print ("Created a " + self.race_name)
 
     # Getters & Setters
     def get_race(self):
-        return self._race_name
+        return self.race_name
     def get_subrace(self):
-        return self._subrace
+        return self.subrace
     def get_size(self):
-        return self._size
+        return self.size
     def get_speed(self):
-        return self._speed
+        return self.speed
 
 
 class RaceFactory(object):
@@ -71,22 +71,16 @@ class Dwarf(Race):
 
 
     def new_race(self, character):
-        # set ability boost
-        character.increase_ability_score(CON, 2)
-        # set all proficiencies
-        character.add_weapon_profs(["Battleaxe","Handaxe","Throwing Hammer","Warhammer"])
-        character.create_option(3, 1, "Dwarven Tool Proficiency", ["Smith's tools", "Brewer's supplies", "Mason's tools"])
-        character.add_lang_profs(["Common","Dwarvish"])
+        character.add_profs(["Battleaxe","Handaxe","Throwing Hammer","Warhammer"])
+        character.create_option(1, "Tool Proficiency", ["Smith's tools", "Brewer's supplies", "Mason's tools"])
+        character.add_profs(["Common","Dwarvish"])
         # set all features
+        character.add_features(["Darkvision","Dwarven Resilience","Stonecunning"])
         # set all spells
         if self._subrace == "Hill": # All the hill stuff
-            character.increase_ability_score(WIS, 1)
+            character.max_HP += 1
         else: # All the Mountain stuff
-            character.increase_ability_score(STR, 2)
-            character.add_armor_profs(["Light", "Medium"])
-
-    def get_options(self):
-        return True # THIS SHOULD BE A SQL QUERY
+            character.add_profs(["Light", "Medium"])
 
 
 
@@ -96,28 +90,29 @@ class Elf(Race):
 
 
     def new_race(self, character):
-        # set ability boost
-        character.increase_ability_score(DEX, 2)
         # set all proficiencies
-        character.add_skill_profs(["Perception"])
-        character.add_lang_profs(["Common","Elvish"])
+        character.add_profs(["Common","Elvish"])
         # set all features
+        character.add_features(["Fey Ancestry", "Trance"])
         # set all spells
         if self._subrace == "High": # All the high stuff
-            character.increase_ability_score(INT, 1)
-            character.add_weapon_profs(["Longsword","Shortsword","Longbow","Shortbow"])
+            character.add_profs(["Longsword","Shortsword","Longbow","Shortbow"])
             # Creating language option list
             temp_list = LANG_LIST
             temp_list.remove("Common")
             temp_list.remove("Elvish")
-            character.create_option()
+            character.create_option(1, "Language Proficiency", temp_list)
+            character.create_option(1, "Spell Wizard Cantrip", ["Acid Splash", "Blade Ward","Chill Touch","Dancing Lights","Fire Bolt","Friends","Light","Mage Hand","Mending","Message","Minor Illusion","Poison Spray","Prestidigitation","Ray of Frost","Shocking Grasp","True Strike"])
+            character.add_features(["Darkvision"])
         elif self._subrace == "Wood": # All the wood stuff
-            character.increase_ability_score(WIS, 1)
             self._speed = 35
-            character.add_weapon_profs(["Longsword","Shortsword","Longbow","Shortbow"])
+            character.add_features(["Darkvision", "Mask of the Wild"])
+            character.add_profs(["Longsword","Shortsword","Longbow","Shortbow"])
         else: # All the drow stuff
-            character.increase_ability_score(CHR, 1)
-            character.add_weapon_profs(["Rapier","Shortsword","Hand Crossbow"])
+            character.add_profs(["Rapier","Shortsword","Hand Crossbow"])
+            character.add_features(["Superior Darkvision", "Sunlight Sensitivity"])
+            character.add_spells(["Dancing Lights"])
+
 
 
 class Halfling(Race):
@@ -127,14 +122,15 @@ class Halfling(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(DEX, 2)
         # set all proficiencies
+        character.add_profs(["Common", "Halfling"])
+        character.add_features(["Lucky","Brave","Halfling Nimbleness"])
         # set all features
         # set all spells
         if self._subrace == "Lightfoot": # All the lightfoot stuff
-            character.increase_ability_score(CHR, 1)
+            character.add_features(["Naturally Stealthy"])
         else: # All the stout stuff
-            character.increase_ability_score(CON, 1)
+            character.add_features(["Stout Resilience"])
 
 
 class Human(Race):
@@ -147,17 +143,11 @@ class Human(Race):
         # set all proficiencies
         # set all features
         # set all spells
-        if self._subrace == "Standard": # All the standard stuff
-            character.increase_ability_score(STR, 1)
-            character.increase_ability_score(DEX, 1)
-            character.increase_ability_score(CON, 1)
-            character.increase_ability_score(INT, 1)
-            character.increase_ability_score(WIS, 1)
-            character.increase_ability_score(CHR, 1)
-        else: # All the variant stuff
-            character.increase_ability_score(DEX, 1)
-            character.increase_ability_score(CON, 1)
-            # AT SOME POINT WE MUST CHANGE THIS TO A PROMPT
+        temp_list = LANG_LIST
+        temp_list.remove("Common")
+        character.create_option(1, "Language Proficiency", temp_list)
+        if self._subrace != "Standard": # All the standard stuff
+            character.create_option(1, "Feat", ["Alert","Athlete","Actor","Charger","Crossbow Expert","Defensive Duelist","Dual Wielder","Dungeon Delver","Durable","Elemental Adept","Grappler","Great Weapon Master","Healer","Heavily Armored","Heavy Armor Master","Inspiring Leader","Keen Mind","Lightly Armored","Linguist","Lucky","Mage Slayer","Magic Initiate","Martial Adept","Medium Armor Master","Mobile","Moderately Armored","Mounted Combat","Observant","Polearm Master","Resilient","Ritual Caster","Savage Attacker","Sentinel","Sharpshooter","Shield Master","Skilled","Skulker","Spell Sniper","Tavern Brawler","Tough","War Caster","Weapon Master"])
 
 
 class Gnome(Race):
@@ -167,14 +157,15 @@ class Gnome(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(INT, 2)
         # set all proficiencies
         # set all features
+        character.add_features(["Darkvision","Gnome Cunning"])
         # set all spells
         if self._subrace == "Forest": # All the forest stuff
-            character.increase_ability_score(DEX, 1)
+            character.add_features(["Speak with Small Beasts"])
         else: # All the rock stuff
-            character.increase_ability_score(CON, 1)
+            character.add_features(["Artificer's Lore", "Tinker"])
+            character.create_option(1, "Tool Proficiency", ["Alchemist's supplies","Brewer's supplies","Calligrapher's supplies","Carpenter's tools","Cobbler's tools","Cook's utensils","Glassblower's tools","Jeweler's tools","Leatherworker's tools","Mason's tools","Painter's supplies","Potter's tools","Smith's tools","Tinker's tools","Weaver's tools","Woodcarver's tools"])
 
 
 class HalfElf(Race):
@@ -184,7 +175,6 @@ class HalfElf(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(CHR, 2)
         # PROMPT FOR 2 MORE CHOICES!!
         # set all proficiencies
         # set all features
@@ -198,8 +188,6 @@ class HalfOrc(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(STR, 2)
-        character.increase_ability_score(CON, 1)
         # set all proficiencies
         # set all features
         # set all spells
@@ -212,8 +200,6 @@ class Dragonborn(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(STR, 2)
-        character.increase_ability_score(CHR, 1)
         # set all proficiencies
         # set all features
         # set all spells
@@ -226,8 +212,6 @@ class Tiefling(Race):
 
     def new_race(self, character):
         # set ability boost
-        character.increase_ability_score(CHR, 2)
-        character.increase_ability_score(INT, 1)
         # set all proficiencies
         # set all features
         # set all spells

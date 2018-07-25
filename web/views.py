@@ -85,6 +85,18 @@ class Character(db.Model):
     current_HP = db.Column(db.Integer, unique=False, nullable=False)
     temp_HP = db.Column(db.Integer, unique=False, nullable=False)
     armor_class = db.Column(db.Integer, unique=False, nullable=False)
+    # Appearance
+    age = db.Column(db.Integer, unique=False, nullable=False)
+    height = db.Column(db.String(80), unique=False, nullable=False)
+    weight = db.Column(db.String(80), unique=False, nullable=False)
+    hair_color = db.Column(db.String(80), unique=False, nullable=False)
+    eye_color = db.Column(db.String(80), unique=False, nullable=False)
+    skin_color = db.Column(db.String(80), unique=False, nullable=False)
+    # Personality
+    personality_traits = db.Column(db.String(300), unique=False, nullable=False)
+    ideals = db.Column(db.String(300), unique=False, nullable=False)
+    bonds = db.Column(db.String(300), unique=False, nullable=False)
+    flaws = db.Column(db.String(300), unique=False, nullable=False)
     # Relational Tables
     features = db.relationship('CharacterFeatures', backref='Character', lazy=True)
     proficiencies = db.relationship('CharacterProficiencies', backref='Character', lazy=True)
@@ -96,21 +108,67 @@ class Character(db.Model):
         race_string="Dwarf Hill", class_string="Fighter", background_string="Soldier", \
         equipment_list = [], skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
         self._new = new
+        self.prof_list = set()
+        self.equipment_list = []
+        self.feature_list = set()
+        self.spell_list = set()
         if (new):
+            self.option_list = []
+            self.max_HP = 0
             self.set_ability_scores(stats)
-            self.new_race(Races.RaceFactory().make_race(race_string))
-            self.new_class(Classes.ClassFactory().make_class(class_string))
-            self.new_background(Backgrounds.BackgroundFactory().make_background(background_string))
-            self.new_skills(skill_list)
-            self.new_equipment(equipment_list)
+            self.set_race(Races.RaceFactory().make_race(race_string))
+            self.set_class(Classes.ClassFactory().make_class(class_string))
+            self.set_background(Backgrounds.BackgroundFactory().make_background(background_string))
+            self.add_profs(skill_list)
+            self.add_equipment(equipment_list)
+            self.new_character()
         else:
             self.get_character(char_id)
 
 
-    
+    def set_ability_scores(self, stats):
+        self.char_str = stats[STR]
+        self.char_dex = stats[DEX]
+        self.char_con = stats[CON]
+        self.char_int = stats[INT]
+        self.char_wis = stats[WIS]
+        self.char_cha = stats[CHR]
+
+    def set_race(self, race):
+        self.race = race.race_name
+        self._race_object = race
+
+    def set_class(self, char_class):
+        self.character_class = char_class.class_name
+        self._class_object = char_class
+
+    def set_background(self, background):
+        self.background = background.background_name
+        self._background_object = background
+
+    def add_profs(self, skill_list):
+        for skill in skill_list:
+            self.prof_list.add(skill)
+
+    def add_features(self, feature_list):
+        for feat in feature_list:
+            self.feature_list.add(feat)
+
+    def add_equipment(self, equipment_list):
+        for e in equipment_list:
+            self.equipment_list.append(e)
+
+    def add_spells(self, spell_list):
+        for s in spell_list:
+            self.spell_list.add(s)
+
+    def create_option(self, num_select, prompt, op_list):
+        self.option_list.append((num_select, prompt, op_list))
+
     def new_character(self):
-        self._option_list = []
         self._race_object.new_race(self)
+        self._class_object.new_class(self)
+        self._background_object.new_background(self)
         # must implement later
         '''
         self._character_class_object.new_class(self)
@@ -119,38 +177,12 @@ class Character(db.Model):
         # PROMPT USER WITH OPTION LIST
 
 
-    def increase_ability_score(self, ability, increment):
-        self._ability_scores[ability] += increment
-
-    # Adding proficiencies (FOR NOW)
-    def add_skill_profs(self, skill_list):
-        for item in skill_list:
-            self._profs[SKILL].add(item)
-
-    def add_weapon_profs(self, weapon_list):
-        for item in weapon_list:
-            self._profs[WEAPON].add(item)
-
-    def add_armor_profs(self, armor_list):
-        for item in armor_list:
-            self._profs[ARMOR].add(item)
-
-    def add_saving_profs(self, saving_list):
-        for item in saving_list:
-            self._profs[SAVING].add(item)
-
-    def add_lang_profs(self, lang_list):
-        for item in lang_list:
-            self._profs[LANG].add(item)
-
 
     # Option list will contain tuples of the format (String, String, List)
     # The first string will be the number of options and number of choices to be made separated by pipes
     # The second string will be A prompt for the user
     # The inner list will be a list of strings to choose from
-    def create_option(self, option_number, choice_number, prompt_string, option_list):
-        self._option_list.append((str(option_number) + "|" + str(choice_number), prompt_string, option_list))
-
+    
 
 # ==================
 # Models: Features

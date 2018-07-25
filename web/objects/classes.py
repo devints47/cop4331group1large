@@ -18,46 +18,24 @@ CHR = 5
 
 class CharacterClass(object):
     def __init__(self, char_class, HP, level_HP, saving_list):
-        self._class_name = char_class
-        self._archetype = ""
-        self._start_HP = HP
-        self._hit_dice = HP
-        self._HP_per_level = level_HP
-        self._feature_list = []
-        self._saving_throws = saving_list
-        self._prof_list = []
-        self._start_equipment = []
-        self._spell_list = []
+        self.class_name = char_class
+        self.archetype = ""
+        self.start_HP = HP
+        self.hit_dice = HP
+        self.HP_per_level = level_HP
+        self.feature_list = []
+        self.saving_throws = saving_list
+        self.prof_list = []
+        self.start_equipment = []
+        self.spell_list = []
         # Level 1 stats
-        self._level = 1
-        self._proficiency_bonus = 2
-        print ("Created a " + self._class_name)
+        self.level = 1
+        self.proficiency_bonus = 2
+        print ("Created a " + self.class_name)
 
 
     def level_up(self): # Need to add a bunch of universal ifs, like proficiency bonus changes
-        self._level += 1
-
-    # Getters & Setters
-    def get_class_name(self):
-        return self._class_name
-
-    def get_archetype(self):
-        return self._archetype
-    def set_archetype(self, selected_arch):
-        self._archetype = selected_arch
-
-    def get_start_HP(self):
-        return self._start_HP
-
-    def get_hit_dice(self):
-        return self._hit_dice
-
-    def get_saving_throws(self):
-        return self._saving_throws
-
-    def get_prof_bonus(self):
-        return self._proficiency_bonus
-
+        self.level += 1
 
 class ClassFactory(object):
     def make_class(self, class_string):
