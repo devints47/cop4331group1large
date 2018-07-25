@@ -195,7 +195,7 @@ class EquipmentLookup(db.Model):
     item_type = db.Column(db.String(80), unique=False, nullable=False) # Armor, weapon, gear, tool, mount, vehicle, or tradable
     item_weight = db.Column(db.Float, unique=False, nullable=False)
     item_value = db.Column(db.Float, unique=False, nullable=False) # Kept this String because currency
-    item_description = db.Column(db.String(300), unique=False, nullable=False)
+    item_description = db.Column(db.String(800), unique=False, nullable=False)
     # Weapon stuff
     weapon_category = db.Column(db.String(80), unique=False, nullable=False) # Can be a simple or martial weapon
     weapon_is_ranged = db.Column(db.Boolean, unique=False, default=False) # Boolean, either it is or isn't
@@ -211,7 +211,8 @@ class EquipmentLookup(db.Model):
     armor_dex = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
     armor_strength = db.Column(db.Boolean, unique=False, nullable=False) # Sometimes you need to be strong to wear armor
 
-    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
+    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, \
+        w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
         self.item_name = e_name
         self.item_type = e_type
         self.item_weight = e_weight
@@ -254,7 +255,8 @@ class SpellLookup(db.Model):
     verbal_component = db.Column(db.Boolean, unique=False, default=False) 
     somatic_component = db.Column(db.Boolean, unique=False, default=False) 
     material_component = db.Column(db.Boolean, unique=False, default=False) 
-    verbal_component = db.Column(db.Boolean, unique=False, default=False) 
+    material_description = db.Column(db.String(200), unique=False, nullable=False)
+    ritual_component = db.Column(db.Boolean, unique=False, default=False) 
     # Caster Lists
     bard_list = db.Column(db.Boolean, unique=False, default=False)
     druid_list = db.Column(db.Boolean, unique=False, default=False)
@@ -264,6 +266,32 @@ class SpellLookup(db.Model):
     sorcerer_list = db.Column(db.Boolean, unique=False, default=False)
     warlock_list = db.Column(db.Boolean, unique=False, default=False)
     wizard_list = db.Column(db.Boolean, unique=False, default=False)
+    # Spell Description
+    spell_description = db.Column(db.String(1000), unique=False, nullable=False)
+
+    def __init__(self, name, level, school, cast, s_range, duration, conc, verbal, somatic, material, mat_desc, ritual, \
+    bard, druid, cleric, paladin, ranger, sorcerer, warlock, wizard, spell_desc):
+        self.spell_name = name
+        self.spell_level = level
+        self.spell_school = school
+        self.spell_cast = cast
+        self.spell_range = s_range
+        self.spell_duration = duration
+        self.concentration = conc
+        self.verbal_component = verbal
+        self.somatic_component = somatic
+        self.material_component = material
+        self.material_description = mat_desc
+        self.ritual_component = ritual
+        self.bard_list = bard
+        self.druid_list = druid
+        self.cleric_list = cleric
+        self.paladin_list = paladin
+        self.ranger_list = ranger
+        self.sorcerer_list = sorcerer
+        self.warlock_list = warlock
+        self.wizard_list = wizard
+        self.spell_description = spell_desc
 
 
 
