@@ -12,7 +12,7 @@ WIS = 4
 CHR = 5
 
 LANG_LIST = ["Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc","Abyssal","Celestial","Deep Speech","Infernal","Primordial","Sylvan","Undercommon"]
-
+RACE_LIST = ['Human', 'Elf', 'Dwarf', 'Gnome', 'Halfling', 'Tiefling', 'Dragonborn', 'Half-Elf', 'Half-Orc']
 # ==================
 # Races
 # ==================
