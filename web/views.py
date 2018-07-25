@@ -2,7 +2,6 @@ import os
 import config
 import objects.races as Races
 from flask import Flask, url_for, redirect, render_template, request, json, session, flash, jsonify
-from flask.ext.api import status
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -410,7 +409,7 @@ def get_characters():
         return jsonify(characters=characters)
 
     else:
-        return status.HTTP_400_BAD_REQUEST
+        return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
 
 @app.route('/login_mobile', methods=['GET', 'POST'])
 def login_mobile():
@@ -418,7 +417,7 @@ def login_mobile():
         user = User.query.filter_by(username=request.args['username']).first()
         if user is None or not user.check_password(request.args['password']):
 
-            return status.HTTP_400_BAD_REQUEST
+            return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
 
         else:
             # Need to return user id/object and associated data
