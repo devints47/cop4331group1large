@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight, Button, ImageBackground } from 'react-native';
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import Races from '../CharacterModal/Races';
 import Equipment from '../CharacterModal/Equipment';
-import ActionButton from 'react-native-action-button';
+import ActionButton, { ActionButtonItem } from 'react-native-action-button';
 import {chars,races,classWeapons} from '../../assets/data/races';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalRouter from '../CharacterModal/ModalRouter';
@@ -74,22 +74,27 @@ class FlatListItem extends Component {
 
         return (  
             <Swipeout {...swipeSettings}>
-                <View style={{
+                <ImageBackground 
+                style={{
                 flex: 1,
-                flexDirection:'column',                                
+                flexDirection:'column',
+                height:'100%',
+                width:'100%',                       
                 }}
+                source={require('../../assets/images/ListBox.png')}
             >            
                     <View style={{
                             flex: 1,
                             flexDirection:'row',
                             // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'                
-                            backgroundColor: 'rgb(212,213,176)',
                     }}>
-                    <Image
-                    source = {icons[this.props.item.race]}
-                    style={{width:100, height:100, margin:5}}>
-                    </Image>     
-                       
+                        <TouchableHighlight onPress={()=>this.props.showChar(this.props.item)}>
+                            <Image
+                            source = {icons[this.props.item.race]}
+                            style={{width:100, height:100, margin:5}}>
+                            </Image>    
+                        </TouchableHighlight> 
+                        
                         <View style={{
                                 flex: 1,
                                 flexDirection:'column',   
@@ -115,14 +120,8 @@ class FlatListItem extends Component {
                                 </Text>
                         </View>              
                     </View>
-                    <View style={{
-                        height: 1,
-                        backgroundColor:'white'                            
-                    }}>
-                
-                    </View>
 
-                </View>   
+                </ImageBackground>   
 
             </Swipeout>      
 
@@ -188,7 +187,7 @@ export default class BasicFlatList extends Component {
                 renderItem={({item, index})=>{
                     //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
                     return (
-                    <FlatListItem item={item} index={index} parentFlatList={this}>
+                    <FlatListItem item={item} index={index} parentFlatList={this} showChar={(data)=>this.refs.modal._displayTest(data)}>
 
                     </FlatListItem>);
                 }}
@@ -197,8 +196,9 @@ export default class BasicFlatList extends Component {
 
             </FlatList>
 
-            <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => this.refs.modal._displayRace()}>
+            <ActionButton buttonColor="rgba(152,0,0,1)" onPress={() => this.refs.modal._displayRace()}>
             </ActionButton>
+
 
             <ModalRouter ref={'modal'} parentFlatList={this}>
             </ModalRouter>

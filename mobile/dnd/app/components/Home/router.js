@@ -5,7 +5,7 @@ import {
   Text,
   View,TouchableOpacity,Animated,Image,Button,FlatList
 } from 'react-native';
-import ActionButton from 'react-native-action-button';
+import ActionButton, { ActionButtonItem } from 'react-native-action-button';
 
 import Races from '../CharacterModal/Races';
 import BasicFlatList from '../Screens/BasicFlatList';
@@ -34,31 +34,16 @@ export default class App extends Component{
     }
 
 
-
-    _addChar(){
-        //this.props.navigation.navigate('Character')
-        this.refs.addModal.showAddModal()
-    }
-
-    getRaceInfo(data){
-        this.setState({race: data['race'], subrace: data['subrace'], background: data['background']});
-        console.log(this.state.race);
-    }
-
   render(){
 
   return(
 
         <BasicFlatList style={styles.list}>
-       
-        
-        <ActionButton buttonColor="rgba(152,0,0,1)" onPress={() => this._addChar() }>
-
-        </ActionButton>
-        
-
+      
 
         </BasicFlatList>
+
+        
     
   );
 }
