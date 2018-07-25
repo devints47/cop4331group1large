@@ -16,6 +16,7 @@ class FlatListItem extends Component {
             activeRowKey: null,
         };          
     }
+
     render() {   
         const swipeSettings = {
             autoClose: true,

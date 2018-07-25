@@ -10,6 +10,7 @@ import uuid from 'react-native-uuid';
 import Races from './Races';
 import Equipment from './Equipment';
 import Skills from './Skills';
+import Ability from './Ability';
 
 export default class ModalRouter extends Component{
 
@@ -34,7 +35,7 @@ export default class ModalRouter extends Component{
     
         this.setState({race: data['race'], subrace: data['subrace'], background: data['background'],class:data['class']});
         console.log(data);
-        this.refs.skills.showAddModal(data['class']);
+        this.refs.ability.showAddModal(data['class']);
         
     }
 
@@ -65,6 +66,9 @@ export default class ModalRouter extends Component{
 
             <Skills ref={'skills'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
             </Skills>
+
+            <Ability ref={'ability'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            </Ability>
         </View>
         );
 
