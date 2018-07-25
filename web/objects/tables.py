@@ -22,6 +22,33 @@ a_dis = False
 a_str = 0
 # =======
 
+# Spell Globals
+s_name = ""
+s_level = 0
+s_school = ""
+s_cast = ""
+s_range = ""
+s_duration = ""
+s_conc = False
+s_verbal = False
+s_somatic = False
+s_material = False
+s_mat_desc = ""
+s_ritual = False
+s_bard = False
+s_druid = False
+s_cleric = False
+s_paladin = False
+s_ranger = False
+s_sorcerer = False
+s_warlock = False
+s_wizard = False
+s_spell_desc = ""
+
+
+
+
+
 class TableFactory(object):
     def __init__(self, db):
         # Proficiency Table
@@ -598,15 +625,28 @@ class TableFactory(object):
         e_list.append(EquipmentLookup("Spellbook", "Gear", 3, 50, e_desc, \
         w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
         a_cat, a_bonus, a_dis, a_str))
-        e_list.append(EquipmentLookup(e_name, "Gear", e_weight, e_value, e_desc, \
+        e_list.append(EquipmentLookup("Spikes, iron (10)", "Gear", 5, 2, e_desc, \
         w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
         a_cat, a_bonus, a_dis, a_str))
-
-
-        e_list.append(EquipmentLookup(e_name, "Gear", e_weight, e_value, e_desc, \
+        e_list.append(EquipmentLookup("Spyglass", "Gear", 1, 1000, e_desc, \
         w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
         a_cat, a_bonus, a_dis, a_str))
-        e_list.append(EquipmentLookup(e_name, e_type, e_weight, e_value, e_desc, \
+        e_list.append(EquipmentLookup("Tent, two-person", "Gear", 20, 2, e_desc, \
+        w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
+        a_cat, a_bonus, a_dis, a_str))
+        e_list.append(EquipmentLookup("Tinderbox", "Gear", 1, 5/10, e_desc, \
+        w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
+        a_cat, a_bonus, a_dis, a_str))
+        e_list.append(EquipmentLookup("Torch", "Gear", 1, 1/100, e_desc, \
+        w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
+        a_cat, a_bonus, a_dis, a_str))
+        e_list.append(EquipmentLookup("Vial", "Gear", 0, 1, e_desc, \
+        w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
+        a_cat, a_bonus, a_dis, a_str))
+        e_list.append(EquipmentLookup("Waterskin", "Gear", 5, 2/10, e_desc, \
+        w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
+        a_cat, a_bonus, a_dis, a_str))
+        e_list.append(EquipmentLookup("Whetstone", "Gear", 1, 1/100, e_desc, \
         w_cat, w_range_bool, w_thrown, w_range, w_props, w_damage, w_type, \
         a_cat, a_bonus, a_dis, a_str))
         
@@ -614,3 +654,86 @@ class TableFactory(object):
             db.session.add(e)
             db.session.commit()
 
+
+
+    def add_spells(self, db):
+        s_list = []
+        # A
+        s_list.append(SpellLookup("Acid Splash", 0, "Conjuration", "1 action", "60 ft", "Instant", \
+        s_conc, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Aid", 2, "Abjuration", "1 action", "30 ft", "8 hours", \
+        s_conc, True, True, True, "a tiny strip of white cloth", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Alarm", 1, "Abjuration", "1 action", "30 ft", "8 hours", \
+        s_conc, True, True, True, "a tiny bell and a piece of fine silver wire", True, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Alter Self", 2, "Transmutation", "1 action", "Self", "1 hour", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Animal Friendship", 1, "Enchantment", "1 action", "30 ft", "24 hours", \
+        s_conc, True, True, True, "a morsel of food", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Animal Messenger", 2, "Enchantment", "1 action", "30 ft", "24 hours", \
+        s_conc, True, True, True, "a morsel of food", True, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Animal Shapes", 8, "Transmutation", "1 action", "30 ft", "24 hours", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Animate Dead", 3, "Necromancy", "1 minute", "10 ft", "Instant", \
+        s_conc, True, True, True, "a drop of blood, a piece of flesh, and a pinch of bone dust", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Animate Objects", 5, "Transmutation", "1 action", "120 ft", "1 minute", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Antilife Shell", 5, "Abjuration", "1 action", "Self (10 ft radius)", "1 hour", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Antimagic Field", 8, "Abjuration", "1 action", "Self (10 ft radius)", "1 hour", \
+        True, True, True, True, "a pinch of powdered iron or iron filings", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Antipathy/Sympathy", 8, "Enchantment", "1 hour", "60 ft", "10 days", \
+        s_conc, True, True, True, "either a lump of alum soaked in vinegar for Antipathy or a drop of honey for Sympathy", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Arcane Eye", 4, "Divination", "1 action", "30 ft", "1 hour", \
+        True, True, True, True, "a bit of bat fur", s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup("Arcane Gate", 6, "Conjuration", "1 action", "500 ft", "10 minutes", \
+        True, True, True, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
+        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
+        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+
+
+
+        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
+        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
+        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
+        s_spell_desc))
+
+
+
+
+        for s in s_list:
+            db.session.add(s)
+            db.session.commit()

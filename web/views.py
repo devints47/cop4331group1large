@@ -1,13 +1,15 @@
 import os
 import config
 import objects.races as Races
+import objects.classes as Classes
+import objects.backgrounds as Backgrounds
 from flask import Flask, url_for, redirect, render_template, request, json, session, flash, jsonify
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 # from objects.races import * as Races
-from objects.classes import *
-from objects.backgrounds import *
+# from objects.classes import *
+# from objects.backgrounds import *
 # from objects.tables import *
 
 app = Flask(__name__)
@@ -84,9 +86,9 @@ class Character(db.Model):
         skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
         #set all base stats
         self._ability_scores = stats
-        self._race_object = RaceFactory().make_race(race_string)
-        self._character_class_object = ClassFactory().make_class(class_string)
-        self._background_object = BackgroundFactory().make_background(background_string)
+        self._race_object = Races.RaceFactory().make_race(race_string)
+        self._character_class_object = Classes.ClassFactory().make_class(class_string)
+        self._background_object = Backgrounds.BackgroundFactory().make_background(background_string)
         self._create_profs()
         self.add_skill_profs(skill_list)
         self.new_character()
@@ -295,41 +297,6 @@ class SpellLookup(db.Model):
 
 
 
-class Race(object):
-    def __init__(self):
-        self._hello = 'world'
-
-
-class Dwarf(Race):
-    size = 'medium'
-    def __init__(self, character, subrace):
-        Race.__init__(self)
-        subrace = subrace
-        print self._hello
-
-    def ability_score_boost(subrace):
-        character.constitution += 2
-        if subrace == "Hill":
-            character.wis += 1
-        else:
-            character.str += 2
-
-
-
-class userClass(object):
-    asdf = 1
-
-
-
-class Fighter(userClass):
-    asdf = 1
-
-
-class Background(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
-
-
 # ==================
 # Helper Functions
 # ==================
@@ -426,6 +393,23 @@ def create_character():
 
 
 # API calls
+@app.route('/get_options', methods=['GET'])
+def get_options():
+    if request.method == 'GET':
+        # When this method is called send back a json object of the characters
+        # request.args key value pair
+        # a request should look like http://localhost:5000/get_characters?user_id=1234
+        character = Character(stats=request.args('stat array'), race_string="Dwarf Hill", \
+        class_string="Fighter", background_string="Soldier", \
+        skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"])
+        options = character.get_options()
+
+        return jsonify(options=options)
+
+    else:
+        return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+
+
 @app.route('/get_characters', methods=['GET'])
 def get_characters():
     if request.method == 'GET':
