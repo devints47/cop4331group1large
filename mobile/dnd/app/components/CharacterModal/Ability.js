@@ -40,11 +40,6 @@ export default class Ability extends Component{
     constructor(props){
         super(props);
         this.state={
-            selectedRace: '',
-            selectedSubRace: '',
-            selectedBackground: '',
-            selectedClass:'',
-            subracelabel: 'Subrace',
             booler: false,
             booler2: false,
             booler3: false,
@@ -310,76 +305,23 @@ export default class Ability extends Component{
         this.setState({selectedClass:value});
     }
 
-    _renderEquipment(){
-
-        var empt = [];
-        var milf = this.state.selectedClass;
-        console.log('Here')
-
-        // var oldData = classWeapons[milf]['Equipment'];
-        // console.log(oldData);
-
-        for(var i in classWeapons[milf]['Equipment'])
-        {
-
-            var oldData = classWeapons[milf]['Equipment'][i];
-
-            var newData = oldData.map(function(item){
-                return{
-                    label: item.label,
-                    value: item.label,
-                };
-            });
-            console.log(newData);
-
-
-            empt.push(<View key={uuid.v1()} style={{padding:10}}>
-                <Text>Choose one</Text>
-                <RadioForm style={{ alignItems: 'flex-start' }}
-                buttonColor='rgba(150,97,107,1)'
-                selectedButtonColor='rgba(69,45,49,0.9)'
-                radio_props={newData}
-                initial={-1}
-                onPress={(value) => console.log(value)}
-                />
-                </View>
-                )
-        }
-
-        return( 
-            empt
-        );
-
-    }
 
     updateState(){
 
-        sub = this.state.selectedSubRace;
+        
+        data = 
+        {
+            'str' : this.state.strString,
+            'dex' : this.state.dexString,
+            'con' : this.state.conString,
+            'int' : this.state.intString,
+            'wis' : this.state.wisString,
+            'chr' : this.state.chrString,
 
-        if(sub=== ''){
-            sub='None';
         }
 
-        const newKey = uuid.v1();
-        const newItem = {
-            key: newKey,
-            race: this.state.selectedRace,
-            subrace: sub,
-            background: this.state.selectedBackground,
-            class: this.state.selectedClass,
-        };    
-        chars.push(newItem);
-        // console.log(chars)    
-        this.props.parentFlatList.refreshFlatList(newKey);       
-        
-        
-        this.setState({
-            selectedBackground:'',
-            selectedClass:'',
-            selectedRace:'',
-            selectedSubRace:'',
-        });
-
+        console.log(data);
+        this.props.updateVal(data)
 
         this.refs.myModal.close();          
 
@@ -399,6 +341,7 @@ export default class Ability extends Component{
             position='center'
             backdrop={true}
             coverScreen={true}
+            swipeToClose={false}
             >
 
             <View style={{bottom:10}}>
@@ -576,7 +519,11 @@ export default class Ability extends Component{
                 <TouchableOpacity onPress={this.inc6}><Text style={styles.button}>+</Text></TouchableOpacity>
             </View>: <Text></Text>}
 
+
+             <Button title='Next' onPress={()=>this.updateState()}/>
+
             </ScrollView>
+
                         
             </Modal>
             </KeyboardAvoidingView>

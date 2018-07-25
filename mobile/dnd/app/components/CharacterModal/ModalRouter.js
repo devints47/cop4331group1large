@@ -25,6 +25,7 @@ export default class ModalRouter extends Component{
             class:'Bard',
             equipment: [],
             skills:{},
+            ability:{},
             key: uuid.v1(),
 
         };
@@ -56,11 +57,24 @@ export default class ModalRouter extends Component{
         this.setState({skills: data}, 
             function(){
             console.log(this.state.skills)
-            this.finishCharacter();
+            
             }
         );
         console.log('Updated State')
         this.refs.ability.showAddModal();
+
+    }
+
+    getAbility(data){
+
+        console.log('Get Ability')
+
+        this.setState({ability: data}, 
+            function(item){
+                console.log(this.state.ability)
+                this.finishCharacter()
+            }
+        );
 
     }
 
@@ -130,7 +144,12 @@ export default class ModalRouter extends Component{
         
 
 
-            <Ability ref={'ability'} parentFlatList={this.props.parentFlatList} selectClass={this.state.class}>
+            <Ability 
+            ref={'ability'} 
+            parentFlatList={this.props.parentFlatList} 
+            selectClass={this.state.class}
+            updateVal={(data)=>this.getAbility(data)}
+            >
             </Ability>
         </View>
         );
