@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 	},
 	logo:{
 		height:'70%',
-    width:'70%',
+    width:'90%',
     flex:1,
   },
 	text:{
