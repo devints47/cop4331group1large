@@ -7,12 +7,11 @@ import {AppRegistry, FlatList, StyleSheet, Text, View,
 import {races, subrace, background, chars,charclass} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
-import { TextField } from 'react-native-material-textfield';
 
 var screen = Dimensions.get('window');
 
 
-export default class Races extends Component{
+export default class ModalPage extends Component{
 
     constructor(props){
         super(props);
@@ -22,7 +21,6 @@ export default class Races extends Component{
             selectedBackground: '',
             selectedClass:'',
             subracelabel: 'Subrace',
-            Name:''
         }
     }
 
@@ -107,51 +105,8 @@ export default class Races extends Component{
             >
 
             <View styles={styles.dropdown}>
-                <Text style={styles.header}> Character Creation </Text>
+                <Text style={styles.header}>Modal Page</Text>
                 
-            
-                <TextField
-                label='ENTER YOUR NAME'
-                fontSize= {12}
-                disabled = {true}
-                labelHeight= {20}
-                onChangeText={ (str) => this.setState({Name}) }
-                disabled = {this.state.booler}
-                />
-                
-                
-                
-                <Dropdown
-                style={styles.race} 
-                ref={'racedrop'}
-                label='Race'
-                data={races}
-                itemCount={10}
-                onChangeText = {(input) => this.setState({selectedRace: input}) }
-                />
-
-                {this._renderSubRace()}
-
-
-                <Dropdown
-                style={styles.race} 
-                ref={'backdrop'}
-                label='Class'
-                data={charclass}
-                itemCount={10}
-                onChangeText = {(input)=>this.setState({selectedClass: input})}
-                />
-
-                <Dropdown
-                style={styles.race} 
-                ref={'backdrop'}
-                label='Background'
-                data={background}
-                itemCount={10}
-                onChangeText = {(input)=>this.setState({selectedBackground: input})}
-                />
-
-                <Button title='Next' onPress={()=>this.updateState()}/>
             </View>
             
             </Modal>
