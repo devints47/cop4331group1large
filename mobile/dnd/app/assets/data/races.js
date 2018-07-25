@@ -11,138 +11,171 @@ export var races = [
 ];
 
 export const classSkills = 
-    {
-        '':
-        {
-            'Skills':
-            {
-                'One':[
-                    {'label':'Not Loaded'}
-                ],
-            },
-        },
-     'Barbarian' : 
-     {
-         'Skills':[
-             [
-                 {'label':'Great Axe'},
-                 {'label':'Martial Weapons'},
-             ],
-        ]
- 
-     },
-     
-     'Bard' : 
-     {
-         'Skills':
-         [
-             [
-                 {'label':'Rapier'},
-                 {'label':'Longsword'},
-                 {'label':'Simple Weapon'},
-             ],
-        ]
- 
-     },
-    
-     'Cleric': 
-     {
-         'Skills':
-         [
-            [
-                {'label':'Mace'},
-                {'label':'Warhammar'},
-            ],
-        ]
-     },
-     'Druid': 
-     {
-         'Skills':
-         [
-            [
-                {'label':'Wooden shield'},
-                {'label':'Simple weapon'}
-            ],
-         ]
-     },
-     'Fighter':
-     {
-        'Skills':
+{
+    '':
+    [
+        'Notloaded 1',
         [
-           [
-               {'label':'Chain mail'},
-               {'label':'Leather armor, longbow & 20 arrow'}
-           ],
-        ]
-     },
-     'Monk': 
-     {
-        'Skills':
+            'Not Loaded',
+        ],
+    ],
+    'Barbarian':
+    [
+        'Choose 2',
         [
-           [
-               {'label':'Shortsword'},
-               {'label':'Simple weapon'}
-           ],
-           
+            'Animal Handling',
+            'Athletics',
+            'Intimidation',
+            'Nature',
+            'Perception',
+            'Survival',
+        ],
+    ],
+    'Bard':
+    [
+        'Choose 3',
+        [
+            'Athletics',
+            'Acrobatics',
+            'Sleight of Hand',
+            'Stealth',
+            'Arcana',
+            'History',
+            'Investigation',
+            'Nature',
+            'Religion',
+            'Animal Handling',
+            'Insight',
+            'Medicine',
+            'Perception',
+            'Survival',
+            'Deception',
+            'Intimidation',
+            'Performance',
+            'Persuasion',
         ]
+    ],
+    'Cleric':
+    [
+        'Choose 2',
+        [
+            'History',
+            'Insight',
+            'Medicine',
+            'Perception',
+            'Religion',
+        ],
+    ],
+    'Druid':
+    [
+        'Choose 2',
+        [
+            'Arcana',
+            'Animal Handling',
+            'Insight', 
+            'Medicine',
+            'Nature',
+            'Perception',
+            'Religion',
+            'Survival',
+        ],
+    ],
+    'Fighter':
+    [
+        'Choose 2',
+        [
+            'Acrobatics',
+            'Animal Handling', 
+            'Athletics', 
+            'History', 
+            'Insight', 
+            'Intimidation', 
+            'Perception', 
+            'Survival',
+        ],
+    ],
+    'Monk':
+    [
+        'Choose 2',
+        [
+            'Acrobatics',
+            'Athletics',
+            'History',
+            'Insight',
+            'Religion',
+            'Stealth',
+        ],
+    ],
+    'Paladin':
+    [
+        'Choose 2',
+        [
+            'Athletics',
+            'Insight',
+            'Intimidation',
+            'Medicine',
+            'Persuasion',
+            'Religion',
+        ],
+    ],
+    'Ranger':
+    [
+        'Choose 2',
+        [
 
-     },
- 
-     'Paladin':  {
-        'Skills':
+        ],
+    ],
+    'Rogue':
+    [
+        'Choose 3',
         [
-           [
-               {'label':'Martial weapon & shield'},
-               {'label':'Two martial weapons'}
-           ],
-        ]
-     },
-     'Ranger': {
-        'Skills':
+            'Animal Handling',
+            'Athletics',
+            'Insight',
+            'Investigation',
+            'Nature', 
+            'Perception',
+            'Stealth',
+            'Survival',
+        ],
+    ],
+    'Sorcerer':
+    [
+        'Choose 2',
         [
-           [
-               {'label':'Scale mail'},
-               {'label':'Leather armor'}
-           ],
-        ]
-     },
-     'Rogue': {
-        'Skills':
+            'Arcana',
+            'Deception',
+            'Insight',
+            'Intimidation',
+            'Persuasion',
+            'Religion',
+        ],
+    ],
+    'Warlock':
+    [
+        'Choose 2',
         [
-           [
-               {'label':'Rapier'},
-               {'label':'Shortsword'}
-           ],
-        ]
-     },
-     'Sorcerer': {
-        'Skills':
+            'Arcana',
+            'Deception',
+            'History',
+            'Intimidation',
+            'Investigation',
+            'Nature',
+            'Religion'
+        ],
+    ],
+    'Wizard':
+    [
+        'Choose 2',
         [
-           [
-               {'label':'Light crossbow & 20 bolts'},
-               {'label':'Simple weapon'}
-           ],
-        ]
-    },
-    'Warlock': {
-        'Skills':
-        [
-           [
-               {'label':'Light crossbow & 20 bolts'},
-               {'label':'Simple weapon'}
-           ],
-        ]
-    },
-    'Wizard': {
-        'Skills':
-        [
-           [
-               {'label':'Quarterstaff'},
-               {'label':'Dagger'}
-           ],
-        ]
-    },
-
+            'Arcana',
+            'History', 
+            'Insight',
+            'Investigation',
+            'Medicine',
+            'Religion',
+        ],
+    ],
 }
 
 export const backgroundSkills = {
@@ -150,7 +183,7 @@ export const backgroundSkills = {
         {
             'Skills':[
                 [
-                    {'label':'Not Loaded'}
+                    {'label':'Not Loaded', 'checked' : true}
                 ],
             ]
         },
@@ -170,8 +203,8 @@ export const backgroundSkills = {
      {
          'Skills':[
              [
-                 {'label':'Deception'},
-                 {'label':'Sleight of Hand'},
+                 {'label':'Deception','checked' : true},
+                 {'label':'Sleight of Hand','checked' : true},
              ],
         ]
  
@@ -305,185 +338,125 @@ export var chars = [
     {'key':'2','race':'Halfling', 'subrace':'Stout','class':'Bard', 'background':'Sage'},
 ];
 
-export const subrace = {
-    '' : {
-        subrace:[
-            {'value':'Select Race First'}
-        ],
-    },
-    'Dwarf' : 
+
+
+
+export const raceSkill =
+{
+    '':
     {
-        'subrace': 
-        [
-            {'value':'Hill'},
-            {'value':'Mountain'},
-        ],
-        'weapons':
-        {
-            'Hill':[
-                {'label':'Battleaxe'},
-                {'label':'Handaxe'},
-                {'label':'Throwing Hammer'},
-                {'label':'Warhammer'},
-            ],
-            'Mountain':[
-                {'label':'Battleaxe'},
-                {'label':'Handaxe'},
-                {'label':'Throwing Hammer'},
-                {'label':'Warhammer'},
-            ],
-        }
+        '': ['Choose 1',['None']],
+        'None': ['Choose 1',['None']],
+    },
+    'Dwarf':
+    {
+        'Hill': ['Choose 1',['None']],
+        'Mountain': ['Choose 1',['None']],
 
     },
-    
-    'Elf' : 
+    'Elf':
     {
-        'subrace':
-        [
-            {'value':'High'},
-            {'value':'Wood'},
-            {'value':'Drow'},
-        ],
-        'weapons':
-        {
-            'High':
-            [
-                {'label':'Longsword'},
-                {'label':'Shortsword'},
-                {'label':'Shortbow'},
-                {'label':'Longbow'},
-            ],
-            'Wood':
-            [
-                {'label':'Longsword'},
-                {'label':'Shortsword'},
-                {'label':'Shortbow'},
-                {'label':'Longbow'},
-            ],
-            'Dark':
-            [
-                {'label':'Rapiers'},
-                {'label':'Shortswords'},
-                {'label':'Hand Crossbows'},
-                {'label':'Longbow'},
-            ],
-        }
-
+        'High':['Choose 1',['None']],
+        'Wood':['Choose 1',['None']],
+        'Drow':['Choose 1',['None']],
     },
-    'Halfling': 
+    'Halfling':
     {
-        'subrace':
-            [
-                {'value':'Lightfoot'},
-                {'value':'Stout'},
-            ],
-        'weapons':
-        {
-            'Lightfoot':
-            [
-                {'label':'none'},    
-            ],
-            'Stout':
-            [
-                {'label':'none'},    
-            ],
-        }
+        'Lightfoot':['Choose 1',['None']],
+        'Stout':['Choose 1',['None']],
     },
-    'Human': 
+    'Human':
     {
-        'subrace':
+        'Standard':[['None'],[]],
+        'Variant':
         [
-            {'value':'Standard'},
-            {'value':'Variant'},
-        ],
-        'weapons':
-        {
-            'Standard':
-            [
-                {'label':'none'},    
+            'Choose 1',
+            ['Athletics',
+            'Acrobatics',
+            'Sleight of Hand',
+            'Stealth',
+            'Arcana',
+            'History',
+            'Investigation',
+            'Nature',
+            'Religion',
+            'Animal Handling',
+            'Insight','Medicine',
+            'Perception',
+            'Survival',
+            'Deception',
+            'Intimidation', 
+            'Performance', 
+            'Persuasion',
             ],
-            'Variant':
-            [
-                {'label':'none'},    
-            ],
-        }
+        ]
     },
     'Dragonborn':
     {
-        'subrace':
-        [
-            {'value':'none'},
-        ],
-        'weapons':
-        {
-            'none':
-            [
-                {'label':'none'},    
-            ],
-        }
+        '': ['Choose 1',['None']],
+        'None': ['Choose 1',['None']],
     },
-    'Gnome': 
+    'Gnome':
     {
-        'subrace':
+        'Forest': ['Choose 1',['None']],
+        'Rock': ['Choose 1',['None']],
+    },
+    'Half-Elf':
+    {
+        '':
         [
-            {'value':'Forest'},
-            {'value':'Rock'},
-        ],
-        'weapons':
-        {
-            'Forest':
-            [
-                {'label':'none'},    
+            'Choose 2',
+            ['Athletics',
+            'Acrobatics',
+            'Sleight of Hand',
+            'Stealth',
+            'Arcana',
+            'History',
+            'Investigation',
+            'Nature',
+            'Religion',
+            'Animal Handling',
+            'Insight','Medicine',
+            'Perception',
+            'Survival',
+            'Deception',
+            'Intimidation', 
+            'Performance', 
+            'Persuasion',
             ],
-            'Rock':
-            [
-                {'label':'none'},    
-            ],
-            
-        }
+        ]
+    },
+    'Half-Orc':
+    {
+        '': ['Choose 1',['Intimidation']],
+    },
+    'Tiefling':
+    {
+        '': ['Choose 1',['None']],
+        'None': ['Choose 1',['None']],
+    }
+}
 
-    },
-
-    'Half-Elf':  {
-        'subrace':
-        [
-            {'value':'none'},
-        ],
-        'weapons':
-        {
-            'none':
-            [
-                {'label':'none'},    
-            ],
-        }
-    },
-    'Half-Orc': {
-        'subrace':
-        [
-            {'value':'none'},
-        ],
-        'weapons':
-        {
-            'none':
-            [
-                {'label':'none'},    
-            ],
-        }
-    },
-    'Tiefling': {
-        'subrace':
-        [
-            {'value':'none'},
-        ],
-        'weapons':
-        {
-            'none':
-            [
-                {'label':'none'},    
-            ],
-        }
-    },
-
+export const skillList =
+{
+    'Athletics': false,
+    'Acrobatics':false,
+    'Sleight of Hand':false,
+    'Stealth':false,
+    'Arcana':false,
+    'History':false,
+    'Investigation':false,
+    'Nature':false,
+    'Religion':false,
+    'Animal Handling':false,
+    'Insight':false,
+    'Medicine':false,
+    'Perception':false,
+    'Survival':false,
+    'Deception':false,
+    'Intimidation':false,
+    'Performance':false,
+    'Persuasion':false,
 }
 
 export var classWeapons = 
@@ -749,6 +722,190 @@ export var classWeapons =
         ]
     },
  }
+
+
+ export const subrace = {
+    '' : {
+        subrace:[
+            {'value':'Select Race First'}
+        ],
+    },
+    'Dwarf' : 
+    {
+        'subrace': 
+        [
+            {'value':'Hill'},
+            {'value':'Mountain'},
+        ],
+        'weapons':
+        {
+            'Hill':[
+                {'label':'Battleaxe'},
+                {'label':'Handaxe'},
+                {'label':'Throwing Hammer'},
+                {'label':'Warhammer'},
+            ],
+            'Mountain':[
+                {'label':'Battleaxe'},
+                {'label':'Handaxe'},
+                {'label':'Throwing Hammer'},
+                {'label':'Warhammer'},
+            ],
+        }
+
+    },
+    
+    'Elf' : 
+    {
+        'subrace':
+        [
+            {'value':'High'},
+            {'value':'Wood'},
+            {'value':'Drow'},
+        ],
+        'weapons':
+        {
+            'High':
+            [
+                {'label':'Longsword'},
+                {'label':'Shortsword'},
+                {'label':'Shortbow'},
+                {'label':'Longbow'},
+            ],
+            'Wood':
+            [
+                {'label':'Longsword'},
+                {'label':'Shortsword'},
+                {'label':'Shortbow'},
+                {'label':'Longbow'},
+            ],
+            'Dark':
+            [
+                {'label':'Rapiers'},
+                {'label':'Shortswords'},
+                {'label':'Hand Crossbows'},
+                {'label':'Longbow'},
+            ],
+        }
+
+    },
+    'Halfling': 
+    {
+        'subrace':
+            [
+                {'value':'Lightfoot'},
+                {'value':'Stout'},
+            ],
+        'weapons':
+        {
+            'Lightfoot':
+            [
+                {'label':'none'},    
+            ],
+            'Stout':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Human': 
+    {
+        'subrace':
+        [
+            {'value':'Standard'},
+            {'value':'Variant'},
+        ],
+        'weapons':
+        {
+            'Standard':
+            [
+                {'label':'none'},    
+            ],
+            'Variant':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Dragonborn':
+    {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Gnome': 
+    {
+        'subrace':
+        [
+            {'value':'Forest'},
+            {'value':'Rock'},
+        ],
+        'weapons':
+        {
+            'Forest':
+            [
+                {'label':'none'},    
+            ],
+            'Rock':
+            [
+                {'label':'none'},    
+            ],
+            
+        }
+
+    },
+
+    'Half-Elf':  {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Half-Orc': {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+    'Tiefling': {
+        'subrace':
+        [
+            {'value':'none'},
+        ],
+        'weapons':
+        {
+            'none':
+            [
+                {'label':'none'},    
+            ],
+        }
+    },
+
+}
+
+
 
 export const charclass = [
     {'value':'Barbarian'},

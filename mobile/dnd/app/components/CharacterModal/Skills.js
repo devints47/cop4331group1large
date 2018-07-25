@@ -4,11 +4,12 @@ import Modal from 'react-native-modalbox';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
         TextInput,Button,ScrollView} from 'react-native';
-import {races, subrace, background, chars,charclass,classWeapons,backgroundSkills} from '../../assets/data/races';
+import {races, subrace, background, chars,charclass,classWeapons,backgroundSkills, classSkills, raceSkill, skillList} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import CheckboxFormX from 'react-native-checkbox-form';
+import { runInThisContext } from 'vm';
 
 const mockData = [
     {
@@ -32,6 +33,7 @@ export default class Skills extends Component{
         this.state={
             inputData: {race:'',subrace:'',background:'',class:''},
         }
+        this.skills = JSON.parse(JSON.stringify(skillList));
     }
 
     showAddModal = (value) => {
@@ -85,7 +87,18 @@ export default class Skills extends Component{
     }
 
     _onSelect = ( item ) => {
-        console.log(item);
+        
+        console.log(item)
+
+        for (i in item){
+            if(item[i]['RNchecked'] || !item[i]['RNchecked']){
+                this.skills[item[i].label] = item[i].RNchecked
+            }
+        }
+
+        console.log(this.skills)
+
+
       };
 
     render(){
@@ -110,32 +123,42 @@ export default class Skills extends Component{
            <View>
             <Text style={{fontSize: 15,
             fontWeight: 'bold',
-            textAlign: 'left',}}>Skills from background</Text>
+            textAlign: 'left',}}>Background: Choose All</Text>
             </View>
 
             <View>
               
               <CheckboxFormX
                   dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
-                  contentContainerStyle={{alignItems: 'flex-start'}}
+                  contentContainerStyle={{alignItems: 'flex-start', padding:10}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
                   onChecked={(item) => this._onSelect(item)}
+                  checked={true}
+                  
               />
              </View>
 
            <View>
              <Text style={{fontSize: 15,
              fontWeight: 'bold',
-             textAlign: 'left',}}>Skills from subclass</Text>
+             textAlign: 'left',}}>Race: {raceSkill[this.state.inputData.race][this.state.inputData.subrace][0]}</Text>
             </View>
 
             <View>
               
               <CheckboxFormX
-                  dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
-                  contentContainerStyle={{alignItems: 'flex-start'}}
+                  dataSource=
+                  {
+                      raceSkill[this.state.inputData.race][this.state.inputData.subrace][1].map
+                      (
+                          function(item){
+                              return {label: item, type: 'race'}
+                          }
+                      )
+                  }
+                  contentContainerStyle={{alignItems: 'flex-start',padding: 10}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
@@ -146,20 +169,26 @@ export default class Skills extends Component{
            <View>
             <Text style={{fontSize: 15,
             fontWeight: 'bold',
-            textAlign: 'left',}}>Skills from class</Text>
+            textAlign: 'left',}}>Class: {classSkills[this.state.inputData['class']][0]}</Text>
             </View>
 
             <View>
               
               <CheckboxFormX
-                  dataSource={backgroundSkills[this.state.inputData['background']]['Skills'][0]}
-                  contentContainerStyle={{alignItems: 'flex-start'}}
+                  dataSource=
+                  {classSkills[this.state.inputData['class']][1].map(function(item){
+                      return {label: item}
+                  })}
+                  contentContainerStyle={{alignItems: 'flex-start', padding:10}}
                   itemShowKey="label"
                   itemCheckedKey="RNchecked"
                   iconSize={28}
                   onChecked={(item) => this._onSelect(item)}
               />
           </View>
+
+          <Button title='Next' onPress={()=>this.updateState()}/>
+
             </ScrollView>            
             </Modal>
         );
