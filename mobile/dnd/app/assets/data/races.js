@@ -356,9 +356,9 @@ export const raceSkill =
     },
     'Elf':
     {
-        'High':['Choose 1',['None']],
-        'Wood':['Choose 1',['None']],
-        'Drow':['Choose 1',['None']],
+        'High':['Choose 1',['Perception']],
+        'Wood':['Choose 1',['Perception']],
+        'Drow':['Choose 1',['Perception']],
     },
     'Halfling':
     {
