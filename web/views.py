@@ -470,5 +470,5 @@ def register_mobile():
             else:
                 return jsonify(message='Passwords do not match')
         else:
-            return redirect(message="Username taken")
+            return jsonify(message="Username taken")
     return 400
