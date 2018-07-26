@@ -55,6 +55,13 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.pw_hash, password)
 
+    @property
+    def serialize(self):
+        return {
+                'id' : str(self.id),
+                'username': str(self.username)
+            }
+
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -424,6 +431,6 @@ def login_mobile():
             # Need to return user id/object and associated data
             characters = Character.query.filter_by(user=user.id).all()
 
-            return jsonify(user=user, characters=characters)
+            return jsonify(user=user.serialize())
 
     return render_template('login.html')
