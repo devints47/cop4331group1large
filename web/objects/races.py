@@ -71,7 +71,7 @@ class Dwarf(Race):
 
 
     def new_race(self, character):
-        character.add_profs(["Battleaxe","Handaxe","Throwing Hammer","Warhammer"])
+        character.add_profs(["Battleaxe","Handaxe","Light Hammer","Warhammer"])
         character.create_option(1, "Tool Proficiency", ["Smith's tools", "Brewer's supplies", "Mason's tools"])
         character.add_profs(["Common","Dwarvish"])
         # set all features
@@ -111,7 +111,7 @@ class Elf(Race):
         else: # All the drow stuff
             character.add_profs(["Rapier","Shortsword","Hand Crossbow"])
             character.add_features(["Superior Darkvision", "Sunlight Sensitivity"])
-            character.add_spells(["Dancing Lights"])
+            character.add_spells([("Dancing Lights", "Charisma")])
 
 
 
@@ -165,7 +165,7 @@ class Gnome(Race):
             character.add_features(["Speak with Small Beasts"])
         else: # All the rock stuff
             character.add_features(["Artificer's Lore", "Tinker"])
-            character.create_option(1, "Tool Proficiency", ["Alchemist's supplies","Brewer's supplies","Calligrapher's supplies","Carpenter's tools","Cobbler's tools","Cook's utensils","Glassblower's tools","Jeweler's tools","Leatherworker's tools","Mason's tools","Painter's supplies","Potter's tools","Smith's tools","Tinker's tools","Weaver's tools","Woodcarver's tools"])
+            character.add_profs(["Tinker's Tools"])
 
 
 class HalfElf(Race):
@@ -177,6 +177,11 @@ class HalfElf(Race):
         # set ability boost
         # PROMPT FOR 2 MORE CHOICES!!
         # set all proficiencies
+        character.add_profs("Common","Elvish")
+        temp_list = LANG_LIST
+        temp_list.remove("Common")
+        temp_list.remove("Elvish")
+        character.create_option(1, "Language Proficiency", temp_list)
         # set all features
         # set all spells
 
@@ -190,6 +195,8 @@ class HalfOrc(Race):
         # set ability boost
         # set all proficiencies
         # set all features
+        character.add_features(["Darkvision","Relentless Endurance","Savage Attacks"])
+        character.add_profs(["Common","Orc"])
         # set all spells
 
 
@@ -202,6 +209,9 @@ class Dragonborn(Race):
         # set ability boost
         # set all proficiencies
         # set all features
+        character.create_option(1, "Feature", [ "Draconic Ancestry (Black)","Draconic Ancestry (Blue)","Draconic Ancestry (Brass)","Draconic Ancestry (Bronze)","Draconic Ancestry (Copper)","Draconic Ancestry (Gold)","Draconic Ancestry (Green)","Draconic Ancestry (Red)","Draconic Ancestry (Silver)","Draconic Ancestry (White)"])
+        character.add_features(["Breath Weapon","Damage Resistance"])
+        character.add_profs(["Common","Draconic"])
         # set all spells
 
 
@@ -213,6 +223,9 @@ class Tiefling(Race):
     def new_race(self, character):
         # set ability boost
         # set all proficiencies
+        character.add_features(["Darkvision","Hellish Resistance"])
+        character.add_spells(["Thaumaturgy","Charisma"])
+        character.add_profs(["Common","Infernal"])
         # set all features
         # set all spells
 

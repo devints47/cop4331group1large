@@ -115,6 +115,7 @@ class Character(db.Model):
         if (new):
             self.option_list = []
             self.max_HP = 0
+            self.armor_class = 10
             self.set_ability_scores(stats)
             self.set_race(Races.RaceFactory().make_race(race_string))
             self.set_class(Classes.ClassFactory().make_class(class_string))
@@ -133,6 +134,12 @@ class Character(db.Model):
         self.char_int = stats[INT]
         self.char_wis = stats[WIS]
         self.char_cha = stats[CHR]
+        self.str_mod = int((self.char_str - 10)/2)
+        self.dex_mod = int((self.char_dex - 10)/2)
+        self.con_mod = int((self.char_con - 10)/2)
+        self.int_mod = int((self.char_int - 10)/2)
+        self.wis_mod = int((self.char_wis - 10)/2)
+        self.cha_mod = int((self.char_cha - 10)/2)
 
     def set_race(self, race):
         self.race = race.race_name
@@ -169,12 +176,6 @@ class Character(db.Model):
         self._race_object.new_race(self)
         self._class_object.new_class(self)
         self._background_object.new_background(self)
-        # must implement later
-        '''
-        self._character_class_object.new_class(self)
-        self._background_object.new_background(self)
-        '''
-        # PROMPT USER WITH OPTION LIST
 
 
 
@@ -182,7 +183,7 @@ class Character(db.Model):
     # The first string will be the number of options and number of choices to be made separated by pipes
     # The second string will be A prompt for the user
     # The inner list will be a list of strings to choose from
-    
+
 
 # ==================
 # Models: Features
@@ -196,9 +197,11 @@ class CharacterFeatures(db.Model):
 class FeatureLookup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     feature_name = db.Column(db.String(80), unique=False, nullable=False)
-    feature_type = db.Column(db.String(80), unique=False, nullable=False)
-    feature_text = db.Column(db.String(500), unique=False, nullable=False)
+    feature_text = db.Column(db.String(1000), unique=False, nullable=False)
     # Other fields if time allows!
+    def __init__(self, name, text):
+        self.feature_name = name
+        self.feature_text = text
 
 
 # ==================

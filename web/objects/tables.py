@@ -20,7 +20,7 @@ a_cat = ""
 a_bonus = 0
 a_dis = False
 a_str = 0
-# =======
+# =============
 
 # Spell Globals
 s_name = ""
@@ -44,7 +44,11 @@ s_sorcerer = False
 s_warlock = False
 s_wizard = False
 s_spell_desc = ""
+# ================
 
+# Feature Globals
+f_name = ""
+f_text = ""
 
 
 
@@ -147,6 +151,7 @@ class TableFactory(object):
         p_list.append(ProficiencyLookup("Warhammer", "Martial Weapon"))
         p_list.append(ProficiencyLookup("Whip", "Martial Weapon"))
         p_list.append(ProficiencyLookup("Blowgun", "Martial Weapon"))
+        p_list.append(ProficiencyLookup("Hand Crossbow", "Martial Weapon"))
         p_list.append(ProficiencyLookup("Heavy Crossbow", "Martial Weapon"))
         p_list.append(ProficiencyLookup("Longbow", "Martial Weapon"))
         p_list.append(ProficiencyLookup("Net", "Martial Weapon"))
@@ -155,6 +160,46 @@ class TableFactory(object):
         p_list.append(ProficiencyLookup("Medium Armor", "Armor"))
         p_list.append(ProficiencyLookup("Heavy Armor", "Armor"))
         p_list.append(ProficiencyLookup("Shield", "Armor"))
+        # Tool Proficiencies
+        p_list.append(ProficiencyLookup("Alchemist's supplies", "Tools"))
+        p_list.append(ProficiencyLookup("Brewer's supplies", "Tools"))
+        p_list.append(ProficiencyLookup("Calligrapher's supplies", "Tools"))
+        p_list.append(ProficiencyLookup("Carpenter's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Cobbler's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Cook's utensils", "Tools"))
+        p_list.append(ProficiencyLookup("Glassblower's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Jeweler's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Leatherworker's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Mason's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Painter's supplies", "Tools"))
+        p_list.append(ProficiencyLookup("Potter's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Smith's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Tinker's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Weaver's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Woodcarver's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Disguise kit", "Tools"))
+        p_list.append(ProficiencyLookup("Forgery kit", "Tools"))
+        p_list.append(ProficiencyLookup("Dice set", "Tools"))
+        p_list.append(ProficiencyLookup("Dragonchess set", "Tools"))
+        p_list.append(ProficiencyLookup("Playing card set", "Tools"))
+        p_list.append(ProficiencyLookup("Three-Dragon Ante set", "Tools"))
+        p_list.append(ProficiencyLookup("Herbalism kit", "Tools"))
+        p_list.append(ProficiencyLookup("Bagpipes", "Tools"))
+        p_list.append(ProficiencyLookup("Drum", "Tools"))
+        p_list.append(ProficiencyLookup("Dulcimer", "Tools"))
+        p_list.append(ProficiencyLookup("Flute", "Tools"))
+        p_list.append(ProficiencyLookup("Lute", "Tools"))
+        p_list.append(ProficiencyLookup("Lyre", "Tools"))
+        p_list.append(ProficiencyLookup("Horn", "Tools"))
+        p_list.append(ProficiencyLookup("Pan flute", "Tools"))
+        p_list.append(ProficiencyLookup("Shawm", "Tools"))
+        p_list.append(ProficiencyLookup("Viol", "Tools"))
+        p_list.append(ProficiencyLookup("Navigator's tools", "Tools"))
+        p_list.append(ProficiencyLookup("Poisoner's kit", "Tools"))
+        p_list.append(ProficiencyLookup("Thieves' tools", "Tools"))
+        p_list.append(ProficiencyLookup("Vehicles (land)", "Tools"))
+        p_list.append(ProficiencyLookup("Vehicles (water)", "Tools"))
+
 
         for p in p_list:
             db.session.add(p)
@@ -768,34 +813,10 @@ class TableFactory(object):
         True, True, True, True, "a handful of oak bark", s_ritual, \
         s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
         s_spell_desc))
-        s_list.append(SpellLookup("Beacon of Hope", "1 action", "Abjuration", "1 action", "30 ft", "1 minute", \
+        s_list.append(SpellLookup("Beacon of Hope", 1, "Abjuration", "1 action", "30 ft", "1 minute", \
         True, True, True, s_material, s_mat_desc, s_ritual, \
         s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
         s_spell_desc))
-        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
-        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
-        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
-        s_spell_desc))
-        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
-        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
-        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
-        s_spell_desc))
-        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
-        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
-        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
-        s_spell_desc))
-        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
-        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
-        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
-        s_spell_desc))
-
-
-
-        s_list.append(SpellLookup(s_name, s_level, s_school, s_cast, s_range, s_duration, \
-        s_conc, s_verbal, s_somatic, s_material, s_mat_desc, s_ritual, \
-        s_bard, s_druid, s_cleric, s_paladin, s_ranger, s_sorcerer, s_warlock, s_wizard, \
-        s_spell_desc))
-
 
 
 
@@ -804,5 +825,63 @@ class TableFactory(object):
             db.session.commit()
 
 
+
     def add_features(self, db):
-        
+        f_list = []
+        # Racial features
+        f_list.append(FeatureLookup("Darkvision", "You have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light."))
+        f_list.append(FeatureLookup("Dwarven Resilience", f_text))
+        f_list.append(FeatureLookup("Stonecunning", f_text))
+        f_list.append(FeatureLookup("Fey Ancestry", f_text))
+        f_list.append(FeatureLookup("Trance", f_text))
+        f_list.append(FeatureLookup("Mask of the Wild", f_text))
+        f_list.append(FeatureLookup("Superior Darkvision", f_text))
+        f_list.append(FeatureLookup("Sunlight Sensitivity", f_text))
+        f_list.append(FeatureLookup("Lucky", f_text))
+        f_list.append(FeatureLookup("Brave", f_text))
+        f_list.append(FeatureLookup("Halfling Nimbleness", f_text))
+        f_list.append(FeatureLookup("Stout Resilience", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Black)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Blue)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Brass)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Bronze)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Copper)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Gold)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Green)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Red)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (Silver)", f_text))
+        f_list.append(FeatureLookup("Draconic Ancestry (White)", f_text))
+        f_list.append(FeatureLookup("Breath Weapon", f_text))
+        f_list.append(FeatureLookup("Damage Resistance", "You have resistance to the damge type associated with your draconic ancestry."))
+        f_list.append(FeatureLookup("Gnome Cunning", f_text))
+        f_list.append(FeatureLookup("Speak with Small Beasts", f_text))
+        f_list.append(FeatureLookup("Artificer's Lore", f_text))
+        f_list.append(FeatureLookup("Tinker", f_text))
+        f_list.append(FeatureLookup("Relentless Endurance", f_text))
+        f_list.append(FeatureLookup("Savage Attacks", f_text))
+        f_list.append(FeatureLookup("Hellish Resistance", f_text))
+        # Class features
+        f_list.append(FeatureLookup("Rage", f_text))
+        f_list.append(FeatureLookup("Spellcasting (Charisma)", f_text)
+        f_list.append(FeatureLookup("Bardic Inspiration", f_text))
+        f_list.append(FeatureLookup("Spellcasting (Wisdom)", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Knowledge", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Life", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Light", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Nature", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Tempest", f_text))
+        f_list.append(FeatureLookup("Divine Domain: Trickery", f_text))
+        f_list.append(FeatureLookup("Divine Domain: War", f_text))
+        f_list.append(FeatureLookup("Druidic", f_text))
+        f_list.append(FeatureLookup("Second Wind", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Archery", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Defense", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Dueling", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Great Weapon Fighting", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Protection", f_text))
+        f_list.append(FeatureLookup("Fighting Style: Two-Weapon Fighting", f_text))
+        f_list.append(FeatureLookup("Military Rank", f_text))
+        # Background features
+        f_list.append(FeatureLookup("Shelter of the Faithful", f_text))
+
+        f_list.append(FeatureLookup(f_name, f_text))
