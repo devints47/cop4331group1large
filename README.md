@@ -9,8 +9,10 @@ Final Project for COP 4331c
 - Inside the env, install the requirements `pip install -r "requirements.txt"`
 - Copy the config from the template `cp config.py.template config.py`
 - Create the SQLite database by entering the python shell from the working directory and type
-`from views import db`
-db.create_all()`
+`from views import *`
+`from objects.tables import *`
+`db.create_all()`
+`TableFactory(db)`
 - Generate a secret key by typing
 `import os`
 `os.urandom(24)`

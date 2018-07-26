@@ -485,19 +485,22 @@ def create_character():
 
 
 # API calls
-@app.route('/get_options', methods=['GET'])
+@app.route('/get_options', methods=['POST'])
 def get_options():
-    if request.method == 'GET':
+    if request.method == 'POST':
+    	print request.form
+    	print request.form['abilityArray']
         # When this method is called send back a json object of the characters
         # request.args key value pair
         # a request should look like http://localhost:5000/get_characters?user_id=1234
-        current_character = Character(stats=request.args('abilityArray'), \
-        race_string=request.args('race_subrace'), class_string=request.args('class') , background_string=request.args('background'), \
-        equipment_list=request.args('equipmentArray'), skill_list=request.args('skillsArray'))
+        current_character = Character(stats=request.form['abilityArray'], \
+        race_string=request.form['race_subrace'], class_string=request.form['class'] , background_string=request.form['background'], \
+        equipment_list=request.form['equipmentArray'], skill_list=request.form['skillsArray'])
         options = character.get_options()
 
-
-        return jsonify(options=options)
+        print current_character
+        print options
+        return options
 
     else:
         return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
