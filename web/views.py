@@ -140,17 +140,34 @@ class Character(db.Model):
                 'user': str(self.user),
                 'name': str(self.name),
                 'race': str(self.race),
-                'character_class_1': str(self.character_class_1),
-                'character_class_2': str(self.character_class_2),
+                'character_class': str(self.character_class),
                 'background': str(self.background),
+			    'char_str' : str(self.char_str),
+			    'char_dex' : str(self.char_dex),
+			    'char_con' : str(self.char_con),
+			    'char_int' : str(self.char_int),
+			    'char_wis' : str(self.char_wis),
+			    'char_cha' : str(self.char_cha),
                 'max_HP': str(self.max_HP),
                 'current_HP': str(self.current_HP),
                 'temp_HP': str(self.temp_HP),
+                'armor_class': str(self.armor_class),
+                'age': str(self.age),
+			    'height': str(self.height),
+			    'weight': str(self.weight),
+			    'hair_color': str(self.hair_color),
+			    'eye_color': str(self.eye_color),
+			    'skin_color': str(self.skin_color),
+			    'personality_traits':  str(self.personality_traits),
+			    'ideals': str(self.ideals),
+			    'bonds': str(self.bonds),
+			    'flaws': str(self.flaws),
+			    'features': self.feature_list,
+			    'proficiencies': self.prof_list,
+			    'equipment': self.equipment,
+			    'spells': self.spell_list
             }
 
-  
-            
-          
 
     def set_ability_scores(self, stats):
         self.char_str = stats[STR]
