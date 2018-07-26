@@ -59,6 +59,12 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.pw_hash, password)
 
+    def serialize(self):
+        return {
+                'id' : str(self.id),
+                'username': str(self.username)
+            }
+
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -104,6 +110,7 @@ class Character(db.Model):
     spells = db.relationship('CharacterSpells', backref='Character', lazy=True)
 
 
+
     def __init__(self, new=True, char_id=1, stats=[10,10,10,10,10,10], \
         race_string="Dwarf Hill", class_string="Fighter", background_string="Soldier", \
         equipment_list = [], skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
@@ -126,6 +133,24 @@ class Character(db.Model):
         else:
             self.get_character(char_id)
 
+            
+    def serialize(self):
+        return {
+                'id' : str(self.id),
+                'user': str(self.user),
+                'name': str(self.name),
+                'race': str(self.race),
+                'character_class_1': str(self.character_class_1),
+                'character_class_2': str(self.character_class_2),
+                'background': str(self.background),
+                'max_HP': str(self.max_HP),
+                'current_HP': str(self.current_HP),
+                'temp_HP': str(self.temp_HP),
+            }
+
+  
+            
+          
 
     def set_ability_scores(self, stats):
         self.char_str = stats[STR]
@@ -485,8 +510,32 @@ def login_mobile():
 
         else:
             # Need to return user id/object and associated data
-            characters = Character.query.filter_by(user=request.args('user_id').all())
+            characters = Character.query.filter_by(user=user.id).all()
 
-            return jsonify(user=user, characters=characters)
+            return jsonify(user.serialize())
 
     return render_template('login.html')
+
+
+@app.route('/register_mobile', methods=['GET', 'POST'])
+def register_mobile():
+    # If user submitted the form
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        # Check to see if username exists already
+        check_username = User.query.filter_by(username=data['username']).first()
+        if check_username is None:
+            if data['password'] == data['confirm_password']:
+                # Create the new user
+                new_user = User(data['username'], data['password'], data['email'])
+
+                db.session.add(new_user)
+                db.session.commit()
+                session['logged_in_user'] = new_user.id
+
+                return jsonify(new_user.serialize())
+            else:
+                return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+        else:
+            return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+    return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
