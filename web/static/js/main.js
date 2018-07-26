@@ -499,18 +499,44 @@ var calcAbilityScores = function (selected_Race, selected_Subrace, inputBoost, S
 }
 
 //function constructor for character
-function Character(abilityScores, skills, equipment, race_subrace, _class, background) {
+function Character(abilityScores, skills, equipment, race_subrace, _class, background, name) {
     this.abilityArray = abilityScores;
     this.skillsArray = skills;
     this.equipmentArray = equipment;
     this.race_subrace = race_subrace;
     this.class = _class;
     this.background = background;
+    this.name = name;
 }
+
+
+
+var options = {
+
+    first: {
+        num: 1,
+        prompt: "Pick a thing",
+        o_list: ["Thing", "Thing2", "Thing3"]
+    },
+    second: {
+        num: 2,
+        prompt: "Pick 2 things",
+        o_list: ["Thing", "Thing2", "Thing3"]
+    }
+};
+
+
 
 
 //jquery functions
 $(function () {
+
+    //bind change of images to card deck for our dynamic character creation
+    $('.card-deck').on('change', '.race', function () {
+        var race;
+        console.log("in here");
+    });
+
 
 
 
@@ -942,16 +968,29 @@ $(function () {
         //for up arrow: add to input
         if ($(this).hasClass('upArrow')) {
             //increment points used
-            pointsUsed++;
             inputValue++;
+            //increment by two if input value is 14 or 15
+            if (inputValue == 14 || inputValue == 15) {
+                pointsUsed++; //increment by two
+                pointsUsed++;
+            } else {
+                pointsUsed++
+            }
         }
         //for down arrow: subtract from input
         if ($(this).hasClass('downArrow')) {
             //decrement pointsused and input value
-            pointsUsed--;
             inputValue--;
+            //going from 14-13 or 15-14  subtract points used by 2
+            if (inputValue == 13 || inputValue == 14) {
+                pointsUsed--;
+                pointsUsed--;
+            } else {
+                pointsUsed--;
+            }
         }
 
+        //  console.log(pointsUsed);
         //if points used is display rangeout of bounds alert
         if (inputValue > 15 || inputValue < 8) {
             $('#pointsbuyOutofBoundsAlert').show();
@@ -1083,7 +1122,7 @@ $(function () {
         backgroundSkillsArray = getBackgroundSkill(selected_Background);
 
         //update panel heading
-        $('#raceSkillPanelHeading').text("Skills From " + selected_Race + " Class: Choose " + raceSkillsArray[0]);
+        $('#raceSkillPanelHeading').text("Skills From " + selected_Race + " Race: Choose " + raceSkillsArray[0]);
 
         //empty the checkbox fieldset element
         $('#raceSkillCheckBoxes').children().detach();
@@ -1254,6 +1293,8 @@ $(function () {
         var selected_Race = $('.race_Selected option:selected').text();
         var selected_Subrace = $('.subrace_Selected option:selected').text();
         var selected_Class = $('.class_Selected option:selected').text();
+        var nameInput = $('#nameInput').val();
+
 
         //get ability score values as numbers
         var STR = Number($('#strengthInput').val());
@@ -1285,7 +1326,7 @@ $(function () {
         }).get()
 
         //CREATE character object
-        var myCharacter = new Character(abilityScores, skillsArray, equipmentArray, selected_Race + " " + selected_Subrace, selected_Class, selected_Background);
+        var myCharacter = new Character(abilityScores, skillsArray, equipmentArray, selected_Race + " " + selected_Subrace, selected_Class, selected_Background, nameInput);
         //jsonify the object
         var myJSONCharacter = JSON.stringify(myCharacter);
         console.log(myJSONCharacter);
@@ -1293,11 +1334,114 @@ $(function () {
         //send to backend 
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/get_options",
+            url: "/get_options",
             data: myJSONCharacter,
+            success: function (optionsSent) {
+                //remove all elemtns from panel
+                $('#optionsPanel').children().detach();
+
+                var nameValuePairs = Object.entries(optionsSent);
+
+                for (var i = 0; i < nameValuePairs.length; i++) {
+                    //grab options and details
+                    var options = nameValuePairs[i][1];
+                    var amountOfPicks = options.num;
+                    var prompt = options.prompt;
+                    var listOfOptions = options.o_list;
+                    console.log(amountOfPicks);
+                    console.log(prompt);
+                    console.log(listOfOptions);
+
+                    //html with opening tag and prompt
+                    var html = ' <div class="col-sm-6 col-md-6 col-lg-6"><div class="panel panel-default "><div class="panel-heading">' + prompt + '</div><div class="panel-body"> <form> <fieldset class="form-group">';
+
+                    //add options
+                    for (var j = 0; j < listOfOptions.length; j++) {
+                        var checked = '<div class="form-check form-check"><input class="form-check-input" type="checkbox" value="' + listOfOptions[j] + '" checked><label class="form-check-label" for="inlineCheckbox1">' + listOfOptions[j] + '</label> </div>';
+                        var unchecked = '<div class="form-check form-check"><input class="form-check-input" type="checkbox" value="' + listOfOptions[j] + '"><label class="form-check-label" for="inlineCheckbox1">' + listOfOptions[j] + '</label> </div>';
+                        if (j <= amountOfPicks - 1) {
+                            html += checked;
+                        } else {
+                            html += unchecked;
+                        }
+                    }
+                    //close and append
+                    var closingTags = '</fieldset></form></div></div></div>';
+                    html += closingTags;
+                    $('#optionsPanel').append(html);
+
+
+                }
+
+                //go to next pill
+                var id = $('.nav-pills > .nav-item > .active').parent().next('li').find('a').attr('id');
+                //remove disabled class from pill if it has it
+                if ($('#' + id).hasClass('disabled')) {
+                    $('#' + id).removeClass('disabled');
+                }
+
+                jQuery('#' + id)[0].click();
+            },
+            error: function () {
+                //show alert
+                $('#equipmentAlert').show();
+            },
         });
 
 
+    });
+
+    //last api call for character creation
+    //add 
+    $('#optionsBtn').click(function () {
+
+        //get selected options
+        var optionsArray = [];
+        $('#optionsPanel input:checked').map(function () {
+            optionsArray.push($(this).val());
+        }).get();
+
+        console.log(optionsArray);
+        //jsonify the object
+        var myJSONCOptions = JSON.stringify(optionsArray);
+
+        console.log(myJSONCOptions);
+
+
+        $.ajax({
+            type: "POST",
+            url: "/create_character",
+            data: myJSONOptions,
+            success: function (character) {
+                //go to next pill
+                var id = $('.nav-pills > .nav-item > .active').parent().next('li').find('a').attr('id');
+                //remove disabled class from pill if it has it
+                if ($('#' + id).hasClass('disabled')) {
+                    $('#' + id).removeClass('disabled');
+                }
+
+                jQuery('#' + id)[0].click();
+
+
+            },
+            error: function () {
+                //show alert
+                $('#equipmentAlert').show();
+            },
+
+        });
+
+
+
+    });
+
+    //selecting a character
+    $('.cardLink').click(function (e) {
+        //stop link from firing
+        e.preventDefault();
+        //get character id from attribute
+        var characterID = $(this).attr('data-characterID');
+        console.log(characterID);
     });
 
 
@@ -1316,6 +1460,9 @@ $(function () {
         clonedInnerModal = $('#innerModal').clone(true);
 
     });
+
+
+
 
 });
 
