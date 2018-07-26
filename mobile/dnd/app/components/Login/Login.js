@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
 	},
 	logo:{
-		height:'70%',
+		height:'90%',
     width:'90%',
     flex:1,
   },
