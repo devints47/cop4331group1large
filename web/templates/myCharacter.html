@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <!--custom css-->
+    <link rel="stylesheet" href="main.css">
+    <!--feather icons-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+
+    <title>Dungeons and Dragons</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <span class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dungeons and Dragons</span>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Log out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--contains everything but top nav-->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- side bar-->
+            <nav id="sideBarNav" class="col-md-2  col-lg-2 col-sm-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column" role="navigation">
+                        <li class="nav-item">
+                            <a id="home" class="nav-link active" href="#home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="false">
+                                <span class="icon" data-feather="home"></span>
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <h6 style="margin-top: 4px !important;" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>My Character</span>
+                        </h6>
+                        <li class="nav-item">
+                            <a id="myStats-tab" class="nav-link" href="#stats-tab" data-toggle="tab" role="tab" aria-controls="myStats" aria-selected="true">
+                                <span class="icon" data-feather="crosshair"></span>
+                                Stats
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="myBackground" class="nav-link" href="#background-tab" data-toggle="tab" href="#background-tab" role="tab" aria-selected="false">
+                                <span class="icon" data-feather="compass"></span>
+                                Background
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="mySpells" class="nav-link" href="#spells-tab" data-toggle="tab" data-target="#spells-tab" role="tab" aria-selected="false">
+                                <span class="icon" data-feather="database"></span>
+                                Spells
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+            <!--tab content-->
+            <div class="tab-content col-md-10 col-sm-10 ml-sm-auto col-lg-10" id="myTabContent">
+
+                <!--home tab-->
+                <div role="tabpanel" aria-labelledby="home-tab" class="col-md-12 col-sm-12 ml-sm-auto col-lg-12 tab-pane fade" id="home-tab">
+
+                </div>
+
+                <!--my stats tab-->
+                <div role="tabpanel" aria-labelledby="stats-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12 fade-in active" id="stats-tab">
+                    <div class="container-fluid">
+                        <h1>Abilities:</h1>
+                        <div style="margin-top: 15px;" id="abilityScoresPanel" class="row">
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">STR&nbsp;
+                                <span id="strengthBadge" class="badge badge-dark">8</span>
+                            </h3>
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">DEX&nbsp;
+                                <span id="dexterityBadge" class="badge badge-dark">8</span>
+                            </h3>
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">CON&nbsp;
+                                <span id="constitutionBadge" class="badge badge-dark">8</span>
+                            </h3>
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">INT&nbsp;
+                                <span id="intelligenceBadge" class="badge badge-dark">8</span>
+                            </h3>
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">WIS&nbsp;
+                                <span id="wisdomBadge" class="badge badge-dark ">8</span>
+                            </h3>
+                            <h3 class="col-md-4 col-sm-4 col-lg-4">CHR&nbsp;
+                                <span id="charismaBadge" class="badge badge-dark ">8</span>
+                            </h3>
+
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px;" class="container-fluid">
+                        <h1>Skills:</h1>
+                        <div id="skillsPanel" class="row">
+                            <ul class="list-group">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <!--add background tab-->
+                <div role="tabpanel" aria-labelledby="background-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12" id="background-tab">
+                    background
+                </div>
+
+                <!--spells tab-->
+                <div role="tabpanel" aria-labelledby="spells-tab" class="tab-pane fade col-md-12 col-sm-12 col-lg-12" id="spells-tab">
+                    <div class="container-fluid">
+                        <h1>Spells</h1>
+                        <div class="row">
+                            <ul class="list-group">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--call for icons-->
+    <script>
+        feather.replace()
+    </script>
+
+</body>
+
+</html>
