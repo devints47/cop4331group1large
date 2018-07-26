@@ -75,7 +75,7 @@ export default class CharacterInfo extends Component{
                 right:10, 
                 color:'antiquewhite', 
                 fontFamily:'Arial' }}>
-                {this.state.info.race}
+                {this.state.info['name']}
             </Text>
             <Image
             source={icons[this.state.info['race']]}

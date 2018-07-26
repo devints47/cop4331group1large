@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight, Button, ImageBackground } from 'react-native';
+import { AppRegistry, 
+    FlatList, StyleSheet, Text, View, Image, Alert, 
+    Platform, TouchableHighlight, Button, ImageBackground,
+    AsyncStorage } from 'react-native';
 import flatListData from './flatListData';
 import Swipeout from 'react-native-swipeout';
 import Races from '../CharacterModal/Races';
@@ -70,6 +73,7 @@ class FlatListItem extends Component {
             rowId: this.props.index, 
             sectionId: 1    
         };
+
 
         return (  
             <Swipeout {...swipeSettings}>
@@ -160,7 +164,13 @@ export default class BasicFlatList extends Component {
         // alert("You add Item");
         this.refs.addModal.showAddModal();
     }
+
     render() {
+
+
+    
+
+
       return (
         <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 34 : 0, backgroundColor: 'rgb(135,119,143)'}}>
             

@@ -3,7 +3,7 @@ import Modal from 'react-native-modalbox';
 //import Button from 'react-native-button';
 import {AppRegistry, FlatList, StyleSheet, Text, View, 
         Image, Alert, Platform, TouchableHighlight, Dimensions,
-        TextInput,Button} from 'react-native';
+        TextInput,Button, AsyncStorage} from 'react-native';
 import {races, subrace, background, chars,charclass} from '../../assets/data/races';
 import {Dropdown} from 'react-native-material-dropdown';
 import uuid from 'react-native-uuid';
@@ -111,6 +111,8 @@ export default class ModalRouter extends Component{
         this.props.parentFlatList.refreshFlatList(character);       
 
     }
+
+
 
 
     render(){

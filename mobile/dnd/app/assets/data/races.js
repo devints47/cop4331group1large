@@ -334,8 +334,8 @@ export const backgroundSkills = {
 }
 
 export var chars = [
-    {'key':'1','race':'Human', 'subrace':'Variant', 'class':'Cleric', 'background':'Criminal'},
-    {'key':'2','race':'Halfling', 'subrace':'Stout','class':'Bard', 'background':'Sage'},
+    {'key':'1','race':'Human', 'subrace':'Variant', 'class':'Cleric', 'background':'Criminal', 'name':'Steve'},
+    {'key':'2','race':'Halfling', 'subrace':'Stout','class':'Bard', 'background':'Sage', 'name':'Bob'},
 ];
 
 

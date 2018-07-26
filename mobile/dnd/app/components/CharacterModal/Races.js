@@ -22,7 +22,7 @@ export default class Races extends Component{
             selectedBackground: '',
             selectedClass:'',
             subracelabel: 'Subrace',
-            Name:''
+            name:''
         }
     }
 
@@ -72,9 +72,10 @@ export default class Races extends Component{
             subrace: sub,
             background: this.state.selectedBackground,
             class: this.state.selectedClass,
+            name: this.state.name
         };    
         //chars.push(newItem);
-        // console.log(chars)    
+        console.log(newItem)    
         //this.props.parentFlatList.refreshFlatList(newKey);       
         
         
@@ -112,11 +113,11 @@ export default class Races extends Component{
                 
             
                 <TextField
-                label='ENTER YOUR NAME'
+                label='Character Name'
                 fontSize= {12}
                 disabled = {true}
                 labelHeight= {20}
-                onChangeText={ (str) => this.setState({Name}) }
+                onChangeText={ (data) => this.setState({name: data})}
                 disabled = {this.state.booler}
                 />
                 
