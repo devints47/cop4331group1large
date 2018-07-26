@@ -448,3 +448,27 @@ def login_mobile():
             return jsonify(user.serialize())
 
     return render_template('login.html')
+
+
+@app.route('/register_mobile', methods=['GET', 'POST'])
+def register_mobile():
+    # If user submitted the form
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        # Check to see if username exists already
+        check_username = User.query.filter_by(username=data['username']).first()
+        if check_username is None:
+            if data['password'] == data['confirm_password']:
+                # Create the new user
+                new_user = User(data['username'], data['password'], data['email'])
+
+                db.session.add(new_user)
+                db.session.commit()
+                session['logged_in_user'] = new_user.id
+
+                return jsonify(new_user.serialize())
+            else:
+                return jsonify(message='Passwords do not match')
+        else:
+            return redirect(message="Username taken")
+    return 400
