@@ -1,0 +1,29 @@
+{"startJSON" : {
+    "abilty_scores": [10, 10, 10, 10, 10, 10],
+    "skills": ["Athletics", "Survival"],
+    "equipment": ["Warhammer", "Explorer Pack"],
+    "race": "Race Subrace",
+    "class": "Class",
+    "background": "Background"
+}}
+
+
+{"optionJSON" : {
+    "One":{
+        "num": "1",
+        "prompt": "Pick a thing",
+        "o_list": ["Thing", "Thing2", "Thing3"]
+    },
+	"Two":{
+		"num": "2",
+		"prompt": "Pick 2 things",
+        "o_list": ["Thing", "Thing2", "Thing3"]		
+	}
+}}
+
+
+{"selectionJSON" : {
+	"name": "Character Name",
+	"selected_list": ["Thing3","Thing2"]
+}}
+
