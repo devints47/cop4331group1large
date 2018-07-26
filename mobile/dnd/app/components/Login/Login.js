@@ -90,7 +90,7 @@ class Login extends Component {
                   />
         </Animate.View>
         
-        {this.state.isShowingText == false ? <LoginForm navigation={this.props.navigation}/> : <SignupForm/>}
+        {this.state.isShowingText == false ? <LoginForm navigation={this.props.navigation}/> : <SignupForm navigation={this.props.navigation}/>}
         </View>
 
       </ImageBackground>

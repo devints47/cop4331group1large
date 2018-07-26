@@ -43,6 +43,7 @@ export default class LoginForm extends Component {
     .then((res)=>{
         if(res['id']){
             console.log('Logged in!')
+            AsyncStorage.setItem('user_id', res['id']);
             button.props.navigation.navigate('Router')
         }
         else{

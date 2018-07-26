@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text,View,AppRegistry,StyleSheet, TextInput} from 'react-native';
+import {Text,View,AppRegistry,StyleSheet, TextInput, AsyncStorage,Alert} from 'react-native';
 
 import { FormInput, Button } from 'react-native-elements';
 import * as Animate from 'react-native-animatable';
@@ -12,9 +12,68 @@ export default class SignupForm extends Component {
 
        this.state = {
 
-        selectedCategory : 0
+        selectedCategory : 0,
+
+        user:'',
+        pass:'',
+        confirm:'',
+        email:'',
+
        };
    }
+
+
+   handleRegister(){
+
+    data = 
+    {
+        'username': this.state.user, 
+        'password': this.state.pass, 
+        'confirm_password':this.state.confirm,
+        'email': this.state.email
+    }
+    const json = JSON.stringify(data);
+    var button = this;
+
+
+    fetch(global.uri + '/register_mobile',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: json,
+            credentials: 'same-origin',
+        }
+    ).then((res)=>{
+        console.log(res)
+        token=JSON.stringify(res.headers.map['set-cookie'])
+        AsyncStorage.setItem('@app:session', token);
+        console.log(token);
+        return res.json()
+    }).then((res)=>{
+        if(res['id']){
+                console.log('Logged in!')
+                AsyncStorage.setItem('user_id', res['id']);
+                button.props.navigation.navigate('Router')
+        }
+            else{
+                console.log(res)
+                Alert.alert('Error!!!')
+            }
+            console.log('Else')
+            console.log(res)
+    }).catch(()=>{
+        console.log('undef error')
+        Alert.alert('Error!!!')
+    }).done()
+
+
+
+
+   }
+
+
   
     render() {
     return (
@@ -33,6 +92,20 @@ export default class SignupForm extends Component {
             autoCapitalize='none'
             autoCorrect={false}
             underlineColorAndroid='rgba(0,0,0,0)'
+            onChangeText={(text)=>this.setState({user:text})}
+            />
+            
+             <TextInput 
+            placeholder='email'
+            placeholderTextColor='rgba(124,110,95,0.8)'
+            style={styles.input}
+            returnKeyType='next'
+            onSubmitEditing={()=> this.passwordInput.focus()}
+            keyboardType='email-address'
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
+            onChangeText={(text)=>this.setState({email:text})}
             />
 
             <TextInput 
@@ -43,6 +116,7 @@ export default class SignupForm extends Component {
             returnKeyType='go'
             underlineColorAndroid='rgba(0,0,0,0)'
             ref={(input)=>this.passwordInput=input}
+            onChangeText={(text)=>this.setState({pass:text})}
             />
 
             <TextInput 
@@ -53,12 +127,14 @@ export default class SignupForm extends Component {
             returnKeyType='go'
             underlineColorAndroid='rgba(0,0,0,0)'
             ref={(input)=>this.passwordInput=input}
+            onChangeText={(text)=>this.setState({confirm:text})}
             />
 
             <Button  
             buttonStyle={styles.button} 
             placeholderTextColor='rgba(124,110,95,0.8)'
-            title='signup'/>
+            title='signup'
+            onPress={()=>this.handleRegister()}/>
 
         </Animate.View>
     );
