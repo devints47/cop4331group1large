@@ -85,6 +85,21 @@ class Character(db.Model):
     spells = db.relationship('CharacterSpells', backref='Character', lazy=True)
 
 
+    def serialize(self):
+        return {
+                'id' : str(self.id),
+                'user': str(self.user),
+                'name': str(self.name),
+                'race': str(self.race),
+                'character_class_1': str(self.character_class_1),
+                'character_class_2': str(self.character_class_2),
+                'background': str(self.background),
+                'max_HP': str(self.max_HP),
+                'current_HP': str(self.current_HP),
+                'temp_HP': str(self.temp_HP),
+            }
+
+
     def __init__(self, stats=[10,10,10,10,10,10], race_string="Dwarf Hill", \
         class_string="Fighter", background_string="Soldier", \
         skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
@@ -433,3 +448,27 @@ def login_mobile():
             return jsonify(user.serialize())
 
     return render_template('login.html')
+
+
+@app.route('/register_mobile', methods=['GET', 'POST'])
+def register_mobile():
+    # If user submitted the form
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        # Check to see if username exists already
+        check_username = User.query.filter_by(username=data['username']).first()
+        if check_username is None:
+            if data['password'] == data['confirm_password']:
+                # Create the new user
+                new_user = User(data['username'], data['password'], data['email'])
+
+                db.session.add(new_user)
+                db.session.commit()
+                session['logged_in_user'] = new_user.id
+
+                return jsonify(new_user.serialize())
+            else:
+                return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+        else:
+            return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+    return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
