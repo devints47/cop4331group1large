@@ -91,7 +91,7 @@ export default class Equipment extends Component{
         group = data[0];
         label = data[1];
 
-        this.equipment[group]=label;
+        this.equipment[group]=label+"\n";
 
 
         console.log(this.equipment);
@@ -115,10 +115,10 @@ export default class Equipment extends Component{
         }
 
 
-        if(newItem.length != len){
+        /*if(newItem.length != len){
             Alert.alert('Select All Items!');
             return;
-        }
+        }*/
 
         this.props.updateVal(newItem);
         

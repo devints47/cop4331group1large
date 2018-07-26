@@ -18,8 +18,6 @@ class FlatListItem extends Component {
     }
 
     render() {   
-
-
         const icons = 
         {
             'Dwarf': require('../../assets/images/icons/Dwarf.png'),
@@ -31,10 +29,7 @@ class FlatListItem extends Component {
             'Half-Elf': require('../../assets/images/icons/Half-Elf.png'),
             'Half-Orc': require('../../assets/images/icons/Halfling.png'),
             'Tiefling': require('../../assets/images/icons/Tiefling.png'),
-            
         }
-
-
 
         const swipeSettings = {
             autoClose: true,
@@ -44,7 +39,7 @@ class FlatListItem extends Component {
                 }              
             },          
             onOpen: (secId, rowId, direction) => {
-                this.setState({ activeRowKey: this.props.item.key });
+                this.setState({ activeRowKey: this.props.key });
             },      
             right: [
                 { 

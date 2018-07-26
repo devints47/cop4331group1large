@@ -32,6 +32,34 @@ export default class CharacterInfo extends Component{
 
     }
 
+    showEquip(milf){
+        
+        var empt = []
+
+        empt.push(<Text style={{bottom:200}}>{milf}</Text>)
+
+        return(empt);
+    }
+
+    showSkills(milf){
+        
+        var empt = []
+
+        console.log('Skills')
+        console.log(this.state.info.race)
+        console.log(this.state.info.skills)
+
+        for(var i in this.state.info.skills)
+        {
+            console.log('itr')
+            console.log(this.state.info.skills[i])
+            if(this.state.info.skills[i]){
+                empt.push(<Text style={{bottom:200}}>{i}</Text>)
+            }
+        }
+
+        return(empt);
+    }
     
 
     render(){
@@ -124,11 +152,49 @@ export default class CharacterInfo extends Component{
             }}
             coverScreen={true}
             swipeToClose={false}
+
             >
+
+            <View style={{bottom:-100}}>
+            <View style={{bottom:10}}>
+      
+            <Text style={styles.header}>Character Creation</Text>
+            
+            </View>
+            
+            
+            <View>
+            <Text style={{fontSize: 16, bottom: 200}}>Equipment: </Text>
+            <Text>  </Text>
+            {this.showEquip()}
+            <Text>  </Text>
+            </View>
+
+
+            <View>
+            <Text style={{fontSize: 16, bottom: 200}}>Skills: </Text>
+            <Text>  </Text>
+            {this.showSkills()}
+            <Text>  </Text>
+            </View>
+
+
+            <View>
+            <Text style={{fontSize: 16, bottom: 200}}>Abilities: </Text>
+            <Text>  </Text>
+            <Text>STR:</Text>
+            <Text>DEX:</Text>
+            <Text>CON:</Text>
+            <Text>INT:</Text>
+            <Text>WIS:</Text>
+            <Text>CHR:</Text>
+            <Text>  </Text>
+            </View>
+            
+            </View>
+            
             </Modal>
             
-
-
            </Modal>
 
 
@@ -163,6 +229,7 @@ const styles=StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
+        bottom: 200
     },
     race:{
 

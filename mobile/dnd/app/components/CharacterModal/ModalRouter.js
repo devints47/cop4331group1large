@@ -124,6 +124,8 @@ export default class ModalRouter extends Component{
             parentFlatList={this.props.parentFlatList} 
             selectClass={this.state.class}
             updateVal={(data)=>this.getSkills(data)}
+            equipper={this.state.equipment}
+            skiller={this.state.skills}
             >
             </CharacterInfo>
 
