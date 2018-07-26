@@ -467,13 +467,16 @@ def get_characters():
 @app.route('/login_mobile', methods=['GET', 'POST'])
 def login_mobile():
     if request.method == 'POST':
-        user = User.query.filter_by(username=request.args['username']).first()
-        if user is None or not user.check_password(request.args['password']):
+        data = request.get_json(force=True)
+        user = User.query.filter_by(username=data['username']).first()
+        if user is None or not user.check_password(data['password']):
 
             return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
 
         else:
             # Need to return user id/object and associated data
-            return jsonify('data:data')
+            characters = Character.query.filter_by(user=request.args('user_id').all())
+
+            return jsonify(user=user, characters=characters)
 
     return render_template('login.html')
