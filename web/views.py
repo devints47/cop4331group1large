@@ -85,6 +85,21 @@ class Character(db.Model):
     spells = db.relationship('CharacterSpells', backref='Character', lazy=True)
 
 
+    def serialize(self):
+        return {
+                'id' : str(self.id),
+                'user': str(self.user),
+                'name': str(self.name),
+                'race': str(self.race),
+                'character_class_1': str(self.character_class_1),
+                'character_class_2': str(self.character_class_2),
+                'background': str(self.background),
+                'max_HP': str(self.max_HP),
+                'current_HP': str(self.current_HP),
+                'temp_HP': str(self.temp_HP),
+            }
+
+
     def __init__(self, stats=[10,10,10,10,10,10], race_string="Dwarf Hill", \
         class_string="Fighter", background_string="Soldier", \
         skill_list=["Athletics", "Acrobatics", "Intimidation","Survival"]):
