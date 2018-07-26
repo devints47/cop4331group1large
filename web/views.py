@@ -472,7 +472,7 @@ def index():
 @app.route('/create_character', methods=['POST'])
 def create_character():
     if request.method == 'POST':
-        print 'post request'
+        print request.form
         # Form data for creating a character goes here
         # This is where the character gets instantiated and saved to the db
         # not json encoded just request.form['name attribute of html element']

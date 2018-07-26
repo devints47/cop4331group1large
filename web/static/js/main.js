@@ -1293,7 +1293,7 @@ $(function () {
         //send to backend 
         $.ajax({
             type: "POST",
-            url: "http://test.com/test",
+            url: "http://localhost:5000/get_options",
             data: myJSONCharacter,
         });
 
