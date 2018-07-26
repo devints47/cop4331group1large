@@ -422,7 +422,7 @@ def login_mobile():
 
         else:
             # Need to return user id/object and associated data
-            characters = Character.query.filter_by(user=user.id).all())
+            characters = Character.query.filter_by(user=user.id).all()
 
             return jsonify(user=user, characters=characters)
 
