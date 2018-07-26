@@ -468,7 +468,7 @@ def register_mobile():
 
                 return jsonify(new_user.serialize())
             else:
-                return jsonify(message='Passwords do not match')
+                return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
         else:
-            return jsonify(message="Username taken")
-    return 400
+            return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
+    return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
