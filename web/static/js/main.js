@@ -1293,7 +1293,7 @@ $(function () {
         //send to backend 
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/create_character",
+            url: "http://localhost:5000/get_options",
             data: myJSONCharacter,
         });
 
