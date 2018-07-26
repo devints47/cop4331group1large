@@ -172,6 +172,19 @@ class Character(db.Model):
     def create_option(self, num_select, prompt, op_list):
         self.option_list.append((num_select, prompt, op_list))
 
+    def get_options(self):
+    	temp_list = []
+    	for o in self.option_list:
+    		temp_list.append(self.serialize_option(o))
+    	return temp_list
+
+    def serialize_option(self, option):
+    	return {
+    		'num': option[0],
+    		'prompt': option[1],
+    		'selection': option[2]
+    	}
+
     def new_character(self):
         self._race_object.new_race(self)
         self._class_object.new_class(self)
@@ -250,11 +263,10 @@ class EquipmentLookup(db.Model):
     armor_category = db.Column(db.String(80), unique=False, nullable=False) # Light, medium, or heavy?
     armor_bonus = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
     armor_disadvantage = db.Column(db.Boolean, unique=False, nullable=False) # Boolean, sometimes you suck at stealthing with armor
-    armor_dex = db.Column(db.Integer, unique=False, nullable=False) # String because some add dex, some don't
-    armor_strength = db.Column(db.Boolean, unique=False, nullable=False) # Sometimes you need to be strong to wear armor
+    armor_strength = db.Column(db.Integer, unique=False, nullable=False) # Sometimes you need to be strong to wear armor
 
-    def __init__(self, e_name, e_type, e_weight, e_value, e_desc, w_cat, w_range_bool, w_thrown, \
-        w_range, w_props, w_damage, w_type, a_cat, a_bonus, a_dis, a_dex, a_str):
+    def __init__(self, e_name="", e_type="", e_weight=0.0, e_value=0.0, e_desc="", w_cat="", w_range_bool=False, w_thrown=False, \
+        w_range="", w_props="", w_damage="", w_type="", a_cat="", a_bonus=0, a_dis=False, a_str=False):
         self.item_name = e_name
         self.item_type = e_type
         self.item_weight = e_weight
@@ -270,7 +282,6 @@ class EquipmentLookup(db.Model):
         self.armor_category = a_cat
         self.armor_bonus = a_bonus
         self.armor_disadvantage = a_dis
-        self.armor_dex_cap = a_dex
         self.armor_strength = a_str
 
 
@@ -409,7 +420,6 @@ def password():
 def index():
     # Get user's characters
     characters = Character.query.filter_by(user=session['logged_in_user']).all()
-
     # Since most stuff is hardcoded to the SPA frontend there's not much else to send.
     return render_template('index.html',
                             characters=characters,

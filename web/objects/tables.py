@@ -1,4 +1,8 @@
-import os
+from views import ProficiencyLookup
+from views import ProficiencyLookup
+from views import FeatureLookup
+from views import SpellLookup
+from views import EquipmentLookup
 
 
 # GLOBALS
@@ -60,9 +64,9 @@ class TableFactory(object):
         # Equipment Table
         self.add_equipment(db)
         # Spell Table
-        # self.add_spells(db)
+        self.add_spells(db)
         # Feature Table
-        # self.add_features(db)
+        self.add_features(db)
 
 
     def add_proficiencies(self, db):
@@ -862,7 +866,7 @@ class TableFactory(object):
         f_list.append(FeatureLookup("Hellish Resistance", f_text))
         # Class features
         f_list.append(FeatureLookup("Rage", f_text))
-        f_list.append(FeatureLookup("Spellcasting (Charisma)", f_text)
+        f_list.append(FeatureLookup("Spellcasting (Charisma)", f_text))
         f_list.append(FeatureLookup("Bardic Inspiration", f_text))
         f_list.append(FeatureLookup("Spellcasting (Wisdom)", f_text))
         f_list.append(FeatureLookup("Divine Domain: Knowledge", f_text))
