@@ -3,10 +3,10 @@ html, body{
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding: 0;
+    padding: 0;
+    font-family: "Arial Bold";
     background-color: #ede4c7;
 }
-
 
 nav a{
     color: #fff; 
@@ -50,28 +50,100 @@ form button{
 }
 
 #sideBarNav {
-    background-color: #343a40 !important;
+    background-image: url('MainBG.png');
     position: fixed;
     height: 100%;
 }
+
+.navbar{
+    background-image: url('MainBG.png');
+}
+
 
 .icon{
     color:#fff !important;
 }
 
+
 .jumbotron{
-    background-color:  #ede4c7;
-    color: #343a40; 
+    background-color: #ede4c7;
+    color: #343140; 
     margin-top: 10px;
 }
 
 .card{
+    position: relative;
     margin-top: 10px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-size: contain;
+    border-radius: 10px;
 }
 
 .card-deck{
      margin-top: 10px;
 }
+
+.card-img-overlay{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.card-text, .card-title{
+    color: white;
+}
+
+.name{
+    position: absolute;
+    top: 4%;
+    left: 6%;
+    font-size: 14px;
+}
+
+.race{
+    position: absolute;
+    top: 54%;
+    left: 40%;
+    font-size: 12px;
+}
+
+.race-img{
+    position: absolute;
+    top: 8%;
+    left: 2%;
+    max-width: 100%;
+    max-height: 50%;
+}
+
+.class{
+    position: absolute;
+    top: 61%;
+    left: 40%;
+    font-size: 12px;
+}
+
+.background{
+    position: absolute;
+    top: 73%;
+    left: 30%;
+    font-size: 12px;
+}
+
+.appearance{
+    position: absolute;
+    top: 85%;
+    left: 30%;
+    font-size: 12px;
+}
+
+.cardLink{
+    width: 100%;
+    height: 100%;
+}
+
    
 
 #cardContainer{
@@ -104,6 +176,8 @@ form button{
 
 #abilityButtons{
     margin-top: 15px;
+    background-color: transparent !important;
+    border-color: #343a40 !important; 
 }
 
 
@@ -157,4 +231,10 @@ form button{
 
 .radioBoxLegend{
     font-weight: bold;
+}
+
+
+/*for myCharacter.html */
+#abilityScoresPanel{
+    border: 1px solid;
 }
